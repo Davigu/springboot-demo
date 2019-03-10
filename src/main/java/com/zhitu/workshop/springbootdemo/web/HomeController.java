@@ -11,6 +11,7 @@ public class HomeController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index() {
+        // 设置jsp的模板文件
         ModelAndView modelAndView = new ModelAndView("/index"); //设置对应JSP的模板文件
         modelAndView.addObject("hi", "Hello,Cat"); //设置${hi}标签的值为Hello,Cat
         return modelAndView;
