@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhitu.workshop.springbootdemo.dao.UserDao">
+    <!-->根据名字有条件查询  <-->
+    <select id="selectUserByName" resultType="com.zhitu.workshop.springbootdemo.bo.User" parameterType="string">
+        select * from user where name = #{name}
+    </select>
+    <!-->查询全部  <-->
+    <select id="findAll" resultType="com.zhitu.workshop.springbootdemo.bo.User" parameterType="string">
+        select * from user
+    </select>
+    <!-->插入新数据  <-->
+    <select id="insertUser" resultType="com.zhitu.workshop.springbootdemo.bo.User">
+        insert into user(id,name,email) value (#{id} , #{name} , #{email})
+    </select>
+</mapper>
