@@ -3,7 +3,7 @@ package com.zhitu.workshop.springbootdemo.bo;
 import javax.xml.crypto.Data;
 import java.util.Date;
 
-public class photo {
+public class Photo {
     private Long photoId;
     private Long albumId;
     private String photoName;

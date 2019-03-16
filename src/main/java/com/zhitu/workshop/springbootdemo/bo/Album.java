@@ -1,6 +1,6 @@
 package com.zhitu.workshop.springbootdemo.bo;
 
-public class album {
+public class Album {
     private Long albumId;
     private  Long useUserId;
     private  String albumName;

@@ -1,6 +1,6 @@
 package com.zhitu.workshop.springbootdemo.bo;
 
-public class photoTag {
+public class PhotoTag {
     private Long tagId;
     private Long photoId;
     private String tag;
