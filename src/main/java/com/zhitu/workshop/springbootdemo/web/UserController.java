@@ -1,38 +1,41 @@
 package com.zhitu.workshop.springbootdemo.web;
-
 import com.zhitu.workshop.springbootdemo.bo.User;
-import com.zhitu.workshop.springbootdemo.dao.UserDao;
+import com.zhitu.workshop.springbootdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@Controller
-public class UserController {
-    @Autowired
-    UserDao userDao;
+    @Controller
+    public class UserController {
 
-    @RequestMapping(value = "/findByName")
-    public @ResponseBody
-    User findByName(String name) throws Exception{
-        User user = userDao.selectUserByName(name);
-        System.out.println(user);
-        return  user;
-    }
-    @RequestMapping(value = "/all")
-    public @ResponseBody
-    List<User> all() throws Exception{
-        List<User> user = userDao.findAll();
-        System.out.println(user);
-        return  user;
-    }
-    @RequestMapping(value = "/insert")
-    public @ResponseBody String insertUser(String id,String name,String email) throws Exception{
-        userDao.insertUser(Integer.parseInt(id),name,email);
+        @Autowired
+        UserService  userService;
+        //PhotoDao photoDao;
+        //http://url/photo/photoid
 
-        System.out.println(id+name+email);
-        return  "saved";
-    }
+
+        @RequestMapping(value="/find/{userName}")
+        public String login(@PathVariable String  userName, ModelMap model,
+                            HttpServletRequest request, HttpServletResponse response)
+        {
+            User user= userService.selectUserByName(userName);
+            model.put("user", user);
+            return "select";
+
+        }
+
+    /*@ResponseBody
+    public String photoDetail(@PathVariable Long photoId,
+                              HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Photo photo = photoService.getPhoto(photoId);
+        return photo.getPhotoName();
+    }*/
 }

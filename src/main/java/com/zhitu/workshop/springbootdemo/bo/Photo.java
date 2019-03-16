@@ -12,7 +12,16 @@ public class Photo {
     private Long love;
     private String state;
     private Long size;
-    private  Long lovenumber;
+    private Long lovenumber;
+    private String photoAddress;
+
+    public String getPhotoAddress() {
+        return photoAddress;
+    }
+
+    public void setPhotoAddress(String photoAddress) {
+        this.photoAddress = photoAddress;
+    }
 
     public Long getPhotoId() {
         return photoId;

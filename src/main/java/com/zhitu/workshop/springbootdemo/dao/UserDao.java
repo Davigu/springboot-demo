@@ -8,7 +8,8 @@ import java.util.List;
 
 @Mapper
 public interface UserDao {
-    User selectUserByName(@Param("name")String name)throws Exception;
-    User insertUser(@Param("id")Integer id,@Param("name")String name,@Param("email")String email)throws Exception;
-    List<User> findAll()throws Exception;
+    User selectUserByName(@Param("name") String name);
+    void insertUser(User user);
+    List<User> findAll();
+    void deleteUserById(Long id);
 }

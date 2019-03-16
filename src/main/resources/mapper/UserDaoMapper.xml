@@ -5,14 +5,15 @@
 <mapper namespace="com.zhitu.workshop.springbootdemo.dao.UserDao">
     <!-->根据名字有条件查询  <-->
     <select id="selectUserByName" resultType="com.zhitu.workshop.springbootdemo.bo.User" parameterType="string">
-        select * from user where name = #{name}
+        select * from user where user_name = #{name}
     </select>
     <!-->查询全部  <-->
     <select id="findAll" resultType="com.zhitu.workshop.springbootdemo.bo.User" parameterType="string">
-        select * from user
+        select * from user WHERE  user_id=#{id}
     </select>
     <!-->插入新数据  <-->
     <select id="insertUser" resultType="com.zhitu.workshop.springbootdemo.bo.User">
-        insert into user(id,name,email) value (#{id} , #{name} , #{email})
+        insert into user(USER user) value (USER user)
     </select>
+
 </mapper>

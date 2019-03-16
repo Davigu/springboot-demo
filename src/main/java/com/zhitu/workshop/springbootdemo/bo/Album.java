@@ -2,10 +2,10 @@ package com.zhitu.workshop.springbootdemo.bo;
 
 public class Album {
     private Long albumId;
-    private  Long useUserId;
-    private  String albumName;
+    private Long useUserId;
+    private String albumName;
     private String theme;
-    private  String albumAuth;
+    private String albumAuth;
     private String ablumDescription;
     private String albumAddress;
 

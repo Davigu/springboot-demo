@@ -13,6 +13,8 @@
 <body>
 <h1>
     ${hi}
+
 </h1>
+<input type="button" id="new" >
 </body>
 </html>
