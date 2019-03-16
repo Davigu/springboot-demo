@@ -1,21 +1,23 @@
 package com.zhitu.workshop.springbootdemo.bo;
 
-public class PhotoTag {
-    private Integer tagId;
+public class photoTag {
+    private Long tagId;
+    private Long photoId;
+    private String tag;
 
-    public Integer getTagId() {
+    public Long getTagId() {
         return tagId;
     }
 
-    public void setTagId(Integer tagId) {
+    public void setTagId(Long tagId) {
         this.tagId = tagId;
     }
 
-    public Integer getPhotoId() {
+    public Long getPhotoId() {
         return photoId;
     }
 
-    public void setPhotoId(Integer photoId) {
+    public void setPhotoId(Long photoId) {
         this.photoId = photoId;
     }
 
@@ -26,7 +28,4 @@ public class PhotoTag {
     public void setTag(String tag) {
         this.tag = tag;
     }
-
-    private Integer photoId;
-    private String tag;
 }

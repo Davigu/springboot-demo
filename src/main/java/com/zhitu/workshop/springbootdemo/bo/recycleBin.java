@@ -2,7 +2,7 @@ package com.zhitu.workshop.springbootdemo.bo;
 
 import java.util.Date;
 
-public class recycle_bin {
+public class recycleBin {
     private Long fileId;
     private Long userId;
     private Date deleteTime;
