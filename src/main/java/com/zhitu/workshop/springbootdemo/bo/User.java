@@ -1,8 +1,11 @@
 package com.zhitu.workshop.springbootdemo.bo;
 
 public class User {
+    //用户实体类
     private Integer userId;
     private String userName;
+    private Integer id;
+    private String name;
     private String email;
     private Integer password;
     private String phone;
