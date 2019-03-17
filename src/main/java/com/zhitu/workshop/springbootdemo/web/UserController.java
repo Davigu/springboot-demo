@@ -11,31 +11,38 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-    @Controller
+@Controller
     public class UserController {
 
         @Autowired
         UserService  userService;
-        //PhotoDao photoDao;
-        //http://url/photo/photoid
-
-
         @RequestMapping(value="/find/{userName}")
-        public String login(@PathVariable String  userName, ModelMap model,
+        public String register(@PathVariable String  userName, ModelMap model,
                             HttpServletRequest request, HttpServletResponse response)
         {
             User user= userService.selectUserByName(userName);
             model.put("user", user);
             return "select";
-
+        }
+        @RequestMapping(value = "/find/index")
+        public String insert(ModelMap model,HttpServletResponse response,HttpServletRequest request)
+        {
+            return "index";
+        }
+        @RequestMapping(value = "/find/doInsert")
+        @ResponseBody
+        public Map<String,Object> doInsert(User user, ModelMap model, HttpServletRequest request, HttpServletResponse response)
+        {
+            int count = userService.insertUser(user);
+            Map<String,Object> result=new HashMap<String, Object>();
+            result.put("code",0);
+            result.put("msg","创建成功");
+            result.put("userName",user.getUserName());
+            return result;
         }
 
-    /*@ResponseBody
-    public String photoDetail(@PathVariable Long photoId,
-                              HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Photo photo = photoService.getPhoto(photoId);
-        return photo.getPhotoName();
-    }*/
 }

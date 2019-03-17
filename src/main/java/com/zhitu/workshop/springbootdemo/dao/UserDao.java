@@ -9,7 +9,8 @@ import java.util.List;
 @Mapper
 public interface UserDao {
     User selectUserByName(@Param("name") String name);
-    void insertUser(User user);
+    int insertUser(@Param("user")User user);
     List<User> findAll();
     void deleteUserById(Long id);
+
 }

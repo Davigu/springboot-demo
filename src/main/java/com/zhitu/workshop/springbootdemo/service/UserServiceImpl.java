@@ -11,22 +11,22 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
     @Override
-    public User selectUserByName(String name) {
+    public User selectUserByName(String name)  {
         return userDao.selectUserByName(name) ;
     }
 
     @Override
-    public void insertUser(User user) {
-
+    public int insertUser(User user) {
+            return userDao.insertUser(user);
     }
 
     @Override
-    public List<User> findAll() {
+    public List<User> findAll()throws Exception {
         return null;
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteUserById(Long id)throws Exception {
 
     }
 }

@@ -3,13 +3,12 @@ package com.zhitu.workshop.springbootdemo.bo;
 public class User {
     //用户实体类
     private Long userId;
-
     private String userName;
     private String password;
-    private String eMail;
+    private String email;
     private String phone;
     private String gender;
-    private  String auth;
+    private String auth;
     private String sign;
     private String ablespace;
 
@@ -37,12 +36,12 @@ public class User {
         this.password = password;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getemail() {
+        return email;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setemail(String eMail) {
+        this.email = eMail;
     }
 
     public String getPhone() {
