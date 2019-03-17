@@ -1,4 +1,6 @@
 package com.zhitu.workshop.springbootdemo.web;
+import com.sun.org.apache.xerces.internal.parsers.IntegratedParserConfiguration;
+import com.sun.tools.javac.util.Convert;
 import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.MessageDigest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-    @Controller
+@Controller
     public class UserController {
 
         @Autowired
@@ -21,15 +26,63 @@ import java.util.List;
         //PhotoDao photoDao;
         //http://url/photo/photoid
 
-
-        @RequestMapping(value="/find/{userName}")
-        public String login(@PathVariable String  userName, ModelMap model,
-                            HttpServletRequest request, HttpServletResponse response)
+    /**
+     *查询用户是否存在
+     * @param userName 用户名
+     * @param model
+     * @return 用户id
+     */
+        @RequestMapping(value="/find")
+        @ResponseBody
+        public Long findByName(String userName, ModelMap model)
         {
             User user= userService.selectUserByName(userName);
-            model.put("user", user);
-            return "select";
 
+            return user.getUserId();
+
+        }
+
+    /**
+     *
+     * @param model
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+        @RequestMapping(value = "/insert")
+        public String insert(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+            return "/insert";
+        }
+
+
+    /**
+     *用户注册
+     * @param user 用户类
+     * @param model
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+        @RequestMapping(value = "/doInsert")
+        @ResponseBody
+        public Map<String,Object>doInsert(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
+
+            MessageDigest m=MessageDigest.getInstance("MD5");
+            //System.out.println(oSMD5.getMD5ofStr("123"));
+            m.update(user.getPassword().getBytes());
+            byte resultData[] = m.digest();
+            user.setPassword(resultData.toString());
+
+            int count=userService.insertUser(user);
+
+            Map<String,Object> result=new HashMap<String,Object>();
+
+            result.put("code",0);
+            result.put("userId",user.getUserId());
+
+            return result;
         }
 
     /*@ResponseBody

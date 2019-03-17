@@ -12,12 +12,14 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
     @Override
     public User selectUserByName(String name) {
+
         return userDao.selectUserByName(name) ;
     }
 
     @Override
-    public void insertUser(User user) {
+    public int insertUser(User user) {
 
+        return userDao.insertUser(user);
     }
 
     @Override

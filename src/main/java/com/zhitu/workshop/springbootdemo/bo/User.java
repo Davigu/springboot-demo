@@ -6,7 +6,16 @@ public class User {
 
     private String userName;
     private String password;
-    private String eMail;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     private String phone;
     private String gender;
     private  String auth;
@@ -37,13 +46,7 @@ public class User {
         this.password = password;
     }
 
-    public String geteMail() {
-        return eMail;
-    }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
-    }
 
     public String getPhone() {
         return phone;
