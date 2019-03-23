@@ -6,12 +6,18 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
 @Mapper
 public interface UserDao {
     /**
      * 根据用户名选择查询用户信息
      * @param name    用户名
      * @return       查询到的user对象
+     */
+    /**
+     * 通过用户名查询
+     * @param name 用户名
+     * @return 用户类
      */
     User selectUserByName(@Param("name") String name);
 
@@ -27,4 +33,7 @@ public interface UserDao {
      * @param id
      */
     void deleteUserById(@Param("id") Long id);
+
+
+
 }

@@ -1,97 +1,60 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ROCKEY
-  Date: 2019/3/16
-  Time: 21:16
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Insert User</title>
-
-    <script src="/js/jquery/jquery-3.3.1.min.js"></script>
+    <title>login</title>
+    <script src="/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-<div>昵称：    <input type="text" id="userName"></div>
-<div>密码：    <input type="password" id="password"></div>
-<div>邮箱：    <input type="text" id="email"></div>
-<div>电话号码：<input type="text" id="phone"></div>
-<div>性别：    <input type="text" id="gender"></div>
-<div>权限等级：<input type="text" id="auth"></div>
-<div>个性签名：<input type="text" id="sign"></div>
-<div><input type="button" value="Save" id="btnSave"></div>
+<h1>
+    注册
+</h1>
+<!--
+user_id
+user_name
+password
+email
+phone
+gender
+-->
+<div>
+    用户名:<input type="text" id="userName"/><span id="ID1"></span><br>
+    密码:<input type="password" id="password"/><br>
+    邮箱:<input type="text" id="email"><br>
+    电话:<input type="text" id="phone"><br>
+    性别:男<input type="radio" name="gender" value="1">女<input type="radio" name="gender" value="2"><br>
+    <input type="button" value="save" id="btnSave">
+</div>
 <script>
-    //创建功能
-    $(function () {
-        //点击触发事件
-        $("#btnSave").on("click", function () {
-            //给予状态 Saving
-            if ($("#btnSave").hasClass("Saving")) {
-                return;
-            }
-                //给予状态 Saving
-            $("#btnSave").addClass("Saving");
-            $("#btnSave").val("Saving");
-
-            var userName=$("#userName").val();
-            if (userName.trim()==" ") {
-                alert("UserName is empty!");
+    $(function(){
+        $("#btnSave").on("click",function(){
+            if($("#btnSave").hasClass("saving")){
                 return;
             }
 
+            $("#btnSave").addClass("saving");
+            $("#btnSave").val("saving");
+            var username=$("#userName").val();
             var password=$("#password").val();
-            if (password.trim()==" ") {
-                alert("password is empty!");
-                return;
-            }
             var email=$("#email").val();
-            if (email.trim()==" ") {
-                alert("email is empty!");
-                return;
-            }
             var phone=$("#phone").val();
-            if (phone.trim()==" ") {
-                alert("phone is empty!");
-                return;
-            }
-            var gender=$("#gender").val();
-            if (gender.trim()==" ") {
-                alert("gender is empty!");
-                return;
-            }
-            var auth=$("#auth").val();
-            if (auth.trim()==" ") {
-                alert("auth is empty!");
-                return;
-            }
-            var sign=$("#sign").val();
-            if (sign.trim()==" ") {
-                alert("sign is empty!");
-                return;
-            }
+            var gender=$('input:radio[name="gender"]:checked').val();
 
             $.ajax({
                 type:"POST",
-                url:"/user/doInsert",
+                url:"/doInsert",
                 dataType:"json",
                 data:{
-                    "userName":userName,
+                    "userName":username,
                     "password":password,
                     "email":email,
                     "phone":phone,
                     "gender":gender,
-                    "auth":auth,
-                    "sign":sign,
                 },
                 success:function (result) {
                     $("#btnSave").removeClass("Saving");
                     $("#btnSave").val("Save");
-
-                    if (result.code == 0) {
-                        window.location.href = "/user/"+result.userId;
-                    } else {
-                        alert(result.msg);
+                    if(result.code==0){
+                        window.location.href="/user/"+result.userId;
                     }
                 },
                 error:function () {
@@ -100,9 +63,33 @@
                 }
             })
 
+        })
 
+        $("#userName").blur(function(){
+            var username=$("#userName").val();
+            $.ajax({
+                type:"POST",
+                url:"/find",
+                dataType:"json",
+                data:{
+                    "userName":username,
+                },
+                success:function (result) {
+                    $("#ID1").html("用户名已存在")
+                },
+                error:function () {
+                    $("#ID1").html("用户名可用")
+                }
+
+
+            })
+        })
+
+        $("#userName").focus(function () {
+            $("#ID1").html("")
         })
     })
 </script>
+
 </body>
 </html>

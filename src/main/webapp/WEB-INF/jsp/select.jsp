@@ -5,11 +5,8 @@
 </head>
 <body>
 <h1>
-    ${hi}
 </h1>
 <div>User Id:${user.userId}</div>
 <div>User Name:${user.userName}</div>
-
-
 </body>
 </html>
