@@ -12,10 +12,11 @@
         select * from user WHERE  user_id=#{id}
     </select>
     <!-->插入新数据  <-->
-    <insert id="insertUser" useGeneratedKeys="true"  keyProperty="userId"  keyColumn="user_id"
-            parameterType="com.zhitu.workshop.springbootdemo.bo.User">
-        insert into user(user_name,password,email,phone,gender)
-        value (#{user.userName},#{user.password},#{user.email},#{user.phone},#{user.gender})
+    <insert id="insertUser" useGeneratedKeys="true"
+            parameterType="com.zhitu.workshop.springbootdemo.bo.User"
+            keyProperty="userId" keyColumn="user_id">
+        insert into user (user_name,password,email,phone,gender)
+        values (#{user.userName},#{user.password},#{user.email},#{user.phone},#{user.gender})
     </insert>
 
 </mapper>

@@ -6,9 +6,9 @@ import com.zhitu.workshop.springbootdemo.bo.User;
 import java.util.List;
 
 public interface UserService {
-    User selectUserByName(String name);
+   User selectUserByName(String name);
     int insertUser(User user);
-    List<User> findAll()throws Exception;
-    void deleteUserById(Long id)throws Exception;
+    List<User> findAll();
+    void deleteUserById(Long id);
 
 }
