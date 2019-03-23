@@ -8,20 +8,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-    @Controller
+@Controller
     public class UserController {
 
         @Autowired
         UserService  userService;
-        //PhotoDao photoDao;
-        //http://url/photo/photoid
 
-
+    /**
+     * 登录页面的选择
+     * @param userName 用户名
+     * @return  和用户名对应的信息页面
+     */
         @RequestMapping(value="/find/{userName}")
         public String login(@PathVariable String  userName, ModelMap model,
                             HttpServletRequest request, HttpServletResponse response)
@@ -30,6 +32,33 @@ import java.util.List;
             model.put("user", user);
             return "select";
 
+        }
+
+    /**
+     * 插入功能
+     * @return 返回
+     * @throws Exception
+     */
+        @RequestMapping(value = "/user/insert")
+        public String insert(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+            return "insert";
+        }
+
+    /**
+     *  点击保存插入数据
+     * @param user  用户信息
+     * @return  把得到的信息传给前端
+     * @throws Exception
+     */
+         @RequestMapping(value = "/user/doInsert")
+         @ResponseBody
+        public Map<String,Object> doInsert( User user, ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+            int count = userService.insertUser(user);
+            Map<String,Object> result = new HashMap<>();
+            result.put("code", 0);
+            result.put("msg", "创建成功！");
+            result.put("userId", user.getUserId());
+            return result;
         }
 
     /*@ResponseBody

@@ -12,8 +12,8 @@
         select * from user WHERE  user_id=#{id}
     </select>
     <!-->插入新数据  <-->
-    <select id="insertUser" resultType="com.zhitu.workshop.springbootdemo.bo.User">
-        insert into user(USER user) value (USER user)
-    </select>
+    <insert id="insertUser" useGeneratedKeys="true" parameterType="com.zhitu.workshop.springbootdemo.bo.User">
+        insert into user(user_name,password ,email , phone, gender ,auth ,sign   ) VALUES (#{user.userName},#{user.password},#{user.email},#{user.phone},#{user.gender},#{user.auth},#{user.sign})
+    </insert>
 
 </mapper>
