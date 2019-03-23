@@ -1,7 +1,8 @@
-package com.zhitu.workshop.springbootdemo.service;
+package com.zhitu.workshop.springbootdemo.service.serviceImpl;
 
 import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.dao.UserDao;
+import com.zhitu.workshop.springbootdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

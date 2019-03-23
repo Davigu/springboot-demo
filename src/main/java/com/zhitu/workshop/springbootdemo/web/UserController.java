@@ -76,7 +76,6 @@ import java.util.Map;
             user.setPassword(resultData.toString());
 
             int count=userService.insertUser(user);
-
             Map<String,Object> result=new HashMap<String,Object>();
 
             result.put("code",0);
@@ -85,10 +84,5 @@ import java.util.Map;
             return result;
         }
 
-    /*@ResponseBody
-    public String photoDetail(@PathVariable Long photoId,
-                              HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Photo photo = photoService.getPhoto(photoId);
-        return photo.getPhotoName();
-    }*/
+
 }
