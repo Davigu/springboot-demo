@@ -1,7 +1,7 @@
 package com.zhitu.workshop.springbootdemo.web;
 
 import com.zhitu.workshop.springbootdemo.bo.User;
-import com.zhitu.workshop.springbootdemo.service.UserService;
+import com.zhitu.workshop.springbootdemo.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,7 +21,7 @@ import java.util.Map;
     public class UserController {
 
         @Autowired
-        UserService userService;
+    UserServiceImpl userServiceImpl;
 
 
 

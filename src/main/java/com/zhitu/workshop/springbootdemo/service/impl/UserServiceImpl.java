@@ -1,24 +1,22 @@
 package com.zhitu.workshop.springbootdemo.service.impl;
-
 import com.zhitu.workshop.springbootdemo.bo.User;
+import com.zhitu.workshop.springbootdemo.dao.UserDao;
 import com.zhitu.workshop.springbootdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserService userService;
+    UserDao userDao;
     /**
      * 根据用户名选择查询用户信息
      * @param name    用户名
      * @return       查询到的user对象
      */
-
-   public User selectUserByName(String name)
-    {
-        return userService.selectUserByName(name);
+    @Override
+    public User selectUserByName(String name) {
+        return userDao.selectUserByName(name) ;
     }
 
     /**
@@ -26,20 +24,15 @@ public class UserServiceImpl implements UserService{
      * @param user  用户信息
      * @return      返回值判断是否成功
      */
+    @Override
+    public int insertUser(User user) {
 
-   public  int insertUser(User user){
-       return userService.insertUser(user);
-   }
-
-
-
-    /**
-     * 通过检索id来完成用户的信息删除
-     * @param id 用户编号
-     */
-   public void deleteUserById(Long id){
-
+        return userDao.insertUser(user);
     }
 
 
+    @Override
+    public void deleteUserById(Long id) {
+
+    }
 }
