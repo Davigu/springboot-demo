@@ -88,16 +88,84 @@
     <div id="shade1" class="c1 hide"></div>
     <div id="modal1" class="c2 hide" style="height: 400px;">
         <p style="font-size: 20px; color: #000;margin-left:150px;">用户注册</p>
-        <p style="margin-left: 20%">用户：<input  type="text" /></p>
-        <p style="margin-left: 20%">密码：<input type="password" /></p>
-        <p style="margin-left: 20%">邮箱：<input type="password" /></p>
-        <p style="margin-left: 20%">号码：<input type="password" /></p>
-        <p style="margin-left: 20%">性别：<input type="password" /></p>
+        <p style="margin-left: 20%">用户：<input  type="text" id="userName" /></p>
+        <p style="margin-left: 20%">密码：<input type="password" id="passWord"/></p>
+        <p style="margin-left: 10%">确认密码：<input type="password" /></p>
+        <p style="margin-left: 20%">邮箱：<input type="text" id="email"/></p>
+        <p style="margin-left: 20%">号码：<input type="text" id="phone"/></p>
+        <p style="margin-left: 20%">性别:男<input type="radio" name="gender" value="1">女<input type="radio" name="gender" value="2"></p>
         <p>
-            <input type="button" style="margin-left: 20%" value="确定" class="btn">
+            <input type="button" style="margin-left: 20%" value="确定" class="btn" id="btnSave">
             <input type="button" style="margin-left: 20%" value="取消" class="btn" onclick="Hide1();">
         </p>
     </div>
+    <!-- 用于确认提交的js代码 -->
+    <script>
+        $(function(){
+            $("#btnSave").on("click",function(){
+                if($("#btnSave").hasClass("saving")){
+                    return;
+                }
+
+                $("#btnSave").addClass("saving");
+                $("#btnSave").val("saving");
+                var username=$("#userName").val();
+                var password=$("#passWord").val();
+                var email=$("#email").val();
+                var phone=$("#phone").val();
+                var gender=$('input:radio[name="gender"]:checked').val();
+                $.ajax({
+                    type:"POST",
+                    url:"/doInsert",
+                    dataType:"json",
+                    data:{
+                        "userName":username,
+                        "password":password,
+                        "email":email,
+                        "phone":phone,
+                        "gender":gender,
+                    },
+                    success:function (result) {
+                        $("#btnSave").removeClass("Saving");
+                        $("#btnSave").val("Save");
+                        if(result.code==0){
+                            alert("注册成功");
+                            Hide1();
+                        }
+                    },
+                    error:function () {
+                        $("#btnSave").removeClass("Saving");
+                        $("#btnSave").val("Save");
+                    }
+                })
+
+            })
+
+            $("#userName").blur(function(){
+                var username=$("#userName").val();
+                $.ajax({
+                    type:"POST",
+                    url:"/find",
+                    dataType:"json",
+                    data:{
+                        "userName":username,
+                    },
+                    success:function (result) {
+                        $("#ID1").html("用户名已存在")
+                    },
+                    error:function () {
+                        $("#ID1").html("用户名可用")
+                    }
+
+
+                })
+            })
+
+            $("#userName").focus(function () {
+                $("#ID1").html("")
+            })
+        })
+    </script>
     <script>
         function Show(){
             document.getElementById('shade').classList.remove('hide');
