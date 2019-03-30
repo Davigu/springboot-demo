@@ -3,7 +3,9 @@ package com.zhitu.workshop.springbootdemo.service.impl;
 import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService{
 
     @Autowired
