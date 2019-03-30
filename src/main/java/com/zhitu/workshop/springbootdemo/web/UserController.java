@@ -54,6 +54,10 @@ import java.util.Map;
         public String insert(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
             return "/insert";
         }
+        @RequestMapping(value = "/home")
+        public String login(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+             return "/home";
+        }
 
 
     /**
