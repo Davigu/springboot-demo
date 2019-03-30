@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhitu.workshop.springbootdemo.dao.AlbumDao">
+    <select id="showAllAlbum" resultType="com.zhitu.workshop.springbootdemo.bo.Album">
+        select * from album
+    </select>
+    <update id="updateAlbum" parameterType="com.zhitu.workshop.springbootdemo.bo.Album" >
+        update album set album_name=#{album.albumName},
+                         theme=#{album.theme},
+                         album_auth=#{album.albumAuth},
+                         album_description=#{album.albumDescription}
+                         where album_id=#{album.albumId} and use_user_id=#{album.useUserId}
+    </update>
+    <delete id="deleteAlbumByID">
+        delete from album where album_id=#{albumID} and use_user_id=#{userID}
+    </delete>
+</mapper>
