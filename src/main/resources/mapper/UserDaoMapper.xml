@@ -8,8 +8,8 @@
         select * from user where user_name = #{name}
     </select>
     <!-->查询全部  <-->
-    <select id="findAll" resultType="com.zhitu.workshop.springbootdemo.bo.User" parameterType="string">
-        select * from user WHERE  user_id=#{id}
+    <select id="findAll" resultType="com.zhitu.workshop.springbootdemo.bo.User">
+        select * from user
     </select>
     <!-->插入新数据  <-->
     <insert id="insertUser" useGeneratedKeys="true"

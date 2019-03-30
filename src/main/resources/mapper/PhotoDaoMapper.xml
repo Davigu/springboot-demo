@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhitu.workshop.springbootdemo.dao.PhotoDao">
+    <select id="showAllPhoto" resultType="com.zhitu.workshop.springbootdemo.bo.Photo">
+        select * from photo,album where album.use_user_id=#{userID}
+    </select>
+    <select id="findPhotoByID" resultType="com.zhitu.workshop.springbootdemo.bo.Photo">
+        select * from photo where photo_id=#{photoID}
+    </select>
+</mapper>
