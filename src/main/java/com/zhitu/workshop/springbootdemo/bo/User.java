@@ -3,19 +3,9 @@ package com.zhitu.workshop.springbootdemo.bo;
 public class User {
     //用户实体类
     private Long userId;
-
     private String userName;
     private String password;
     private String email;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     private String phone;
     private String gender;
     private  String auth;
@@ -46,7 +36,13 @@ public class User {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getPhone() {
         return phone;

@@ -20,10 +20,7 @@ public class UserDaoImpl implements UserDao {
         return userDao.insertUser(user);
     }
 
-    @Override
-    public List<User> findAll() {
-        return null;
-    }
+
 
     @Override
     public void deleteUserById(Long id) {

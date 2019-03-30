@@ -1,4 +1,4 @@
-package com.zhitu.workshop.springbootdemo.service.impl;
+package com.zhitu.workshop.springbootdemo.service;
 
 import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.service.UserService;

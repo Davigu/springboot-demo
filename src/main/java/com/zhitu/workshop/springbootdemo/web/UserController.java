@@ -1,8 +1,8 @@
 package com.zhitu.workshop.springbootdemo.web;
-import com.sun.org.apache.xerces.internal.parsers.IntegratedParserConfiguration;
-import com.sun.tools.javac.util.Convert;
+
 import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.service.UserService;
+import com.zhitu.workshop.springbootdemo.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,19 +10,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.security.MessageDigest;
+
 import java.util.HashMap;
-import java.util.List;
+
+import java.security.MessageDigest;
+
 import java.util.Map;
 
 @Controller
     public class UserController {
 
         @Autowired
-        UserService  userService;
+    UserServiceImpl userServiceImpl;
+
+
+
+
         //PhotoDao photoDao;
         //http://url/photo/photoid
 
@@ -34,20 +39,14 @@ import java.util.Map;
      */
         @RequestMapping(value="/find")
         @ResponseBody
-        public Long findByName(String userName, ModelMap model)
-        {
-            User user= userService.selectUserByName(userName);
-
+        public Long findByName(String userName, ModelMap model,
+                               HttpServletRequest request, HttpServletResponse response){
+            User user= userServiceImpl.selectUserByName(userName);
             return user.getUserId();
-
         }
-
     /**
-     *
-     * @param model
-     * @param request
-     * @param response
-     * @return
+     * 插入功能
+     * @return 返回
      * @throws Exception
      */
         @RequestMapping(value = "/insert")
@@ -61,15 +60,13 @@ import java.util.Map;
 
 
     /**
-     *用户注册
-     * @param user 用户类
-     * @param model
-     * @param request
-     * @param response
-     * @return
+     *  点击保存插入数据
+     * @param user  用户信息
+     * @return  把得到的信息传给前端
      * @throws Exception
      */
-        @RequestMapping(value = "/doInsert")
+
+    @RequestMapping(value = "/doInsert")
         @ResponseBody
         public Map<String,Object>doInsert(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
 
@@ -78,16 +75,15 @@ import java.util.Map;
             m.update(user.getPassword().getBytes());
             byte resultData[] = m.digest();
             user.setPassword(resultData.toString());
-
-            int count=userService.insertUser(user);
-
+            int count= userServiceImpl.insertUser(user);
             Map<String,Object> result=new HashMap<String,Object>();
-
             result.put("code",0);
             result.put("userId",user.getUserId());
-
             return result;
         }
+
+
+
 
     /*@ResponseBody
     public String photoDetail(@PathVariable Long photoId,
@@ -95,4 +91,5 @@ import java.util.Map;
         Photo photo = photoService.getPhoto(photoId);
         return photo.getPhotoName();
     }*/
+
 }
