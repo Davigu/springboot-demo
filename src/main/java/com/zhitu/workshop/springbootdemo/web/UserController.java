@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 import java.security.MessageDigest;
@@ -72,13 +74,41 @@ import java.util.Map;
             //System.out.println(oSMD5.getMD5ofStr("123"));
             m.update(user.getPassword().getBytes());
             byte resultData[] = m.digest();
-            user.setPassword(resultData.toString());
+            user.setPassword(new BigInteger(1, resultData).toString(16));
             int count= userServiceImpl.insertUser(user);
             Map<String,Object> result=new HashMap<String,Object>();
             result.put("code",0);
             result.put("userId",user.getUserId());
             return result;
         }
+    @RequestMapping(value = "/doLogin")
+    @ResponseBody
+    public Map<String,Object> login(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response) throws NoSuchAlgorithmException {
+        //后台非空验证
+        MessageDigest m=MessageDigest.getInstance("MD5");
+        //System.out.println(oSMD5.getMD5ofStr("123"));
+        m.update(user.getPassword().getBytes());
+        byte resultData[] = m.digest();
+        Map<String,Object> result=new HashMap<String,Object>();
+        String pwd = new BigInteger(1, resultData).toString(16);
+        try
+           {
+               User user2 = userServiceImpl.selectUserByName(user.getUserName());
+               if (!user2.getPassword().equals(pwd))
+               {
+                       result.put("code",1);//密码错误
+               }
+               else   //登录成功
+               {
+                      result.put("code",0);
+               }
+           }
+           catch (Exception e)   //不存在这个帐号
+           {
+               result.put("code",2);
+           }
+           return result;
+    }
 
 
 
