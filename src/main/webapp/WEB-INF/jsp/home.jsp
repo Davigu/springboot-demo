@@ -119,22 +119,79 @@
                 });
             }
         })
-    </script>
+    </script >
     <!-- 这里是注册界面 -->
-    <div id="shade1" class="c1 hide"></div>
-    <div id="modal1" class="c2 hide" style="height: 400px;">
-        <p style="font-size: 20px; color: #000;margin-left:150px;margin-top: 20px">用户注册</p>
-        <p style="margin-left: 20%"><input  type="text" id="userName" class="form-control" placeholder="用户"style="width: 250px" /></p>
-        <p style="margin-left: 20%"><input type="password" id="passWord" class="form-control" placeholder="密码"style="width: 250px"/></p>
-        <p style="margin-left: 20%"><input type="password" class="form-control" placeholder="确认密码"style="width: 250px"/></p>
-        <p style="margin-left: 20%"><input type="text" id="email" class="form-control" placeholder="邮箱"style="width: 250px"/></p>
-        <p style="margin-left: 20%"><input type="text" id="phone" class="form-control" placeholder="手机号码"style="width: 250px"/></p>
-        <p style="margin-left: 20%">性别:男<input type="radio" name="gender" value="1">女<input type="radio" name="gender" value="2"></p>
-        <p>
-            <input type="button" style="margin-left: 20%" value="确定" class="btn" id="btnSave">
-            <input type="button" style="margin-left: 20%" value="取消" class="btn" onclick="Hide1();">
-        </p>
+    <div id="shade1" class="c1 hide">
+    <div id="modal1" class="c2 hide" style="height: 400px;"> </div>
+        <form action="" method="post" class="c2">
+            <table>
+        <caption style="font-size: 20px; color: #000;margin-left:150px;margin-top: 20px">用户注册</caption>
+                <tr>
+        <td><input  style="margin-left: 20%" type="text" id="userName" class="form-control" placeholder="用户"style="width: 250px" /><div id="errorAccount" style="color:red;display:inline;"></div></td>
+                </tr>
+                <tr>
+        <td style="margin-left: 20%"><input type="password" id="passWord" class="form-control" placeholder="密码"style="width: 250px"/></td>
+                </tr>
+        <td style="margin-left: 20%"><input type="password" class="form-control" placeholder="确认密码"style="width: 250px"/></td>
+                <tr>
+        <td style="margin-left: 20%"><input type="text" id="email" class="form-control" placeholder="邮箱"style="width: 250px"/></td>
+                    <td><input type="button" id="send" value="发送邮件"></td>
+                </tr>
+        <td style="margin-left: 20%"><input type="text" id="phone" class="form-control" placeholder="手机号码"style="width: 250px"/></td>
+                <tr>
+        <td style="margin-left: 20%">性别:男<input type="radio" name="gender" value="1">女<input type="radio" name="gender" value="2"></td>
+                </tr>
+                <tr>
+                    <td> <input type="button" style="margin-left: 20%" value="确定" class="btn" id="btnSave"></td>
+                    <td><input type="button" style="margin-left: 20%" value="取消" class="btn" onclick="Hide1();"></td>
+                </tr>
+            </table>
+        </form>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+                $("#userName").blur(function () {
+                    var username=$("#userName").val();
+                    $.ajax({
+                        url:"/doCheck",
+                        type:"post",
+                        dataType:"json",
+                        data:{
+                            "userName":username,
+                        },
+                        success:function(result){//回调函数，data是返回的数据result
+                            if(result.code == 0) {
+                               $("#errorAccount").html("用户名已经存在");
+                            }
+                            else if(result.code == 2)
+                            {
+                                $("#errorAccount").html("用户名可以使用");
+                            }
+                        }
+                });
+                })
+        })
+    </script>
+    <!--发送验证邮件-->
+    <script>
+        $(function () {
+            $("#send").on("click",function () {
+                $.ajax({
+                    type:"POST",
+                    url:"/doSendMail",
+                    dataType:"json",
+                    data:{
+                    },
+                    success:function () {
+                        alert("发送成功");
+                    },
+                    error:function () {
+                        alert("发送失败");
+                    }
+                })
+            })
+        })
+    </script>
     <!-- 用于确认注册的js代码 -->
     <script>
         $(function(){
@@ -164,6 +221,7 @@
                     success:function (result) {
                         $("#btnSave").removeClass("Saving");
                         $("#btnSave").val("Save");
+
                         if(result.code==0){
                             alert("注册成功");
                             Hide1();
