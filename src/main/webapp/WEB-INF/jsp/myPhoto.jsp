@@ -69,6 +69,9 @@
     </script>
 </head>
 <body>
+<div id="navbar"></div>
+
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
     <div class="container"> <img src="images/1.jpg">
         <a class="navbar-brand" style="color: black" href="#">星相册</a>
@@ -189,17 +192,21 @@
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<hr>
+
 <div class="container">
     <div class="row">
         <div class=" col-md-3 text-center">
 
             <a class="btn" href="#"><h2>我的照片</h2></a>
             <div class="list-group posi" >
-                <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-picture"></span> 我的照片</a>
+                <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-picture"></span> 全部照片</a>
                 <a href="#" class="list-group-item"><span class="glyphicon glyphicon-book"></span> 我的相册</a>
                 <a href="#" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
                 <a href="#" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                </div>
             </div>
         </div>
         <div class="container col-md-9" style="border-left:medium #DCD4D4 solid;">
@@ -270,7 +277,9 @@
 <script src="js/bootstrap.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/popper.min.js"></script>
-
+<script>
+    $("#navbar").load("navbar.html");
+</script>
 
 </body>
 </html>

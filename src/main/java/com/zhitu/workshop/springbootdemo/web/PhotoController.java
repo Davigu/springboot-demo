@@ -42,6 +42,6 @@ public class PhotoController {
 
     @RequestMapping(value = "/photo")
     public String myPhoto( ){
-        return "myPhoto";
+        return "myShare";
     }
 }
