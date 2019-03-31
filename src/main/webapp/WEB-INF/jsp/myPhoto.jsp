@@ -69,7 +69,6 @@
     </script>
 </head>
 <body>
-<div id="navbar"></div>
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning">

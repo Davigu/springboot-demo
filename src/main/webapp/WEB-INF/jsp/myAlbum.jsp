@@ -17,6 +17,7 @@
     </script>
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
+    //利用append（）方法增加相册
     <script type="text/javascript">
         $(document).ready(function(){
             $("#btn1").click(function(){
@@ -41,7 +42,7 @@
             );
             });
         });
-
+  //读取上传照片及上传照片
         function setImagePreview() {
             var docObj = document.getElementById("doc");
             var imgObjPreview = document.getElementById("preview");
@@ -80,29 +81,6 @@
     </script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-    <div class="container"> <img src="images/star-brand-black.png"> <a class="navbar-brand" style="color: black" href="#">星相册</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"> <a class="nav-link" style="color: black" href="#mybuild" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span> &nbsp;&nbsp;创建 </a></li>
-                <li class="nav-item active"> <a class="nav-link" style="color: black" href="#myupload" data-toggle="modal"><span class="glyphicon glyphicon-cloud-upload"></span> &nbsp;&nbsp;上传</a></li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0 form-control-static float-right">
-                <input class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
-                <button class="btn btn-primary my-2 my-sm-0" type="button"><span class="glyphicon glyphicon-search"></span></button>
-            </form>
-        </div>
-        <div class="dropdown"> <img  class="img-circle" alt="140x140" src="images/32X32.gif"> <a class=" dropdown-toggle  btn" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> 用户名 </a>
-            <ul class="dropdown-menu" aria-labelledby="userMenu1">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
 <div class="modal fade"  id="myupload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content"   style="height: 570px">

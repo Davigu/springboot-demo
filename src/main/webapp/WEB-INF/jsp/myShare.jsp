@@ -17,8 +17,6 @@
 </head>
 <body>
 
-<div id="navbar"></div>
-
 
 <div class="container">
     <div class="row">
