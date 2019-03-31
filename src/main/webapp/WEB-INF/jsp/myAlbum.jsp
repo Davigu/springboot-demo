@@ -17,7 +17,7 @@
     </script>
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
-    //利用append（）方法增加相册
+
     <script type="text/javascript">
         $(document).ready(function(){
             $("#btn1").click(function(){
@@ -29,7 +29,7 @@
                     +' <li><a href="#">重命名</a></li>'
                     +' <li><a href="#">分享</a></li>'
                     +'<li role="separator" class="divider"></li>'
-                    +' <li><a href="#">删除</a></li>'
+                    +'<li ><a id ="delete"href="#">删除</a></li>'
                     +' </ul>'
                     +' </div>'
                     +' <a  href="#" class="thumbnail">'
@@ -42,7 +42,16 @@
             );
             });
         });
-  //读取上传照片及上传照片
+
+        <!--删除功能-->
+        $(document).ready(function()
+        {
+                $("li").delegate("#delete", "click", function() {
+                $(this).parent().parent().parent().parent().hide();
+        });
+
+        })
+        <!--读取上传照片及上传照片-->
         function setImagePreview() {
             var docObj = document.getElementById("doc");
             var imgObjPreview = document.getElementById("preview");
@@ -207,7 +216,7 @@
                         <li><a href="#">重命名</a></li>
                         <li><a href="#">分享</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">删除</a></li>
+                        <li ><a id ="delete"href="#">删除</a></li>
                     </ul>
                 </div>
                 <a  href="#" class="thumbnail">
