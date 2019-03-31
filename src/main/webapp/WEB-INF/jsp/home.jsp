@@ -130,16 +130,16 @@
         <td><input  style="margin-left: 20%" type="text" id="userName" class="form-control" placeholder="用户"style="width: 250px" /><div id="errorAccount" style="color:red;display:inline;"></div></td>
                 </tr>
                 <tr>
-        <td style="margin-left: 20%"><input type="password" id="passWord" class="form-control" placeholder="密码"style="width: 250px"/></td>
+        <td ><input style="margin-left: 20%" type="password" id="passWord" class="form-control" placeholder="密码"style="width: 250px"/></td>
                 </tr>
-        <td style="margin-left: 20%"><input type="password" class="form-control" placeholder="确认密码"style="width: 250px"/></td>
+        <td ><input style="margin-left: 20%" type="password" class="form-control" placeholder="确认密码"style="width: 250px"/></td>
                 <tr>
-        <td style="margin-left: 20%"><input type="text" id="email" class="form-control" placeholder="邮箱"style="width: 250px"/></td>
-                    <td><input type="button" id="send" value="发送邮件"></td>
+        <td ><input style="margin-left: 20%" type="text" id="email" class="form-control" placeholder="邮箱"style="width: 250px"/></td>
+                    <td><input style="margin-left: 80%" type="button" id="send" value="发送邮件"></td>
                 </tr>
-        <td style="margin-left: 20%"><input type="text" id="phone" class="form-control" placeholder="手机号码"style="width: 250px"/></td>
-                <tr>
-        <td style="margin-left: 20%">性别:男<input type="radio" name="gender" value="1">女<input type="radio" name="gender" value="2"></td>
+        <td ><input style="margin-left: 20%" type="text" id="phone" class="form-control" placeholder="手机号码"style="width: 250px"/></td>
+                <tr >
+        <td  align="center" >性别:男<input  type="radio" name="gender" value="1">女<input type="radio" name="gender" value="2"></td>
                 </tr>
                 <tr>
                     <td> <input type="button" style="margin-left: 20%" value="确定" class="btn" id="btnSave"></td>
@@ -161,14 +161,19 @@
                         },
                         success:function(result){//回调函数，data是返回的数据result
                             if(result.code == 0) {
-                               $("#errorAccount").html("用户名已经存在");
+                               $("#errorAccount").html("用户名不合法");
                             }
-                            else if(result.code == 2)
+                            else if(result.code == 1)
                             {
                                 $("#errorAccount").html("用户名可以使用");
                             }
+                            else if(result.code == 2)
+                            {
+                                $("#errorAccount").html("用户名已经存在");
+                            }
                         }
                 });
+
                 })
         })
     </script>
@@ -176,11 +181,13 @@
     <script>
         $(function () {
             $("#send").on("click",function () {
+                var email=$("#email").val();
                 $.ajax({
                     type:"POST",
                     url:"/doSendMail",
                     dataType:"json",
                     data:{
+                        "email":email,
                     },
                     success:function () {
                         alert("发送成功");
@@ -235,29 +242,6 @@
 
             })
 
-            $("#userName").blur(function(){
-                var username=$("#userName").val();
-                $.ajax({
-                    type:"POST",
-                    url:"/find",
-                    dataType:"json",
-                    data:{
-                        "userName":username,
-                    },
-                    success:function (result) {
-                        $("#ID1").html("用户名已存在")
-                    },
-                    error:function () {
-                        $("#ID1").html("用户名可用")
-                    }
-
-
-                })
-            })
-
-            $("#userName").focus(function () {
-                $("#ID1").html("")
-            })
         })
     </script>
 
