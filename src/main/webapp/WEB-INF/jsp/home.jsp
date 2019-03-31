@@ -40,33 +40,33 @@
     </div>
     <div align="center">
         <div style=" float:left;width:40%; margin-left:10%; margin-top:15px; margin-bottom:15px;">
-            <img  src="/image/first.jpg" class="picture"/><p align="left" style="margin-left:20%;">
-            <img  src="/image/1.jpg" class="head" /> </p>
+            <img  src="/images/first.jpg" class="picture"/><p align="left" style="margin-left:20%;">
+            <img  src="/images/1.jpg" class="head" /> </p>
         </div>
         <div style="float:right;width:40%;margin-right:10%;margin-top:15px; margin-bottom:15px;">
-            <img src="/image/second.jpg" class="picture"/>
+            <img src="/images/second.jpg" class="picture"/>
             <p align="left" style="margin-left:20%;">
-                <img  src="/image/2.jpg" class="head" /> </p>
+                <img  src="/images/2.jpg" class="head" /> </p>
         </div>
         <div style="float:right;width:40%;margin-right:10%;margin-top:15px; margin-bottom:15px;">
-            <img src="/image/third.jpeg" class="picture"/>
+            <img src="/images/third.jpeg" class="picture"/>
             <p align="left" style="margin-left:20%;">
-                <img src="/image/3.jpg" class="head" /> </p>
+                <img src="/images/3.jpg" class="head" /> </p>
         </div>
         <div style="float:right;width:40%;margin-left:10%;margin-top:15px; margin-bottom:15px;">
-            <img src="/image/forth.jpg" class="picture"/>
+            <img src="/images/forth.jpg" class="picture"/>
             <p align="left" style="margin-left:20%;">
-                <img src="/image/4.jpg" class="head" /> </p>
+                <img src="/images/4.jpg" class="head" /> </p>
         </div>
         <div style="float:right;width:40%;margin-right:10%;margin-top:15px; margin-bottom:15px;">
-            <img src="/image/fifth.jpg" class="picture"/>
+            <img src="/images/fifth.jpg" class="picture"/>
             <p align="left" style="margin-left:20%;">
-                <img src="/image/5.jpg" class="head" /> </p>
+                <img src="/images/5.jpg" class="head" /> </p>
         </div>
         <div style="float:right;width:40%;margin-left:10%;margin-top:15px; margin-bottom:15px;">
-            <img src="/image/sixth.jpg" class="picture"/>
+            <img src="/images/sixth.jpg" class="picture"/>
             <p align="left" style="margin-left:20%;">
-                <img  src="/image/6.jpg" class="head" /> </p>
+                <img  src="/images/6.jpg" class="head" /> </p>
 
         </div>
 
