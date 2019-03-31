@@ -40,8 +40,8 @@ public class PhotoController {
         return map;
     }
 
-    @RequestMapping(value = "myPhone")
+    @RequestMapping(value = "myPhoto")
     String myPhone(HttpServletRequest request,HttpServletResponse response){
-        return "myPhone";
+        return "myShare";
     }
 }
