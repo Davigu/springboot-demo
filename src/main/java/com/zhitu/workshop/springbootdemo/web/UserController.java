@@ -7,16 +7,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-
-import java.security.MessageDigest;
-
 import java.util.Map;
 
 @Controller
@@ -24,6 +26,8 @@ import java.util.Map;
 
         @Autowired
     UserServiceImpl userServiceImpl;
+    @Autowired
+    private JavaMailSender mailSender;
 
 
 
@@ -37,13 +41,7 @@ import java.util.Map;
      * @param model
      * @return 用户id
      */
-        @RequestMapping(value="/find")
-        @ResponseBody
-        public Long findByName(String userName, ModelMap model,
-                               HttpServletRequest request, HttpServletResponse response){
-            User user= userServiceImpl.selectUserByName(userName);
-            return user.getUserId();
-        }
+
     /**
      * 插入功能
      * @return 返回
@@ -109,9 +107,41 @@ import java.util.Map;
            }
            return result;
     }
+    @RequestMapping(value = "/doCheck")
+    @ResponseBody
+    public Map<String,Object> validation(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response) throws NoSuchAlgorithmException {
+        Map<String,Object> result=new HashMap<String,Object>();
+                User user2 = userServiceImpl.selectUserByName(user.getUserName());
+
+                try {
+                    if (user2 == null) {
+                        result.put("code", 2);  //用户名可以使用
+
+                    } else {
+                        result.put("code", 0);  //用户名已经存在
+                    }
+                }
+                catch (Exception e)
+                {
+
+                }
 
 
+        return result;
+    }
 
+    @RequestMapping(value = "/doSendMail")
+    @ResponseBody
+    public Map<String,Object> mail(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response) throws NoSuchAlgorithmException {
+        Map<String,Object> result=new HashMap<String,Object>();
+        SimpleMailMessage message = new SimpleMailMessage();//创建简单邮件消息
+        message.setFrom("1666938053@qq.com");//设置发送人
+        message.setTo("3492287204@qq.com");//设置收件人
+        message.setSubject("测试");//设置主题
+        message.setText("这里是内容");//设置内容
+        mailSender.send(message);//执行发送邮件
+        return result;
+    }
 
     /*@ResponseBody
     public String photoDetail(@PathVariable Long photoId,
