@@ -13,8 +13,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>星相册-我的照片</title>
     <!-- Bootstrap -->
+    <script src="js/jquery/jquery-3.3.1.min.js">
+    </script>
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#btn1").click(function(){
+                $("p").append(
+                     '<div id="editphone" class="col-xs-6 col-md-3">'
+                    +'<div id="editmenu" class="dropdown" style="position:absolute;top: 5px;right: 20px;">'
+                    +' <button class="btn btn-default dropdown-toggle btn-sm" type="button" data-toggle="dropdown" ></button>'
+                    +' <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto">'
+                    +' <li><a href="#">重命名</a></li>'
+                    +' <li><a href="#">分享</a></li>'
+                    +'<li role="separator" class="divider"></li>'
+                    +' <li><a href="#">删除</a></li>'
+                    +' </ul>'
+                    +' </div>'
+                    +' <a  href="#" class="thumbnail">'
+                    +' <img class="img-rounded" src="images/100X125.gif" style="width: 100%;height: 130px" alt="">'
+                    +' <div class="float-right" style="position:relative;bottom: 20px;right: 5px;color:aliceblue">点赞数</div>'
+                    +'  <div class="btn">我的收藏</div>'
+                    +'   </a>'
+                    +'  </div>'
+
+            );
+            });
+        });
+
+        function setImagePreview() {
+            var docObj = document.getElementById("doc");
+            var imgObjPreview = document.getElementById("preview");
+            if (docObj.files && docObj.files[0]) {
+                //火狐下，直接设img属性
+                imgObjPreview.style.display = 'block';
+                imgObjPreview.style.width = '500px';
+                imgObjPreview.style.height = '300px';
+                //imgObjPreview.src = docObj.files[0].getAsDataURL();
+                //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+                imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+            } else {
+                //IE下，使用滤镜
+                docObj.select();
+                var imgSrc = document.selection.createRange().text;
+                var localImagId = document.getElementById("localImag");
+                //必须设置初始大小
+                localImagId.style.width = "100px";
+                localImagId.style.height = "100px";
+
+
+                //图片异常的捕捉，防止用户修改后缀来伪造图片
+                try {
+                    localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                    localImagId.filters
+                        .item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                } catch (e) {
+                    alert("您上传的图片格式不正确，请重新选择!");
+                    return false;
+                }
+                imgObjPreview.style.display = 'none';
+                document.selection.empty();
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
@@ -80,20 +143,26 @@
                     </form>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="thumbnail"> <img src="images/100X125.gif" style="height: 100px;width: 100%" alt="">
-                            <p>aaaa</p>
-                        </div>
-                    </div>
-                    <div> <a href="#"><img src="images/addPhoto.png" alt=""></a></div>
+
+
+                             <!--上传照片-->
+
+
+
                 </div>
             </div>
             <div class="panel-footer">
-                <button type="button" class="btn btn-success" >开始上传</button>
-                <button type="button" class="btn btn-default">继续添加</button>
-                共
-                <label>5</label>
-                张照片（上传过程中请不要删除原始图片） </div>
+                <form action="/doUpload"method="post" name="fileupload" enctype="multipart/form-data">
+                    <input name="upfile" type="file" id="doc" onchange="javascript:setImagePreview();";/>
+
+                    <div id="localImag">
+                        <img id="preview"  style="display:none" />
+                    </div>
+                    <input type="submit" value="上传" />
+                </form>
+
+                <input type="button" class="btn btn-default">继续添加</input>
+             </div>
         </div>
         <!-- /.modal-content -->
     </div>
@@ -104,7 +173,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">创建相册</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button"  class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -129,7 +199,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-warning" type="button">确定</button>
+                <button class="btn btn-warning" id="btn1" data-dismiss="modal"type="button">确定</button>
                 <button class="btn btn-default " data-dismiss="modal">取消</button>
             </div>
         </div>
@@ -147,6 +217,7 @@
         </div>
         <div class="col-md-9" style="border-left: medium #DCD4D4 solid">
 
+
             <div id="editphone" class="col-xs-6 col-md-3">
                 <div id="editmenu" class="dropdown" style="position:absolute;top: 5px;right: 20px;">
                     <button class="btn btn-default dropdown-toggle btn-sm" type="button" data-toggle="dropdown" ></button>
@@ -159,13 +230,12 @@
                 </div>
                 <a  href="#" class="thumbnail">
                     <img class="img-rounded" src="images/100X125.gif" style="width: 100%;height: 130px" alt="">
-                    <p class="float-right" style="position:relative;bottom: 20px;right: 5px;color:aliceblue">点赞数</p>
-                    <p class="btn">我的收藏</p>
+                    <div class="float-right" style="position:relative;bottom: 20px;right: 5px;color:aliceblue">点赞数</div>
+                    <div class="btn">我的收藏</div>
                 </a>
+            </div>
+            <p>  </p>
 
-            </div>
-            <div class="col-xs-6 col-md-3"><a href="#" class="thumbnail"><img src="images/add.png" alt=""></a>
-            </div>
         </div>
     </div>
 </div>

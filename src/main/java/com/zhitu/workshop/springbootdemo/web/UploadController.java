@@ -25,7 +25,7 @@ public class UploadController {
     @ResponseBody
     public String fileUpload(@RequestParam(value = "upfile") MultipartFile file, Model model, HttpServletRequest request) {
         if (file.isEmpty()) {
-            System.out.println("文件为空空");
+            System.out.println("文件为空");
         }
         File saveFile=new File("F:\\1.png");
         try {

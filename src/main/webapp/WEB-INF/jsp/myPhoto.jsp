@@ -15,10 +15,63 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
+
+    <script src="js/jquery/jquery-3.3.1.min.js">
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#btn1").click(function(){
+                $("p").prepend(
+                    '<div class="col-xs-6 col-md-3">'
+                    +'<a href="#" class="thumbnail">'
+                    +'  <img  src="images/100X125.gif" style="height: 125px; width: 100%; display: block;"alt="100%x180" >'
+                    +'  </a>'
+                    +' </div>'
+                    );
+            });
+
+        });
+    function setImagePreview() {
+    var docObj = document.getElementById("doc");
+    var imgObjPreview = document.getElementById("preview");
+    if (docObj.files && docObj.files[0]) {
+    //火狐下，直接设img属性
+    imgObjPreview.style.display = 'block';
+    imgObjPreview.style.width = '500px';
+    imgObjPreview.style.height = '300px';
+    //imgObjPreview.src = docObj.files[0].getAsDataURL();
+    //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+    imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+    } else {
+    //IE下，使用滤镜
+    docObj.select();
+    var imgSrc = document.selection.createRange().text;
+    var localImagId = document.getElementById("localImag");
+    //必须设置初始大小
+    localImagId.style.width = "100px";
+    localImagId.style.height = "100px";
+
+
+    //图片异常的捕捉，防止用户修改后缀来伪造图片
+    try {
+    localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+    localImagId.filters
+    .item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+    } catch (e) {
+    alert("您上传的图片格式不正确，请重新选择!");
+    return false;
+    }
+    imgObjPreview.style.display = 'none';
+    document.selection.empty();
+    }
+    return true;
+    }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-    <div class="container"> <img src="images/star-brand-black.png"> <a class="navbar-brand" style="color: black" href="#">星相册</a>
+    <div class="container"> <img src="images/1.jpg">
+        <a class="navbar-brand" style="color: black" href="#">星相册</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active"> <a class="nav-link" style="color: black" href="#mybuild" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span> &nbsp;&nbsp;创建 </a></li>
@@ -44,7 +97,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content"   style="height: 570px">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">上传照片</h4>
+                <h4 class="modal-title">上传照片</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
@@ -80,20 +133,20 @@
                     </form>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="thumbnail"> <img src="images/100X125.gif" style="height: 100px;width: 100%" alt="">
-                            <p>aaaa</p>
-                        </div>
-                    </div>
-                    <div> <a href="#"><img src="images/addPhoto.png" alt=""></a> </div>
+                    <!--上传照片-->
+
                 </div>
             </div>
             <div class="panel-footer">
-                <button type="button" class="btn btn-success" >开始上传</button>
-                <button type="button" class="btn btn-default">继续添加</button>
-                共
-                <label>5</label>
-                张照片（上传过程中请不要删除原始图片） </div>
+                <form action="/doUpload"method="post" name="fileupload" enctype="multipart/form-data">
+                    <input name="upfile" type="file" id="doc" onchange="javascript:setImagePreview();";/>
+
+                    <div id="localImag">
+                        <img id="preview"  style="display:none" />
+                    </div>
+                    <input type="submit" value="上传" />
+                </form>
+            </div>
         </div>
         <!-- /.modal-content -->
     </div>
@@ -129,7 +182,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-warning" type="button">确定</button>
+                <button class="btn btn-warning" id="btn1" data-dismiss="modal" type="button">确定</button>
                 <button class="btn btn-default " data-dismiss="modal">取消</button>
             </div>
         </div>
@@ -164,6 +217,7 @@
                         <h4 class="panel-title">上传到相册</h4>
                     </div>
                     <div class="panel-body">
+                        <p></p>
                         <div class="col-xs-6 col-md-3">
                             <a href="#" class="thumbnail">
                                 <img alt="100%x180" src="images/100X125.gif" style="height: 125px; width: 100%; display: block;" >
