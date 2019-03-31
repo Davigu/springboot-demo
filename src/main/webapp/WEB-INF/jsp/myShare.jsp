@@ -43,7 +43,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content"   style="height: 570px">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">上传照片</h4>
+                <h4 class="modal-title" >上传照片</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
