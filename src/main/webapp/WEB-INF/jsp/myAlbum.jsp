@@ -46,8 +46,11 @@
         <!--删除功能-->
         $(document).ready(function()
         {
-                $("li").delegate("#delete", "click", function() {
+                $("body").on( "click","#delete",function() {
+
                 $(this).parent().parent().parent().parent().hide();
+
+
         });
 
         })
