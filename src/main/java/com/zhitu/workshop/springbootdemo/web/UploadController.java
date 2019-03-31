@@ -1,4 +1,5 @@
 package com.zhitu.workshop.springbootdemo.web;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -6,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import java.io.*;
+
 
 
 /**
@@ -23,7 +25,7 @@ public class UploadController {
     @ResponseBody
     public String fileUpload(@RequestParam(value = "upfile") MultipartFile file, Model model, HttpServletRequest request) {
         if (file.isEmpty()) {
-            System.out.println("文件为空空");
+            System.out.println("文件为空");
         }
         File saveFile=new File("F:\\1.png");
         try {
@@ -33,4 +35,5 @@ public class UploadController {
         }
         return "ok";
     }
+
 }

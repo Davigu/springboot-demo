@@ -21,6 +21,14 @@ public class AlbumController {
     @Autowired
     AlbumService albumService;
 
+    @RequestMapping(value = "/album")
+            public String showAlbum()
+    {
+        return "myAlbum";
+    }
+
+
+
     @RequestMapping(value ="/showAll",method = RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> showAllAlbum(ModelMap model, HttpServletRequest request, HttpServletResponse response)throws Exception {
