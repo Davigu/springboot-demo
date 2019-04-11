@@ -29,9 +29,7 @@ import java.util.Random;
     UserServiceImpl userServiceImpl;
     @Autowired
     private JavaMailSender mailSender;
-
-
-
+    static StringBuilder stringBuilder=new StringBuilder(4);
 
         //PhotoDao photoDao;
         //http://url/photo/photoid
@@ -67,18 +65,25 @@ import java.util.Random;
 
     @RequestMapping(value = "/doInsert")
         @ResponseBody
-        public Map<String,Object>doInsert(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
-
-            MessageDigest m=MessageDigest.getInstance("MD5");
-            //System.out.println(oSMD5.getMD5ofStr("123"));
-            m.update(user.getPassword().getBytes());
-            byte resultData[] = m.digest();
-            user.setPassword(new BigInteger(1, resultData).toString(16));
-            int count= userServiceImpl.insertUser(user);
-            Map<String,Object> result=new HashMap<String,Object>();
-            result.put("code",0);
-            result.put("userId",user.getUserId());
+        public Map<String,Object>doInsert(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response, String A)throws Exception{
+             Map<String,Object> result=new HashMap<String,Object>();
+            if (!A.equals(stringBuilder.toString()))
+            {
+                result.put("code",1);
+            }
+            else
+            {
+                MessageDigest m=MessageDigest.getInstance("MD5");
+                //System.out.println(oSMD5.getMD5ofStr("123"));
+                m.update(user.getPassword().getBytes());
+                byte resultData[] = m.digest();
+                user.setPassword(new BigInteger(1, resultData).toString(16));
+                int count= userServiceImpl.insertUser(user);
+                result.put("code",0);
+                result.put("userId",user.getUserId());
+            }
             return result;
+
         }
     @RequestMapping(value = "/doLogin")
     @ResponseBody
@@ -133,7 +138,6 @@ import java.util.Random;
         Map<String,Object> result=new HashMap<String,Object>();
         SimpleMailMessage message = new SimpleMailMessage();//创建简单邮件消息
         String str="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuilder stringBuilder=new StringBuilder(4);
         for(int i=0;i<4;i++)                                        //生成随机数
         {
             char ch=str.charAt(new Random().nextInt(str.length()));
