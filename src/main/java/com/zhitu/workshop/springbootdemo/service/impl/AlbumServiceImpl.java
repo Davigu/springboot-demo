@@ -1,4 +1,4 @@
-package com.zhitu.workshop.springbootdemo.service.serviceImpl;
+package com.zhitu.workshop.springbootdemo.service.impl;
 
 import com.zhitu.workshop.springbootdemo.bo.Album;
 import com.zhitu.workshop.springbootdemo.dao.AlbumDao;

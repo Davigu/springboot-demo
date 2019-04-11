@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhitu.workshop.springbootdemo.dao.AlbumDao">
     <select id="showAllAlbum" resultType="com.zhitu.workshop.springbootdemo.bo.Album">
-        select * from album
+        select * from album where use_user_id=#{userID}
     </select>
     <update id="updateAlbum" parameterType="com.zhitu.workshop.springbootdemo.bo.Album" >
         update album set album_name=#{album.albumName},

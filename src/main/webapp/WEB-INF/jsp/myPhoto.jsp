@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -41,58 +43,28 @@
         <div class="container col-md-9" style="border-left:medium #DCD4D4 solid;">
 
             <div class="row float-right">
-                <button class="btn btn-warning" >上传</button>
+                <button class="btn btn-warning" href="#myupload" data-toggle="modal">上传</button>
             </div>
 
             <div class="row" style="clear: both">
-
-
+                <c:forEach items="${photos}" var="date" varStatus="status">
                 <div class="panel col-md-12">
                     <div class="panel-heading">
-                        <h4 class="panel-title">2019-3-17-19点59分</h4>
-                        <h4 class="panel-title">上传到相册</h4>
+                        <h4 class="panel-title">${date.key}</h4>
                     </div>
                     <div class="panel-body">
-                        <div class="col-xs-6 col-md-3">
-                            <a href="#" class="thumbnail">
-                                <img alt="100%x180" src="images/100X125.gif" style="height: 125px; width: 100%; display: block;" >
-                            </a>
-                        </div>
-                        <div class="col-xs-6 col-md-3">
-                            <a href="#" class="thumbnail">
-                                <img alt="100%x180" src="images/100X125.gif" style="height: 125px; width: 100%; display: block;" >
-                            </a>
-                        </div>
-                        <div class="col-xs-6 col-md-3">
-                            <a href="#" class="thumbnail">
-                                <img alt="100%x180" src="images/100X125.gif" style="height: 125px; width: 100%; display: block;" >
-                            </a>
-                        </div>
-                        <div class="col-xs-6 col-md-3">
-                            <a href="#" class="thumbnail">
-                                <img alt="100%x180" src="images/100X125.gif" style="height: 125px; width: 100%; display: block;" >
-                            </a>
-                        </div>
-                        <div class="col-xs-6 col-md-3">
-                            <a href="#" class="thumbnail">
-                                <img alt="100%x180" src="images/100X125.gif" style="height: 125px; width: 100%; display: block;" >
-                            </a>
-                        </div>
+                            <c:forEach items="${date.value}" var="photo" varStatus="status">
+
+                                <div class="col-xs-6 col-md-3">
+                                    <a href="" class="thumbnail">
+                                        <img alt="${photo.photoName}" src="${photo.phoAddress}" style="height: 125px; width: 100%; display: block;" >
+                                    </a>
+                                </div>
+
+                            </c:forEach>
                     </div>
                 </div>
-                <div class="panel col-md-12">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">2019-3-17-20点10分</h4>
-                        <h4 class="panel-title">上传到相册</h4>
-                    </div>
-                    <div class="panel-body">
-                        <div class="col-xs-6 col-md-3"> <a href="#" class="thumbnail"> <img alt="100%x180" src="images/100X125.gif" style="height: 125px; width: 100%; display: block;" > </a> </div>
-                        <div class="col-xs-6 col-md-3"> <a href="#" class="thumbnail"> <img alt="100%x180" src="images/100X125.gif" style="height: 125px; width: 100%; display: block;" > </a> </div>
-                        <div class="col-xs-6 col-md-3"> <a href="#" class="thumbnail"> <img alt="100%x180" src="images/100X125.gif" style="height: 125px; width: 100%; display: block;" > </a> </div>
-                        <div class="col-xs-6 col-md-3"> <a href="#" class="thumbnail"> <img alt="100%x180" src="images/100X125.gif" style="height: 125px; width: 100%; display: block;" > </a> </div>
-                        <div class="col-xs-6 col-md-3"> <a href="#" class="thumbnail"> <img alt="100%x180" src="images/100X125.gif" style="height: 125px; width: 100%; display: block;" > </a> </div>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
 
         </div>

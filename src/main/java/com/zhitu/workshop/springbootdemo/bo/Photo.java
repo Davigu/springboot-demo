@@ -13,14 +13,14 @@ public class Photo {
     private String state;
     private Long size;
     private Long lovenumber;
-    private String photoAddress;
+    private String phoAddress;
 
-    public String getPhotoAddress() {
-        return photoAddress;
+    public String getPhoAddress() {
+        return phoAddress;
     }
 
-    public void setPhotoAddress(String photoAddress) {
-        this.photoAddress = photoAddress;
+    public void setPhoAddress(String photoAddress) {
+        this.phoAddress = photoAddress;
     }
 
     public Long getPhotoId() {

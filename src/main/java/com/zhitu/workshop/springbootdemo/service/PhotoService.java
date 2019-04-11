@@ -10,12 +10,20 @@ public interface PhotoService {
      * 显示所有照片
      * @return 返回照片地址
      */
-    List<Photo> showAllPhoto(Long userID);
+    List<Photo> showAllPhoto(Long userID) throws Exception;
 
     /**
      * 根据照片ID查询照片
-     * @param ID
+     * @param photoID
      * @return
      */
-    Photo findPhotoByID(Long ID);
+    Photo findPhotoByID(Long photoID) throws Exception;
+
+    /**
+     * 根据用户id和相册id显示照片
+     * @param userID 用户id
+     * @param albumID 相册id
+     * @return 照片列表
+     */
+    List<Photo> showByAlbum(Long userID,Long albumID) throws Exception;
 }
