@@ -70,9 +70,9 @@
                                         </ul>
                                     </div>
                                     <a data-gallery="manual" href="${photo.phoAddress}" class="thumbnail">
-                                        <img alt="${photo.photoName}" src="${photo.phoAddress}" style="height: 125px; width: 100%; display: block;" >
+                                        <img alt="${photo.photoName}" src="${photo.photoAddress}" style="height: 125px; width: 100%; display: block;" >
                                     </a>
-                                </div>
+                                </div
 
                             </c:forEach>
                     </div>
