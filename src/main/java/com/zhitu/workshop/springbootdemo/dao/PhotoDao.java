@@ -22,4 +22,6 @@ public interface PhotoDao {
      * @return 返回照片对象
      */
     Photo findPhotoByID(@Param("photoID") long photoID);
+
+    int insertPhoto(@Param("photo")Photo photo);
 }

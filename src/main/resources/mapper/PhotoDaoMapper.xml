@@ -9,4 +9,10 @@
     <select id="findPhotoByID" resultType="com.zhitu.workshop.springbootdemo.bo.Photo">
         select * from photo where photo_id=#{photoID}
     </select>
+    <insert id="insertPhoto" useGeneratedKeys="true"
+            parameterType="com.zhitu.workshop.springbootdemo.bo.Photo" keyProperty="photoId" keyColumn="photo_id">
+         insert into photo (album_id,photo_name,photo_description,up_time,love,state,size,lovenumber,photo_address)
+        values (#{photo.albumId},#{photo.photoName},#{photo.photoDescription},#{photo.upTime},#{photo.love},#{photo.state},
+        #{photo.size},#{photo.lovenumber},#{photo.photoAddress})
+    </insert>
 </mapper>

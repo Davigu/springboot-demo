@@ -20,4 +20,11 @@ public class PhotoServiceImpl implements PhotoService {
     public Photo findPhotoByID(Long ID) {
         return photoDao.findPhotoByID(ID);
     }
+
+    @Override
+    public Photo insertPhoto(Photo photo){
+        int count =photoDao.insertPhoto(photo);
+        return photo;
+    }
+
 }
