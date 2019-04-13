@@ -7,12 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigInteger;
@@ -25,7 +21,7 @@ import java.util.Random;
 @Controller
     public class UserController {
 
-        @Autowired
+    @Autowired
     UserServiceImpl userServiceImpl;
     @Autowired
     private JavaMailSender mailSender;
@@ -78,7 +74,7 @@ import java.util.Random;
                 m.update(user.getPassword().getBytes());
                 byte resultData[] = m.digest();
                 user.setPassword(new BigInteger(1, resultData).toString(16));
-                int count= userServiceImpl.insertUser(user);
+                 userServiceImpl.insertUser(user);
                 result.put("code",0);
                 result.put("userId",user.getUserId());
             }

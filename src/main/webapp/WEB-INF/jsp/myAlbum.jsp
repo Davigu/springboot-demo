@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -22,36 +24,63 @@
         $("#btn1").on("click",function(){
             var getAlbumName=$("#albumName").val;
             var getDescribe=$("#albumDescribe").val;
-
         })
+    </script>
 
-
-
-        </script>
 
     <script type="text/javascript">
+        <%--界面载入时根据数据库相册信息创建 --%>
+        $(document).ready(function(){
+
+
+
+        });
+
+
+
         $(document).ready(function(){
             $("#btn1").click(function(){
-                $("p").append(
-                     '<div id="editphone" class="col-xs-6 col-md-3">'
-                    +'<div id="editmenu" class="dropdown" style="position:absolute;top: 5px;right: 20px;">'
-                    +' <button class="btn btn-default dropdown-toggle btn-sm" type="button" data-toggle="dropdown" ></button>'
-                    +' <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto">'
-                    +' <li><a href="#">重命名</a></li>'
-                    +' <li><a href="#">分享</a></li>'
-                    +'<li role="separator" class="divider"></li>'
-                    +'<li ><a id ="delete"href="#">删除</a></li>'
-                    +' </ul>'
-                    +' </div>'
-                    +' <a  href="#" class="thumbnail">'
-                    +' <img class="img-rounded" src="images/100X125.gif" style="width: 100%;height: 130px" alt="">'
-                    +' <div class="float-right" style="position:relative;bottom: 20px;right: 5px;color:aliceblue">点赞数</div>'
-                    +'  <div class="btn">我的收藏</div>'
-                    +'   </a>'
-                    +'  </div>'
+                <%--获取值--%>
+                var albumname=$("#albumName").val();
+                var albumdescribe=$("#albumDescribe").val();
+                <%--利用ajax来实现数据的传输--%>
+                $.ajax({
+                    type:"POST",
+                    url:"/addAlbum",
+                    data:{
+                        "albumName":albumname,
+                        "albumDescription":albumdescribe,
+                    },
+                    <%--如果数据传输成功则增加一个相册 --%>
+                  success:  function(){
+                      $("#list").append(
+                          '<div id="editphone" class="col-xs-6 col-md-3">'
+                          +'<div id="editmenu" class="dropdown" style="position:absolute;top: 5px;right: 20px;">'
+                          +' <button class="btn btn-default dropdown-toggle btn-sm" type="button" data-toggle="dropdown" ></button>'
+                          +' <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto">'
+                          +' <li><a href="#">重命名</a></li>'
+                          +' <li><a href="#">分享</a></li>'
+                          +'<li role="separator" class="divider"></li>'
+                          +'<li ><a id ="delete"href="#">删除</a></li>'
+                          +' </ul>'
+                          +' </div>'
+                          +' <a  href="#" class="thumbnail">'
+                          +' <img class="img-rounded" src="images/100X125.gif" style="width: 100%;height: 130px" alt="">'
+                          +' <div class="float-right" style="position:relative;bottom: 20px;right: 5px;color:rgba(252,255,250,0)">点赞数</div>'
+                          +'  <div class="btn" id="obj">'+albumname+'</div>'
+                          +'   </a>'
+                          +'  </div>'
+                      )
+                  },
+                    error:function ()
+                    {
+                        return 0;
+                    }
+                    });
+                })
 
-            );
-            });
+
+
         });
 
         <!--删除功能-->
@@ -214,7 +243,12 @@
         <div class=" col-md-3 text-center"> <a class="btn" href="#">
             <h2>我的照片</h2>
         </a>
-            <div class="list-group posi" > <a href="#" class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 我的照片</a> <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-book"></span> 全部相册</a> <a href="#" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a> <a href="#" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a> </div>
+            <div class="list-group posi" >
+                <a href="/photo"  class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 我的照片</a>
+                <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-book"></span> 全部相册</a>
+                <a href="/share" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
+                <a href="/recyclebin" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
+            </div>
             <div class="progress">
                 <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
                 </div>
@@ -239,14 +273,36 @@
                     <div class="btn">我的收藏</div>
                 </a>
             </div>
-            <p>  </p>
+            <div id="list">
+
+
+                <c:forEach items="${list}" var="item"  >
+                    <div id="editphone" class="col-xs-6 col-md-3">
+            <div id="editmenu" class="dropdown" style="position:absolute;top: 5px;right: 20px;">
+                 <button class="btn btn-default dropdown-toggle btn-sm" type="button" data-toggle="dropdown" ></button>
+                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto">
+                     <li><a href="#">重命名</a></li>
+                     <li><a href="#">分享</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li ><a id ="delete"href="#">删除</a></li>
+                     </ul>
+                 </div>
+             <a  href="#" class="thumbnail">
+                 <img class="img-rounded" src="images/100X125.gif" style="width: 100%;height: 130px" alt="">
+                 <div class="float-right" style="position:relative;bottom: 20px;right: 5px;color:rgba(252,255,250,0)">点赞数</div>
+                  <div class="btn" id="obj">${item.albumName}</div>
+                   </a>
+              </div>
+
+                </c:forEach>
+            </div>
 
         </div>
     </div>
 </div>
 <hr>
 <footer class="text-center fixed-bottom blockquote-footer">
-    梦雷出品
+    达伟出品
 </footer>
 
 <script src="js/jquery-3.3.1.min.js"></script>
@@ -262,8 +318,11 @@
         },function(){
             $("#editmenu").css("display","none");
         });
+
+        $("#navbar").load("navbar.html");
+        $("#testId").val("#albumName")
     });
-    $("#navbar").load("navbar.html");
+
 </script>
 
 

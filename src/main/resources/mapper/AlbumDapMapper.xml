@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhitu.workshop.springbootdemo.dao.AlbumDao">
     <select id="showAllAlbum" resultType="com.zhitu.workshop.springbootdemo.bo.Album">
-        select * from album
+        select * from album where use_user_id=#{userID}
     </select>
     <update id="updateAlbum" parameterType="com.zhitu.workshop.springbootdemo.bo.Album" >
         update album set album_name=#{album.albumName},
@@ -16,4 +16,11 @@
     <delete id="deleteAlbumByID">
         delete from album where album_id=#{albumID} and use_user_id=#{userID}
     </delete>
+    <insert id="insertAlbum" useGeneratedKeys="true"
+            parameterType="com.zhitu.workshop.springbootdemo.bo.Album"
+            keyProperty="albumId" keyColumn="album_id">
+        insert into album(album_name,album_description)
+        values (#{album.albumName},#{album.albumDescription})
+    </insert>
+
 </mapper>

@@ -72,7 +72,7 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-    <div class="container"> <img src="images/1.jpg">
+    <div class="container"> <img src="images/starBrandBlack.png">
         <a class="navbar-brand" style="color: black" href="#">星相册</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">

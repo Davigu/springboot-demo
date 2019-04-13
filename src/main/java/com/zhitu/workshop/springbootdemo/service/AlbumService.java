@@ -1,6 +1,7 @@
 package com.zhitu.workshop.springbootdemo.service;
 
 import com.zhitu.workshop.springbootdemo.bo.Album;
+import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.dao.AlbumDao;
 import org.springframework.stereotype.Service;
 
@@ -27,4 +28,6 @@ public interface AlbumService {
      * @return返回成功或失败
      */
     int updateAlbum(Album album) throws Exception;
+
+    int insertAlbum(Album album) throws Exception;
 }

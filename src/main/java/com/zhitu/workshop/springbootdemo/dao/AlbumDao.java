@@ -28,4 +28,12 @@ public interface AlbumDao {
      */
     int updateAlbum(@Param("album") Album album);
 
+    /**
+     *
+     * @param album
+     * @return
+     */
+     int insertAlbum(@Param("album") Album album);
+
+
 }

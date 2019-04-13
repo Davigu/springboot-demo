@@ -1,6 +1,5 @@
 package com.zhitu.workshop.springbootdemo.bo;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 public class Photo {

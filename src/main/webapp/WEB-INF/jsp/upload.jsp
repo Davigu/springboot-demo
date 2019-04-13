@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/jquery.fileupload.css">
     <link rel="stylesheet" href="/css/uploadfile.css">
 
-        </head>
+</head>
 <body>
 
 <script src="/js/jquery-3.3.1.min.js"></script>
