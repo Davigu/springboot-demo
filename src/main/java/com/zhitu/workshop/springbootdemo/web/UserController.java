@@ -20,6 +20,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Controller
     public class UserController {
@@ -28,9 +29,7 @@ import java.util.Map;
     UserServiceImpl userServiceImpl;
     @Autowired
     private JavaMailSender mailSender;
-
-
-
+    static StringBuilder stringBuilder=new StringBuilder(4);
 
         //PhotoDao photoDao;
         //http://url/photo/photoid
@@ -66,18 +65,25 @@ import java.util.Map;
 
     @RequestMapping(value = "/doInsert")
         @ResponseBody
-        public Map<String,Object>doInsert(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
-
-            MessageDigest m=MessageDigest.getInstance("MD5");
-            //System.out.println(oSMD5.getMD5ofStr("123"));
-            m.update(user.getPassword().getBytes());
-            byte resultData[] = m.digest();
-            user.setPassword(new BigInteger(1, resultData).toString(16));
-            int count= userServiceImpl.insertUser(user);
-            Map<String,Object> result=new HashMap<String,Object>();
-            result.put("code",0);
-            result.put("userId",user.getUserId());
+        public Map<String,Object>doInsert(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response, String A)throws Exception{
+             Map<String,Object> result=new HashMap<String,Object>();
+            if (!A.equals(stringBuilder.toString()))
+            {
+                result.put("code",1);
+            }
+            else
+            {
+                MessageDigest m=MessageDigest.getInstance("MD5");
+                //System.out.println(oSMD5.getMD5ofStr("123"));
+                m.update(user.getPassword().getBytes());
+                byte resultData[] = m.digest();
+                user.setPassword(new BigInteger(1, resultData).toString(16));
+                int count= userServiceImpl.insertUser(user);
+                result.put("code",0);
+                result.put("userId",user.getUserId());
+            }
             return result;
+
         }
     @RequestMapping(value = "/doLogin")
     @ResponseBody
@@ -111,34 +117,37 @@ import java.util.Map;
     @ResponseBody
     public Map<String,Object> validation(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response) throws NoSuchAlgorithmException {
         Map<String,Object> result=new HashMap<String,Object>();
+        try {
                 User user2 = userServiceImpl.selectUserByName(user.getUserName());
-
-                try {
-                    if (user2 == null) {
-                        result.put("code", 2);  //用户名可以使用
-
-                    } else {
-                        result.put("code", 0);  //用户名已经存在
-                    }
+                if (!user2.getUserName().equals(user.getUserName()) ) {
+                    result.put("code", 1);  //用户名可以合法
                 }
-                catch (Exception e)
-                {
-
+                else {
+                    result.put("code", 2);  //用户名不合法
                 }
-
-
+        }
+        catch (Exception e)
+        {
+            result.put("code", 1);
+        }
         return result;
     }
-
     @RequestMapping(value = "/doSendMail")
     @ResponseBody
     public Map<String,Object> mail(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response) throws NoSuchAlgorithmException {
         Map<String,Object> result=new HashMap<String,Object>();
         SimpleMailMessage message = new SimpleMailMessage();//创建简单邮件消息
+        String str="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        for(int i=0;i<4;i++)                                        //生成随机数
+        {
+            char ch=str.charAt(new Random().nextInt(str.length()));
+            stringBuilder.append(ch);
+        }
+        String mail = user.getEmail();
         message.setFrom("1666938053@qq.com");//设置发送人
-        message.setTo("3492287204@qq.com");//设置收件人
+        message.setTo(mail);//设置收件人
         message.setSubject("测试");//设置主题
-        message.setText("这里是内容");//设置内容
+        message.setText("欢迎您注册星相册，您的验证码为"+stringBuilder);//设置内容
         mailSender.send(message);//执行发送邮件
         return result;
     }

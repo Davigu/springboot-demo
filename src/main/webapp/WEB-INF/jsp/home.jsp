@@ -71,8 +71,6 @@
         </div>
 
     </div>
-
-
     <!-- 这里是登录界面 -->
     <div id="shade" class="c1 hide"></div>
             <div id="modal" class="c2 hide">
@@ -89,7 +87,6 @@
         $("#btn").click(function () {
             var loginCode = $.trim($("#uid").val());
             var password = $.trim($("#pwd").val());
-
             //前台的非空验证
             if(loginCode == "" || loginCode == null){
                 alert("对不起，登录账号不能为空。");
@@ -130,16 +127,19 @@
         <td><input  style="margin-left: 20%" type="text" id="userName" class="form-control" placeholder="用户"style="width: 250px" /><div id="errorAccount" style="color:red;display:inline;"></div></td>
                 </tr>
                 <tr>
-        <td style="margin-left: 20%"><input type="password" id="passWord" class="form-control" placeholder="密码"style="width: 250px"/></td>
+        <td ><input style="margin-left: 20%" type="password" id="passWord" class="form-control" placeholder="密码"style="width: 250px"/><div id="errorAccount2" style="color:red;display:inline;"></div></td>
                 </tr>
-        <td style="margin-left: 20%"><input type="password" class="form-control" placeholder="确认密码"style="width: 250px"/></td>
+        <td ><input style="margin-left: 20%" type="password" id="cPassWord" class="form-control" placeholder="确认密码"style="width: 250px"/><div id="errorAccount3" style="color:red;display:inline;"></div></td>
                 <tr>
-        <td style="margin-left: 20%"><input type="text" id="email" class="form-control" placeholder="邮箱"style="width: 250px"/></td>
-                    <td><input type="button" id="send" value="发送邮件"></td>
+        <td ><input style="margin-left: 20%" type="text" id="email" class="form-control" placeholder="邮箱"style="width: 250px"/><div id="errorAccount4" style="color:red;display:inline;"></div></td>
+                    <td><input style="margin-left: 80%" type="button" id="send" value="发送邮件"></td>
                 </tr>
-        <td style="margin-left: 20%"><input type="text" id="phone" class="form-control" placeholder="手机号码"style="width: 250px"/></td>
                 <tr>
-        <td style="margin-left: 20%">性别:男<input type="radio" name="gender" value="1">女<input type="radio" name="gender" value="2"></td>
+                    <td ><input style="margin-left: 20%" type="text" id="VD" class="form-control" placeholder="验证码"style="width: 250px"/><div id="validation" style="color:red;display:inline;"></div></td>
+                </tr>
+        <td ><input style="margin-left: 20%" type="text" id="phone" class="form-control" placeholder="手机号码"style="width: 250px"/><div id="errorAccount5" style="color:red;display:inline;"></div></td>
+                <tr >
+        <td  align="center" >性别:男<input  type="radio" name="gender" value="1">女<input type="radio" name="gender" value="2"></td>
                 </tr>
                 <tr>
                     <td> <input type="button" style="margin-left: 20%" value="确定" class="btn" id="btnSave"></td>
@@ -152,6 +152,7 @@
         $(document).ready(function(){
                 $("#userName").blur(function () {
                     var username=$("#userName").val();
+
                     $.ajax({
                         url:"/doCheck",
                         type:"post",
@@ -161,26 +162,69 @@
                         },
                         success:function(result){//回调函数，data是返回的数据result
                             if(result.code == 0) {
-                               $("#errorAccount").html("用户名已经存在");
+                               $("#errorAccount").html("用户名不合法");
+                            }
+                            else if(result.code == 1)
+                            {
+                                $("#errorAccount").html("用户名可以使用");
                             }
                             else if(result.code == 2)
                             {
-                                $("#errorAccount").html("用户名可以使用");
+                                $("#errorAccount").html("用户名已经存在");
                             }
                         }
                 });
                 })
+            $("#cPassWord").blur(function () {
+                var password=$("#passWord").val();
+                var cpassword=$("#cPassWord").val();
+                if(password != cpassword)
+                {
+                    $("#errorAccount3").html("前后两次密码不一致");
+                }
+                else
+                {
+                    $("#errorAccount3").html("前后密码一致");
+                }
+
+            })
+            $("#email").blur(function () {
+                var objReg = new  RegExp("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$");
+                var email = $("#email").val();
+                if(!objReg.test(email))
+                {
+                    $("#errorAccount4").html("邮箱格式错误");
+                }
+                else
+                {
+                    $("#errorAccount4").html("邮箱可用");
+                }
+            })
+            $("#phone").blur(function () {
+                var objReg = new  RegExp("^[1][358][0-9]{9}$");
+                var phone = $("#phone").val();
+                if(!objReg.test(phone))
+                {
+                    $("#errorAccount5").html("手机号码格式错误");
+                }
+                else
+                {
+                    $("#errorAccount5").html("手机号码可用");
+                }
+            })
         })
     </script>
     <!--发送验证邮件-->
     <script>
         $(function () {
             $("#send").on("click",function () {
+                var email=$("#email").val();
                 $.ajax({
                     type:"POST",
                     url:"/doSendMail",
                     dataType:"json",
                     data:{
+                        "email":email,
                     },
                     success:function () {
                         alert("发送成功");
@@ -206,6 +250,7 @@
                 var password=$("#passWord").val();
                 var email=$("#email").val();
                 var phone=$("#phone").val();
+                var vd=$("#VD").val();
                 var gender=$('input:radio[name="gender"]:checked').val();
                 $.ajax({
                     type:"POST",
@@ -217,14 +262,17 @@
                         "email":email,
                         "phone":phone,
                         "gender":gender,
+                        "A":vd,
                     },
                     success:function (result) {
                         $("#btnSave").removeClass("Saving");
                         $("#btnSave").val("Save");
-
                         if(result.code==0){
                             alert("注册成功");
                             Hide1();
+                        }
+                        if(result.code==1){
+                            alert("验证码错误");
                         }
                     },
                     error:function () {
@@ -235,29 +283,6 @@
 
             })
 
-            $("#userName").blur(function(){
-                var username=$("#userName").val();
-                $.ajax({
-                    type:"POST",
-                    url:"/find",
-                    dataType:"json",
-                    data:{
-                        "userName":username,
-                    },
-                    success:function (result) {
-                        $("#ID1").html("用户名已存在")
-                    },
-                    error:function () {
-                        $("#ID1").html("用户名可用")
-                    }
-
-
-                })
-            })
-
-            $("#userName").focus(function () {
-                $("#ID1").html("")
-            })
         })
     </script>
 
