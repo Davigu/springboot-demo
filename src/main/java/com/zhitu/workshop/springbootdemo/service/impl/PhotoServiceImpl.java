@@ -55,10 +55,6 @@ public class PhotoServiceImpl implements PhotoService {
         }
     }
 
-    @Override
-    public Photo insertPhoto(Photo photo){
-        int count =photoDao.insertPhoto(photo);
-        return photo;
-    }
+
 
 }

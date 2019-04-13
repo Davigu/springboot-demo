@@ -69,8 +69,8 @@
                                             <li><a class="delPhoto" href="javascript:;" photoid="${photo.photoId}">删除</a></li>
                                         </ul>
                                     </div>
-                                    <a data-gallery="manual" href="${photo.phoAddress}" class="thumbnail">
-                                        <img alt="${photo.photoName}" src="${photo.phoAddress}" style="height: 125px; width: 100%; display: block;" >
+                                    <a data-gallery="manual" href="${photo.photoAddress}" class="thumbnail">
+                                        <img alt="${photo.photoName}" src="${photo.photoAddress}" style="height: 125px; width: 100%; display: block;" >
                                     </a>
                                 </div>
 
@@ -152,12 +152,10 @@
             })
         }
     })
-    
     $("input[type='checkbox']").change(function () {
         $(this).css("display", "block");
     })
 
-    
 </script>
 </body>
 </html>
