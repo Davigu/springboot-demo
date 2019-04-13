@@ -37,4 +37,8 @@ public interface PhotoDao {
      * @return 返回影响行数
      */
     int deletePhotoById(@Param("photoID") long photoID);
+
+
+    int insertPhoto(@Param("photo")Photo photo);
+
 }

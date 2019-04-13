@@ -34,4 +34,6 @@ public interface PhotoService {
      * @throws Exception
      */
     boolean deletePhotoById(Long photoID) throws Exception;
+
+    Photo insertPhoto(Photo photo);
 }
