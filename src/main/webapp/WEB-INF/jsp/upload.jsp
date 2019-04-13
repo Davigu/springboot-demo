@@ -23,6 +23,7 @@
         $("#fileuploader").uploadFile({
             url:"doUpload",
             fileName:"upfile"
+
         });
     });
 </script>
