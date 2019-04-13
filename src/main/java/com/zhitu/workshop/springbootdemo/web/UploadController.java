@@ -58,7 +58,7 @@ public class UploadController {
 
         Photo p=new Photo();
         p.setPhotoName(fileOnlyName);
-        p.setPhoAddress("/picture/"+newFileName+fileStyle);
+        p.setPhotoAddress("/picture/"+newFileName+fileStyle);
         p.setAlbumId(12L);
         p.setPhotoDescription("哈哈哈 ");
         p.setLove(1L);

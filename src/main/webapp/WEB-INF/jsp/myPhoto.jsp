@@ -152,10 +152,12 @@
             })
         }
     })
+    
     $("input[type='checkbox']").change(function () {
         $(this).css("display", "block");
     })
 
+    
 </script>
 </body>
 </html>
