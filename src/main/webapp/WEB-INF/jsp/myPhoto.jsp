@@ -17,6 +17,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/photoviewer.css" rel="stylesheet">
 </head>
 <body>
 <div id="navbar"></div>
@@ -30,18 +31,20 @@
 
             <a class="btn" href="#"><h2>我的照片</h2></a>
             <div class="list-group posi" >
-                <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-picture"></span> 全部照片</a>
-                <a href="#" class="list-group-item"><span class="glyphicon glyphicon-book"></span> 我的相册</a>
-                <a href="#" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
-                <a href="#" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
+                <a href="myPhoto" class="list-group-item active"><span class="glyphicon glyphicon-picture"></span> 全部照片</a>
+                <a href="myAlbum" class="list-group-item"><span class="glyphicon glyphicon-book"></span> 我的相册</a>
+                <a href="myShare" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
+                <a href="myRecycleBin" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
             </div>
-            <div class="progress">
+            <div class="progress" style="margin-top: 180px">
                 <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
                 </div>
             </div>
         </div>
         <div class="container col-md-9" style="border-left:medium #DCD4D4 solid;">
-
+            <div class="row float-left">
+                <a class="btn btn-danger" style="margin-left:19px;">全部删除</a>
+            </div>
             <div class="row float-right">
                 <button class="btn btn-warning" href="#myupload" data-toggle="modal">上传</button>
             </div>
@@ -55,8 +58,18 @@
                     <div class="panel-body">
                             <c:forEach items="${date.value}" var="photo" varStatus="status">
 
-                                <div class="col-xs-6 col-md-3">
-                                    <a href="" class="thumbnail">
+                                <div class="col-xs-6 col-md-3 editPhoto" style="padding: 5px;">
+                                    <input type="checkbox" style="position:absolute;top: 6px;left: 9.6px">
+                                    <div class="dropdown editMenu" style="position:absolute;top: 10.5px;right: 10.5px;">
+                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></button>
+                                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto">
+                                            <li><a class="renamePhoto" href="#">重命名</a></li>
+                                            <li><a href="#">分享</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a class="delPhoto" href="javascript:;" photoid="${photo.photoId}">删除</a></li>
+                                        </ul>
+                                    </div>
+                                    <a data-gallery="manual" href="${photo.phoAddress}" class="thumbnail">
                                         <img alt="${photo.photoName}" src="${photo.phoAddress}" style="height: 125px; width: 100%; display: block;" >
                                     </a>
                                 </div>
@@ -73,13 +86,78 @@
 </div>
 <hr>
 <footer class="panel-footer text-center fixed-bottom blockquote-footer">梦雷出品，必属精品</footer>
-<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/popper.min.js"></script>
+<script src="js/photoviewer.js"></script>
 <script>
-    $("#navbar").load("navbar.html");
-</script>
+    $(function () {
+        $("#navbar").load("navbar.html");
+        $(".editMenu").css("display", "none");
+        $(".editPhoto").find("input").css("display","none");
+        $(".editPhoto").hover(function () {
+            $(this).find(".editMenu").css("display", "block");
+            $(this).find("input").css("display", "block");
+        }, function () {
+            $(this).find(".editMenu").css("display", "none");
+            $(this).find("input").css("display", "none");
+        });
+    });
+    //实现大图
+    $('[data-gallery=manual]').click(function (e) {
+        e.preventDefault();
+        var items = [],
+            // get index of element clicked
+            options = {
+                index: $(this).index(".thumbnail")
+            };
+        // looping to create images array
+        $('[data-gallery=manual]').each(function () {
+            let src = $(this).attr('href');
+            items.push({
+                src: src
+            });
+        });
+        console.log(options);
+        new PhotoViewer(items, options);
+    });
 
+    //删除按钮
+    $(".delPhoto").click(function () {
+        var id=$(".delPhoto").attr("photoid");
+        var a=confirm("是否删除这张照片？");
+        var t=$(this).parent().parent().parent().parent();
+        var size=$(this).parent().parent().parent().parent().parent().children("div").length;
+        var panel=$(this).parent().parent().parent().parent().parent().parent();
+        if(a==true){
+            $.ajax({
+                type:"POST",
+                url:"deletePhoto",
+                data:{"id":id},
+                dataType:"json",
+                success:function (data) {
+                    console.log(data);
+                    if(data==true){
+                        console.log("删除成功");
+                        t.remove();
+                        console.log(size);
+                        if(size-1==0){
+                            panel.remove();
+                        }
+                    }else{
+                        console.log("删除失败");
+                    }
+                }
+            })
+        }
+    })
+    
+    $("input[type='checkbox']").change(function () {
+        $(this).css("display", "block");
+    })
+
+    
+</script>
 </body>
 </html>

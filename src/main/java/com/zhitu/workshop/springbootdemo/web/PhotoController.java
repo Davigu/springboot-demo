@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,8 +29,8 @@ public class PhotoController {
     AlbumService albumService;
 
 
-    @RequestMapping(value = "allphoto")
-    public String showAllPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
+    @RequestMapping(value = "myPhoto")
+    public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
         Long userID;
 //        if(request.getSession().getAttribute("userID")==null){
 //            throw new Exception("session中用户id为空");
@@ -61,5 +58,17 @@ public class PhotoController {
         }
         request.setAttribute("photos",map);
         return "myPhoto";
+    }
+
+    @RequestMapping(value = "deletePhoto")
+    @ResponseBody
+    public Object deletePhoto(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)throws Exception{
+        Long ID=Long.valueOf(id);
+        boolean isSuccess=photoService.deletePhotoById(ID);
+        if(isSuccess==true){
+            return "true";
+        }else {
+            return "false";
+        }
     }
 }

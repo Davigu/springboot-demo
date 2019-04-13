@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 加州旅馆
-  Date: 2019/3/30
-  Time: 17:44
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -16,9 +10,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-
 <div id="navbar"></div>
-
 
 <div class="container">
     <div class="row">
@@ -61,7 +53,7 @@
 
 
 <footer class="panel-footer text-center fixed-bottom blockquote-footer">梦雷出品，必属精品</footer>
-<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/popper.min.js"></script>

@@ -14,4 +14,7 @@
     <select id="showByAlbum" resultType="com.zhitu.workshop.springbootdemo.bo.Photo">
         select * from photo,album where album.use_user_id=#{userID} and album_id=#{albumID}
     </select>
+    <delete id="deletePhotoById">
+        delete from photo where photo_id=#{photoID}
+    </delete>
 </mapper>

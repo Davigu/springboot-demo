@@ -41,4 +41,17 @@ public class PhotoServiceImpl implements PhotoService {
             return photoDao.showByAlbum(userID,albumID);
         }
     }
+
+    @Override
+    public boolean deletePhotoById(Long photoID) throws Exception {
+        if(photoID==null||photoID.equals("")){
+            throw new Exception("照片id为空");
+        }else {
+            if(photoDao.deletePhotoById(photoID)>0){
+                return true;
+            }else {
+                return false;
+            }
+        }
+    }
 }

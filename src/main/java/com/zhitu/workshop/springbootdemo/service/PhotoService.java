@@ -26,4 +26,12 @@ public interface PhotoService {
      * @return 照片列表
      */
     List<Photo> showByAlbum(Long userID,Long albumID) throws Exception;
+
+    /**
+     * 根据照片id删除照片
+     * @param photoID 照片id
+     * @return 返回是否成功
+     * @throws Exception
+     */
+    boolean deletePhotoById(Long photoID) throws Exception;
 }

@@ -30,4 +30,11 @@ public interface PhotoDao {
      * @return 返回照片对象
      */
     Photo findPhotoByID(@Param("photoID") long photoID);
+
+    /**
+     * 根据照片ID删除照片
+     * @param photoID 照片id
+     * @return 返回影响行数
+     */
+    int deletePhotoById(@Param("photoID") long photoID);
 }
