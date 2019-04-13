@@ -17,6 +17,17 @@
     </script>
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
+    <!--相册创建与数据库相连的方法-->
+    <script type="text/javascript">
+        $("#btn1").on("click",function(){
+            var getAlbumName=$("#albumName").val;
+            var getDescribe=$("#albumDescribe").val;
+
+        })
+
+
+
+        </script>
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -175,7 +186,7 @@
                         /30</div>
                     <div>
                         <label for="albumName">相册描述：</label>
-                        <textarea name="textarea" rows="3" class="form-control"></textarea>
+                        <textarea name="textarea" rows="3" id="albumDescribe" class="form-control"></textarea>
                         <label>0</label>
                         /2000</div>
                     <div class="form-inline">
