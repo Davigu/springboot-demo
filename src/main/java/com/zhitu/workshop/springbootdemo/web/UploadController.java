@@ -54,7 +54,7 @@ public class UploadController {
         long newFileName=System.currentTimeMillis()+random;
 
         String basepath= this.getClass().getResource("/").getPath();
-        File saveFile=new File(basepath+File.separator+"static"+File.separator+"picture"+newFileName+fileStyle);
+        File saveFile=new File(basepath+File.separator+"static"+File.separator+"picture"+File.separator+newFileName+fileStyle);
 
         Photo p=new Photo();
         p.setPhotoName(fileOnlyName);
