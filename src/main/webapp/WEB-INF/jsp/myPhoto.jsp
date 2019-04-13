@@ -43,7 +43,7 @@
         </div>
         <div class="container col-md-9" style="border-left:medium #DCD4D4 solid;">
             <div class="row float-left">
-                <a class="btn btn-danger" style="margin-left:19px;">全部删除</a>
+                <a class="btn btn-danger" style="margin-left:38px;">全部删除</a>
             </div>
             <div class="row float-right">
                 <button class="btn btn-warning" href="#myupload" data-toggle="modal">上传</button>
@@ -51,11 +51,11 @@
 
             <div class="row" style="clear: both">
                 <c:forEach items="${photos}" var="date" varStatus="status">
-                <div class="panel col-md-12">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">${date.key}</h4>
-                    </div>
-                    <div class="panel-body">
+                    <div class="panel col-md-12">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">${date.key}</h4>
+                        </div>
+                        <div class="panel-body">
                             <c:forEach items="${date.value}" var="photo" varStatus="status">
 
                                 <div class="col-xs-6 col-md-3 editPhoto" style="padding: 5px;">
@@ -75,8 +75,8 @@
                                 </div>
 
                             </c:forEach>
+                        </div>
                     </div>
-                </div>
                 </c:forEach>
             </div>
 
@@ -96,12 +96,17 @@
         $("#navbar").load("navbar.html");
         $(".editMenu").css("display", "none");
         $(".editPhoto").find("input").css("display","none");
-        $(".editPhoto").hover(function () {
+
+        $(".editPhoto").hover(
+            function () {
             $(this).find(".editMenu").css("display", "block");
             $(this).find("input").css("display", "block");
         }, function () {
             $(this).find(".editMenu").css("display", "none");
-            $(this).find("input").css("display", "none");
+            $(this).find("input").css("display","none");
+            if(isChecked==true){
+                $(this).find("input").css("display","block");
+            }
         });
     });
     //实现大图
@@ -122,7 +127,6 @@
         console.log(options);
         new PhotoViewer(items, options);
     });
-
     //删除按钮
     $(".delPhoto").click(function () {
         var id=$(".delPhoto").attr("photoid");
@@ -151,10 +155,6 @@
                 }
             })
         }
-    })
-    
-    $("input[type='checkbox']").change(function () {
-        $(this).css("display", "block");
     })
 </script>
 </body>

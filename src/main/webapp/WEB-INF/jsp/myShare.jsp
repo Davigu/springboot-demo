@@ -47,12 +47,7 @@
     </div>
 </div>
 
-
-
-
-
-
-<footer class="panel-footer text-center fixed-bottom blockquote-footer">梦雷出品，必属精品</footer>
+<footer class="panel-footer text-center fixed-bottom blockquote-footer"></footer>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

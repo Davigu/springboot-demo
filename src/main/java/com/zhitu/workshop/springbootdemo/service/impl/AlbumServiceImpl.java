@@ -1,6 +1,7 @@
 package com.zhitu.workshop.springbootdemo.service.impl;
 
 import com.zhitu.workshop.springbootdemo.bo.Album;
+import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.dao.AlbumDao;
 import com.zhitu.workshop.springbootdemo.service.AlbumService;
 import jdk.nashorn.internal.ir.annotations.Ignore;
@@ -28,6 +29,11 @@ public class AlbumServiceImpl implements AlbumService {
             return albumDao.deleteAlbumByID(albumID,userID);
 
 
+    }
+    @Override
+    public int insertAlbum(Album album) {
+
+        return albumDao.insertAlbum(album);
     }
 
     @Override
