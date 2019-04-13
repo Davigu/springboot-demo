@@ -1,24 +1,13 @@
 package com.zhitu.workshop.springbootdemo.web;
-
-import com.sun.tools.javac.util.Convert;
-import com.sun.xml.internal.xsom.impl.scd.Iterators;
-import com.zhitu.workshop.springbootdemo.bo.Album;
 import com.zhitu.workshop.springbootdemo.bo.Photo;
 import com.zhitu.workshop.springbootdemo.service.AlbumService;
 import com.zhitu.workshop.springbootdemo.service.PhotoService;
-import jdk.nashorn.internal.ir.RuntimeNode;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
