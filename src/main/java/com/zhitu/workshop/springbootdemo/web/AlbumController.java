@@ -1,5 +1,4 @@
 package com.zhitu.workshop.springbootdemo.web;
-
 import com.zhitu.workshop.springbootdemo.bo.Album;
 import com.zhitu.workshop.springbootdemo.service.AlbumService;
 import com.zhitu.workshop.springbootdemo.service.impl.AlbumServiceImpl;

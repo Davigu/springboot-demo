@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>recycleBin</title>
+    <title>星相册-我的回收站</title>
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

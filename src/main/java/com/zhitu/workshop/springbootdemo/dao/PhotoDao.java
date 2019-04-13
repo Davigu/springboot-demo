@@ -17,9 +17,28 @@ public interface PhotoDao {
     List<Photo> showAllPhoto(@Param("userID") long userID);
 
     /**
+     * 查找相册中的照片
+     * @param userID 用户id
+     * @param albumID 相册id
+     * @return 照片列表
+     */
+    List<Photo> showByAlbum(@Param("userID") long userID,@Param("albumID") Long albumID);
+
+    /**
      * 根据照片ID查询照片
      * @param
      * @return 返回照片对象
      */
     Photo findPhotoByID(@Param("photoID") long photoID);
+
+    /**
+     * 根据照片ID删除照片
+     * @param photoID 照片id
+     * @return 返回影响行数
+     */
+    int deletePhotoById(@Param("photoID") long photoID);
+
+
+    int insertPhoto(@Param("photo")Photo photo);
+
 }

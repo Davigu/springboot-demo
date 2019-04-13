@@ -10,7 +10,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-
+<div id="navbar"></div>
 
 <div class="container">
     <div class="row">
