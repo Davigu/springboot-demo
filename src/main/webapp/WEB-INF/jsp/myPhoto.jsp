@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 加州旅馆
-  Date: 2019/3/30
-  Time: 17:46
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -51,11 +45,11 @@
 
             <div class="row" style="clear: both">
                 <c:forEach items="${photos}" var="date" varStatus="status">
-                <div class="panel col-md-12">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">${date.key}</h4>
-                    </div>
-                    <div class="panel-body">
+                    <div class="panel col-md-12">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">${date.key}</h4>
+                        </div>
+                        <div class="panel-body">
                             <c:forEach items="${date.value}" var="photo" varStatus="status">
 
                                 <div class="col-xs-6 col-md-3 editPhoto" style="padding: 5px;">
@@ -69,14 +63,14 @@
                                             <li><a class="delPhoto" href="javascript:;" photoid="${photo.photoId}">删除</a></li>
                                         </ul>
                                     </div>
-                                    <a data-gallery="manual" href="${photo.phoAddress}" class="thumbnail">
+                                    <a data-gallery="manual" href="${photo.photoAddress}" class="thumbnail">
                                         <img alt="${photo.photoName}" src="${photo.photoAddress}" style="height: 125px; width: 100%; display: block;" >
                                     </a>
-                                </div
+                                </div>
 
                             </c:forEach>
+                        </div>
                     </div>
-                </div>
                 </c:forEach>
             </div>
 
@@ -122,7 +116,6 @@
         console.log(options);
         new PhotoViewer(items, options);
     });
-
     //删除按钮
     $(".delPhoto").click(function () {
         var id=$(".delPhoto").attr("photoid");
@@ -156,7 +149,6 @@
     $("input[type='checkbox']").change(function () {
         $(this).css("display", "block");
     })
-
 
 </script>
 </body>

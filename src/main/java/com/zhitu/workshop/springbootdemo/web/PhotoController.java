@@ -18,7 +18,7 @@ public class PhotoController {
     AlbumService albumService;
 
 
-    @RequestMapping(value = "myPhoto")
+    @RequestMapping(value = "/myPhoto")
     public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
         Long userID;
 //        if(request.getSession().getAttribute("userID")==null){

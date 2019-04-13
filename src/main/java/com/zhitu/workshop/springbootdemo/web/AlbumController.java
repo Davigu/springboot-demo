@@ -20,7 +20,7 @@ public class AlbumController {
     AlbumService albumService;
     @Autowired
     AlbumServiceImpl albumServiceImpl;
-    @RequestMapping(value = "/album")
+    @RequestMapping(value = "/myAlbum")
             public String showAlbum(HttpServletRequest request) throws Exception
     {
         request.setAttribute("list",albumServiceImpl.showAllAlbum(12));

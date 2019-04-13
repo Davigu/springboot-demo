@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ShareController {
-    @RequestMapping(value = "myShare")
+    @RequestMapping(value = "/myShare")
     public String showMyShare()
     {
         return "myShare";
