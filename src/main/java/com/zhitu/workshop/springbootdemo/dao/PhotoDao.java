@@ -2,6 +2,7 @@ package com.zhitu.workshop.springbootdemo.dao;
 
 import com.sun.xml.internal.bind.v2.model.core.ID;
 import com.zhitu.workshop.springbootdemo.bo.Photo;
+import com.zhitu.workshop.springbootdemo.bo.RecycleBin;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -41,4 +42,5 @@ public interface PhotoDao {
 
     int insertPhoto(@Param("photo")Photo photo);
 
+    int delIntoRec(@Param("photoID") long photoID);
 }

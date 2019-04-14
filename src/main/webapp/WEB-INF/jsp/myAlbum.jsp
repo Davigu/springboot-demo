@@ -13,6 +13,13 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
 
     <script type="text/javascript">
+        <%--界面载入时根据数据库相册信息创建 --%>
+        $(document).ready(function(){
+
+
+
+        });
+
 
 
         $(document).ready(function(){

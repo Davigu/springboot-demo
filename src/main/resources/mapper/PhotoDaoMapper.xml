@@ -6,7 +6,7 @@
     <select id="showAllPhoto" resultType="com.zhitu.workshop.springbootdemo.bo.Photo">
         select * from photo p
         inner join album a on p.album_id=a.album_id
-        where a.use_user_id=#{userID} order by p.up_time desc
+        where a.use_user_id=#{userID} and p.state='0' order by p.up_time desc
     </select>
     <select id="findPhotoByID" resultType="com.zhitu.workshop.springbootdemo.bo.Photo">
         select * from photo where photo_id=#{photoID}
@@ -23,6 +23,10 @@
         values (#{photo.albumId},#{photo.photoName},#{photo.photoDescription},#{photo.upTime},#{photo.love},#{photo.state},
         #{photo.size},#{photo.lovenumber},#{photo.photoAddress})
     </insert>
+
+    <update id="delIntoRec">
+          UPDATE photo set state = '1' where photo_id=#{photoID}
+    </update>
 
 
 </mapper>
