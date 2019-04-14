@@ -311,7 +311,7 @@
             $("#editmenu").css("display","none");
         });
 
-        $("#navbar").load("navbar.html");
+        $("#navbar").load("navbar.jsp");
         $("#testId").val("#albumName")
     });
 

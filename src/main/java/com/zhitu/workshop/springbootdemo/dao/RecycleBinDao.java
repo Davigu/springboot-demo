@@ -9,7 +9,7 @@ public interface RecycleBinDao {
     /**
      * 移入回收站
      * @param re 回收照片信息
-     * @return 返回影响行数
+     * @return 返回是否成功
      */
     int delIntoRec(@Param("re")RecycleBin re);
 }

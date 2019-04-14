@@ -63,7 +63,7 @@
         });
     });
 
-    $("#navbar").load("navbar.html");
+    $("#navbar").load("navbar.jsp");
 </script>
 </body>
 </html>

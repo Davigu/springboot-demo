@@ -61,4 +61,15 @@ public class PhotoServiceImpl implements PhotoService {
         return photo;
     }
 
+    @Override
+    public int DelIntoRec(Long photoID) throws Exception {
+        int count =photoDao.delIntoRec(photoID);
+        if(count==0){
+            throw new Exception("移入回收站失败");
+        }else{
+            return count;
+        }
+        //return 0;
+    }
+
 }

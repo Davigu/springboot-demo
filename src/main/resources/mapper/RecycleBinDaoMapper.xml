@@ -2,8 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhitu.workshop.springbootdemo.bo.RecycleBin">
-    <insert id="delIntoRec" useGeneratedKeys="true" parameterType="com.zhitu.workshop.springbootdemo.bo.RecycleBin" keyColumn="file_id" keyProperty="fileId">
-        insert into recycle_bin (user_id,delete_time,initial_time,address,object,recent_id)             VALUES(#{re.userId},#{re.deleteTime},#{re.initialTime},#{re.address},#{re.object},#{recentId})
+<mapper namespace="com.zhitu.workshop.springbootdemo.dao.RecycleBinDao">
+    <insert id="delIntoRec" parameterType="com.zhitu.workshop.springbootdemo.bo.RecycleBin" useGeneratedKeys="true" keyProperty="fileId" keyColumn="file_id">
+        insert into recycle_bin (user_id,delete_time,initial_time,object,recent_id,address,file_size)
+        VALUES(#{re.userId},#{re.deleteTime},#{re.initialTime},#{re.object},#{re.recentId},
+        (select photo_address from photo where photo_id=#{re.recentId}),
+        (select size from photo where photo_id=#{re.recentId})
+        )
     </insert>
 </mapper>

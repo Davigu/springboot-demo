@@ -1,4 +1,4 @@
-
+<%@page pageEncoding="UTF-8"%>
 <html>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -128,7 +128,6 @@
     </div>
 </div>
 <hr>
-<script src="js/bootstrap.min.js"></script>
 <footer class="panel-footer text-center fixed-bottom blockquote-footer">达伟出品，必属精品</footer>
 </body>
 </html>

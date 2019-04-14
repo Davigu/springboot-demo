@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="navbar.jsp" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -64,7 +65,7 @@
                                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></button>
                                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto">
                                             <li><a class="renamePhoto" href="#">重命名</a></li>
-                                            <li><a href="#">移入回收站</a></li>
+                                            <li><a class="delIntoRec" href="javascript:;"photoid="${photo.photoId}">删除照片</a></li>
                                             <li role="separator" class="divider"></li>
                                             <li><a class="delPhoto" href="javascript:;" photoid="${photo.photoId}">彻底删除</a></li>
                                         </ul>
@@ -93,7 +94,6 @@
 <script src="js/photoviewer.js"></script>
 <script>
     $(function () {
-        $("#navbar").load("navbar.html");
         $(".editMenu").css("display", "none");
         $(".editPhoto").find("input").css("display","none");
         $(".editPhoto").hover(
@@ -153,6 +153,33 @@
                 }
             })
         }
+    });
+    $(".delIntoRec").click(function () {
+        var photoid=$(this).attr("photoid");
+        var photoAdd=$(this).attr("photoAdd");
+        var t=$(this).parent().parent().parent().parent();
+        var size=$(this).parent().parent().parent().parent().parent().children("div").length;
+        var panel=$(this).parent().parent().parent().parent().parent().parent();
+        $.ajax({
+            type:"POST",
+            url:"delIntoRec",
+            data:{
+                "photoid":photoid,
+            },
+            dataType: "json",
+            success:function(data){
+                if(data==true){
+                    console.log("移入回收站成功");
+                    t.remove();
+                    //console.log(size);
+                    if(size-1==0){
+                        panel.remove();
+                    }
+                }else{
+                    console.log("移入回收站失败");
+                }
+            }
+        })
     })
 </script>
 </body>

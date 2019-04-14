@@ -10,6 +10,15 @@ public class RecycleBin {
     private String address;
     private String object;
     private Long recentId;
+    private Long size;
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
+    }
 
     public Long getFileId() {
         return fileId;
