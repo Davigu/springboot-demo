@@ -1,13 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 加州旅馆
-  Date: 2019/3/30
-  Time: 17:46
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -15,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>星相册-我的照片</title>
     <!-- Bootstrap -->
-    <script src="js/jquery/jquery-3.3.1.min.js">
+    <script src="/js/jquery-3.3.1.min.js">
     </script>
-    <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
     <!--相册创建与数据库相连的方法-->
     <script type="text/javascript">
         $("#btn1").on("click",function(){
@@ -244,10 +236,10 @@
             <h2>我的照片</h2>
         </a>
             <div class="list-group posi" >
-                <a href="/photo"  class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 我的照片</a>
+                <a href="/myPhoto"  class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 我的照片</a>
                 <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-book"></span> 全部相册</a>
-                <a href="/share" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
-                <a href="/recyclebin" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
+                <a href="/myShare" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
+                <a href="/myRecycleBin" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
             </div>
             <div class="progress">
                 <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
@@ -324,8 +316,5 @@
     });
 
 </script>
-
-
-
 </body>
 </html>
