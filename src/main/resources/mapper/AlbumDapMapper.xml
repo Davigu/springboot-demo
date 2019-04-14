@@ -13,9 +13,9 @@
                          album_description=#{album.albumDescription}
                          where album_id=#{album.albumId} and use_user_id=#{album.useUserId}
     </update>
-    <delete id="deleteAlbumByName">
+    <delete id="deleteAlbumById">
 
-        delete from album where album_name=#{albumName}
+        delete from album where album_id=#{albumId}
 
     </delete>
     <insert id="insertAlbum" useGeneratedKeys="true"

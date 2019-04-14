@@ -1,21 +1,3 @@
-
-<html>
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <meta charset="utf-8">
-    <title>导航模板</title>
-    <script>
-    $(function()
-    {
-        var str=sessionStorage.getItem("name");
-        $("#bdiv").html(str);
-    });
-    </script>
-</head>
-<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
     <div class="container"><img src="images/starBrandBlack.png"><a class="navbar-brand" style="color: black" href="#">星相册</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -135,7 +117,10 @@
     </div>
 </div>
 <hr>
-<script src="js/bootstrap.min.js"></script>
-<footer class="panel-footer text-center fixed-bottom blockquote-footer">达伟出品，必属精品</footer>
-</body>
-</html>
+<script>
+    $(function()
+    {
+        var str=sessionStorage.getItem("name");
+        $("#bdiv").html(str);
+    });
+</script>
