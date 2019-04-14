@@ -2,7 +2,7 @@
 <html>
     <head>
         <title> 登录</title>
-        <script src="/js/jquery/jquery-3.3.1.min.js"></script>
+        <script src="/js/jquery-3.3.1.min.js"></script>
     </head>
     <body>
         <div>用户名：<input type="text" id="userName"></div>
