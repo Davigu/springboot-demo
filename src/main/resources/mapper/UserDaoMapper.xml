@@ -8,7 +8,7 @@
         select * from user where user_name = #{name}
     </select>
     <!-->查询全部  <-->
-    <select id="findAll" resultType="com.zhitu.workshop.springbootdemo.bo.User">
+    <select id="findAllUser" resultType="com.zhitu.workshop.springbootdemo.bo.User">
         select * from user
     </select>
     <!-->插入新数据  <-->
