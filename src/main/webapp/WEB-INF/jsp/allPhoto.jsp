@@ -64,9 +64,9 @@
                                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></button>
                                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto">
                                             <li><a class="renamePhoto" href="#">重命名</a></li>
-                                            <li><a href="#">分享</a></li>
+                                            <li><a href="#">移入回收站</a></li>
                                             <li role="separator" class="divider"></li>
-                                            <li><a class="delPhoto" href="javascript:;" photoid="${photo.photoId}">删除</a></li>
+                                            <li><a class="delPhoto" href="javascript:;" photoid="${photo.photoId}">彻底删除</a></li>
                                         </ul>
                                     </div>
                                     <a data-gallery="manual" href="${photo.photoAddress}" class="thumbnail">
@@ -96,16 +96,14 @@
         $("#navbar").load("navbar.html");
         $(".editMenu").css("display", "none");
         $(".editPhoto").find("input").css("display","none");
-
         $(".editPhoto").hover(
             function () {
             $(this).find(".editMenu").css("display", "block");
             $(this).find("input").css("display", "block");
         }, function () {
             $(this).find(".editMenu").css("display", "none");
-            $(this).find("input").css("display","none");
-            if(isChecked==true){
-                $(this).find("input").css("display","block");
+            if($(this).find("input").prop("checked")==false){
+                $(this).find("input").css("display", "none");
             }
         });
     });
@@ -130,7 +128,7 @@
     //删除按钮
     $(".delPhoto").click(function () {
         var id=$(".delPhoto").attr("photoid");
-        var a=confirm("是否删除这张照片？");
+        var a=confirm("是否彻底删除这张照片？");
         var t=$(this).parent().parent().parent().parent();
         var size=$(this).parent().parent().parent().parent().parent().children("div").length;
         var panel=$(this).parent().parent().parent().parent().parent().parent();
