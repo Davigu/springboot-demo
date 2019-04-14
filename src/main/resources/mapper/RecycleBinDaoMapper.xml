@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhitu.workshop.springbootdemo.bo.RecycleBin">
+    <insert id="delIntoRec" useGeneratedKeys="true" parameterType="com.zhitu.workshop.springbootdemo.bo.RecycleBin" keyColumn="file_id" keyProperty="fileId">
+        insert into recycle_bin (user_id,delete_time,initial_time,address,object,recent_id)             VALUES(#{re.userId},#{re.deleteTime},#{re.initialTime},#{re.address},#{re.object},#{recentId})
+    </insert>
+</mapper>
