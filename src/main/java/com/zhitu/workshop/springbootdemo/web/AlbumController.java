@@ -20,14 +20,13 @@ public class AlbumController {
     AlbumService albumService;
     @Autowired
     AlbumServiceImpl albumServiceImpl;
+
     @RequestMapping(value = "/myAlbum")
             public String showAlbum(HttpServletRequest request) throws Exception
     {
         request.setAttribute("list",albumServiceImpl.showAllAlbum(12));
         return "myAlbum";
     }
-
-
 
     @RequestMapping(value ="/showAll",method = RequestMethod.GET)
     @ResponseBody
@@ -38,15 +37,24 @@ public class AlbumController {
         return map;
     }
 
+
+
     @RequestMapping(value = "/editAlbum")
     @ResponseBody
     public String editAlbum(Album album,ModelMap model,HttpServletResponse response,HttpServletRequest request)throws Exception{
 
-
-
         return "成功";
     }
-
+@RequestMapping(value="/deleteAlbum")
+    @ResponseBody
+public void deleteAlbum(Long id)
+{
+    try {
+        albumServiceImpl.deleteAlbumById(id);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
     @RequestMapping(value="/addAlbum")
     @ResponseBody
     public Map<String,Object >addAlbum(Album album,ModelMap model,HttpServletRequest request,HttpServletResponse response)
@@ -54,6 +62,8 @@ public class AlbumController {
         Map<String,Object> result=new HashMap<String,Object>();
         albumServiceImpl.insertAlbum(album);
         result.put("code",0);
+        result.put("albumId",album.getAlbumId());
+        result.put("albumName",album.getAlbumName());
         return result;
     }
 

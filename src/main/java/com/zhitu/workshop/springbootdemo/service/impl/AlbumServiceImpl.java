@@ -24,9 +24,9 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public int deleteAlbumByName(String AlbumName) throws Exception{
+    public int deleteAlbumById(Long albumId )throws Exception{
 
-            return albumDao.deleteAlbumByName(AlbumName);
+            return albumDao.deleteAlbumById(albumId);
 
 
     }

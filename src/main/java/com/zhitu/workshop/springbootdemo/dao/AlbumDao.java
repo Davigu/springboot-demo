@@ -16,10 +16,10 @@ public interface AlbumDao {
 
     /**
      * 根据相册ID进行删除
-     * @param AlbumName
+     * @param
      * @return
      */
-    int deleteAlbumByName(@Param("AlbumName")String AlbumName);
+    int deleteAlbumById(@Param("AlbumId")Long AlbumId);
 
     /**
      * 更新相册信息

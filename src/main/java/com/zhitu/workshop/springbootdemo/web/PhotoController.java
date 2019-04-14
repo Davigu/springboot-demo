@@ -1,7 +1,10 @@
 package com.zhitu.workshop.springbootdemo.web;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.zhitu.workshop.springbootdemo.bo.Photo;
+import com.zhitu.workshop.springbootdemo.bo.RecycleBin;
 import com.zhitu.workshop.springbootdemo.service.AlbumService;
 import com.zhitu.workshop.springbootdemo.service.PhotoService;
+import com.zhitu.workshop.springbootdemo.service.RecycleBinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +18,13 @@ public class PhotoController {
     @Autowired
     PhotoService photoService;
     @Autowired
-    AlbumService albumService;
+    RecycleBinService recycleBinService;
 
-
+@RequestMapping(value="/myPhoto")
+public String showPhoto()
+{
+    return "myPhoto";
+}
     @RequestMapping(value = "/allPhoto")
     public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
         Long userID;
@@ -57,6 +64,32 @@ public class PhotoController {
         if(isSuccess==true){
             return "true";
         }else {
+            return "false";
+        }
+    }
+
+
+    @RequestMapping(value = "delIntoRec")
+    @ResponseBody
+    public Object DelIntoRec(@RequestParam(value = "photoid") Long photoId,HttpServletResponse response,HttpServletRequest request)throws Exception{
+
+        Date dayNow=new Date();
+        Calendar cal=Calendar.getInstance();
+        cal.add(Calendar.DATE,30);
+        Date date=cal.getTime();
+
+        RecycleBin re=new RecycleBin();
+        re.setUserId(Long.valueOf("12"));
+        re.setObject("1");
+        re.setRecentId(photoId);
+        re.setInitialTime(dayNow);
+        re.setDeleteTime(date);
+
+        int count1=photoService.DelIntoRec(photoId);
+        int count2=recycleBinService.delIntoRec(re);
+        if(count1>0&&count2>0){
+            return "true";
+        }else{
             return "false";
         }
     }
