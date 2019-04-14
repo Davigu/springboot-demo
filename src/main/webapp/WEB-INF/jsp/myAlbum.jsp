@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>星相册-我的照片</title>
     <!-- Bootstrap -->
-    <script src="js/jquery/jquery-3.3.1.min.js">
+    <script src="js/jquery-3.3.1.min.js">
     </script>
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">

@@ -9,7 +9,7 @@
         <!-- TemplateEndEditable -->
         <link href="/css/style.css" rel="stylesheet" type="text/css" />
         <link href="/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <script src="/js/jquery/jquery-3.3.1.min.js"></script>
+        <script src="/js/jquery-3.3.1.min.js"></script>
         <script src="/js/bootstrap.js"></script>
     </head>
 
@@ -80,10 +80,12 @@
         <p>
             <input type="button" id="btn" value="确定" class="btn">
             <input type="button" style="margin-left: 20%" value="取消" class="btn" onclick="Hide();">
+
         </p>
     </div>
     <!-- 用于登录的js代码-->
     <script type="text/javascript">
+
         $("#btn").click(function () {
             var loginCode = $.trim($("#uid").val());
             var password = $.trim($("#pwd").val());
@@ -106,15 +108,19 @@
                     },
                     success:function(result){   //请求成功的回调方法
                         if(result != "" && result.code == "0"){
-                            alert("登录成功")
+                            alert("登录成功");
+                           sessionStorage.setItem("name",loginCode);
+                            window.location.href="myAlbum";
                         }else if(result.code == "2"){
                             alert("登录账号不存在！请重试。");
                         }else if(result.code == "1"){
                             alert("登录密码错误！请重试。");
                         }
                     }
+
                 });
             }
+
         })
     </script >
     <!-- 这里是注册界面 -->
@@ -201,7 +207,7 @@
                 }
             })
             $("#phone").blur(function () {
-                var objReg = new  RegExp("^[1][358][0-9]{9}$");
+                var objReg = new  RegExp("^[1][0-9][0-9]{9}$");
                 var phone = $("#phone").val();
                 if(!objReg.test(phone))
                 {
