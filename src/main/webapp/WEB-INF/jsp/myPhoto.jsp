@@ -1,4 +1,10 @@
-
+<%--
+  Created by IntelliJ IDEA.
+  User: 加州旅馆
+  Date: 2019/3/30
+  Time: 17:46
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -37,7 +43,7 @@
         </div>
         <div class="container col-md-9" style="border-left:medium #DCD4D4 solid;">
             <div class="row float-left">
-                <a class="btn btn-danger" style="margin-left:19px;">全部删除</a>
+                <a class="btn btn-danger" style="margin-left:38px;">全部删除</a>
             </div>
             <div class="row float-right">
                 <button class="btn btn-warning" href="#myupload" data-toggle="modal">上传</button>
@@ -90,12 +96,17 @@
         $("#navbar").load("navbar.html");
         $(".editMenu").css("display", "none");
         $(".editPhoto").find("input").css("display","none");
-        $(".editPhoto").hover(function () {
+
+        $(".editPhoto").hover(
+            function () {
             $(this).find(".editMenu").css("display", "block");
             $(this).find("input").css("display", "block");
         }, function () {
             $(this).find(".editMenu").css("display", "none");
-            $(this).find("input").css("display", "none");
+            $(this).find("input").css("display","none");
+            if(isChecked==true){
+                $(this).find("input").css("display","block");
+            }
         });
     });
     //实现大图
@@ -145,11 +156,6 @@
             })
         }
     })
-
-    $("input[type='checkbox']").change(function () {
-        $(this).css("display", "block");
-    })
-
 </script>
 </body>
 </html>
