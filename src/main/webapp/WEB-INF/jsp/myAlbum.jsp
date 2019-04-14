@@ -1,13 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 加州旅馆
-  Date: 2019/3/30
-  Time: 17:46
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -17,16 +9,8 @@
     <!-- Bootstrap -->
     <script src="/js/jquery-3.3.1.min.js">
     </script>
-    <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <!--相册创建与数据库相连的方法-->
-    <script type="text/javascript">
-        $("#btn1").on("click",function(){
-            var getAlbumName=$("#albumName").val;
-            var getDescribe=$("#albumDescribe").val;
-        })
-    </script>
-
+    <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
 
     <script type="text/javascript">
         <%--界面载入时根据数据库相册信息创建 --%>
@@ -88,8 +72,22 @@
         {
                 $("body").on( "click","#delete",function() {
 
-                $(this).parent().parent().parent().parent().hide();
-
+                    var getAlbumName=$("#albumName").val;
+                    $.ajax({
+                        type:"POST",
+                        url:"/deleteAlbum",
+                        data: {"albumName":getAlbumName},
+                        success:
+                     function()
+                     {
+                         $(this).parent().parent().parent().parent().hide();
+                         alert("Delete Success!")
+                     },
+                        error:
+                        function(){
+                        alert("Delete Failed!")
+                        }
+                    })
 
         });
 
@@ -244,10 +242,10 @@
             <h2>我的照片</h2>
         </a>
             <div class="list-group posi" >
-                <a href="/photo"  class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 我的照片</a>
+                <a href="/myPhoto"  class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 我的照片</a>
                 <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-book"></span> 全部相册</a>
-                <a href="/share" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
-                <a href="/recyclebin" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
+                <a href="/myShare" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
+                <a href="/myRecycleBin" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
             </div>
             <div class="progress">
                 <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
@@ -284,7 +282,7 @@
                      <li><a href="#">重命名</a></li>
                      <li><a href="#">分享</a></li>
                     <li role="separator" class="divider"></li>
-                    <li ><a id ="delete"href="#">删除</a></li>
+                    <li ><a id ="delete"href="#" >删除</a></li>
                      </ul>
                  </div>
              <a  href="#" class="thumbnail">
@@ -324,8 +322,5 @@
     });
 
 </script>
-
-
-
 </body>
 </html>
