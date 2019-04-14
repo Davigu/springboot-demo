@@ -13,8 +13,10 @@
                          album_description=#{album.albumDescription}
                          where album_id=#{album.albumId} and use_user_id=#{album.useUserId}
     </update>
-    <delete id="deleteAlbumByID">
-        delete from album where album_id=#{albumID} and use_user_id=#{userID}
+    <delete id="deleteAlbumById">
+
+        delete from album where album_id=#{albumId}
+
     </delete>
     <insert id="insertAlbum" useGeneratedKeys="true"
             parameterType="com.zhitu.workshop.springbootdemo.bo.Album"

@@ -20,7 +20,11 @@ public class PhotoController {
     @Autowired
     RecycleBinService recycleBinService;
 
-
+@RequestMapping(value="/myPhoto")
+public String showPhoto()
+{
+    return "myPhoto";
+}
     @RequestMapping(value = "/allPhoto")
     public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
         Long userID;
