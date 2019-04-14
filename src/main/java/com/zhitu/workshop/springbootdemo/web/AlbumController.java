@@ -43,7 +43,7 @@ public class AlbumController {
     public String editAlbum(Album album,ModelMap model,HttpServletResponse response,HttpServletRequest request)throws Exception{
 
 
-        int count=albumService.deleteAlbumByID(Long.valueOf(1),Long.valueOf(14));
+
         return "成功";
     }
 

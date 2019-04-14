@@ -20,7 +20,7 @@ public interface AlbumService {
      * @param albumID 相册ID
      * @return
      */
-    int deleteAlbumByID(long albumID,long userID) throws Exception;
+    int deleteAlbumByName(String AlbumName) throws Exception;
 
     /**
      * 更新相册信息

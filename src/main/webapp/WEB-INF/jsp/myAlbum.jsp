@@ -11,23 +11,8 @@
     </script>
     <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
-    <!--相册创建与数据库相连的方法-->
-    <script type="text/javascript">
-        $("#btn1").on("click",function(){
-            var getAlbumName=$("#albumName").val;
-            var getDescribe=$("#albumDescribe").val;
-        })
-    </script>
-
 
     <script type="text/javascript">
-        <%--界面载入时根据数据库相册信息创建 --%>
-        $(document).ready(function(){
-
-
-
-        });
-
 
 
         $(document).ready(function(){
@@ -80,8 +65,22 @@
         {
                 $("body").on( "click","#delete",function() {
 
-                $(this).parent().parent().parent().parent().hide();
-
+                    var getAlbumName=$("#albumName").val;
+                    $.ajax({
+                        type:"POST",
+                        url:"/deleteAlbum",
+                        data: {"albumName":getAlbumName},
+                        success:
+                     function()
+                     {
+                         $(this).parent().parent().parent().parent().hide();
+                         alert("Delete Success!")
+                     },
+                        error:
+                        function(){
+                        alert("Delete Failed!")
+                        }
+                    })
 
         });
 
@@ -276,7 +275,7 @@
                      <li><a href="#">重命名</a></li>
                      <li><a href="#">分享</a></li>
                     <li role="separator" class="divider"></li>
-                    <li ><a id ="delete"href="#">删除</a></li>
+                    <li ><a id ="delete"href="#" >删除</a></li>
                      </ul>
                  </div>
              <a  href="#" class="thumbnail">
