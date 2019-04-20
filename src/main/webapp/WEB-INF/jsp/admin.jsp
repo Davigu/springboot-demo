@@ -44,6 +44,7 @@
                 <td> 邮箱</td>
                 <td> 性别</td>
                 <td> 手机号码</td>
+
             </tr>
             <c:forEach items="${list}" var="c">
             <tr>
