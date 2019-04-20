@@ -43,4 +43,6 @@ public interface PhotoDao {
     int insertPhoto(@Param("photo")Photo photo);
 
     int delIntoRec(@Param("photoID") long photoID);
+
+    int recoverPhoto(@Param("photoID")long photoID);
 }
