@@ -4,13 +4,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
+    <script src="/js/jquery-3.3.1.min.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet">
+
     <meta charset="utf-8">
     <title>导航模板</title>
-    <script>
-        var str=sessionStorage.getItem("name");
-        $("#bdiv").html(str);
-    </script>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
@@ -27,6 +26,10 @@
         </div>
         <div class="dropdown"><a class="dropdown-toggle btn " id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img class="img-circle" alt="140x140" src="images/32X32.gif"></a>
             <lable id="bdiv"> </lable>
+            <script>
+                var str=sessionStorage.getItem("name");
+                $("#bdiv").html(str);
+            </script>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu1">
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>

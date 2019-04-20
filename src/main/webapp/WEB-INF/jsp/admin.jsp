@@ -28,8 +28,8 @@
 </div>
         用户信息管理 <input type="button" id="ReFresh" value="刷新" class="btn" style="margin-right: 10%">
 <div>
-    <div>
-        <table border="2">
+    <div align="center">
+        <table border="2" >
             <tr>
                 <td> ID</td>
                 <td> 用户名</td>
