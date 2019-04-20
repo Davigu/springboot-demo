@@ -23,7 +23,12 @@
                 <button class="btn btn-primary my-2 my-sm-0" type="button"><span class="glyphicon glyphicon-search"></span></button>
             </form>
         </div>
-        <div class="dropdown"><a class="dropdown-toggle btn " id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img class="img-circle" alt="140x140" src="images/32X32.gif">用户名</a>
+        <div class="dropdown"><a class="dropdown-toggle btn " id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img class="img-circle" alt="140x140" src="images/32X32.gif"></a>
+            <label id="aaa"></label>
+            <script>
+                var str = sessionStorage.getItem("name");
+                document.getElementById('aaa').innerHTML = str;
+            </script>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu1">
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
