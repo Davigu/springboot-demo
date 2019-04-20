@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.*"%>
+<%@ page import="java.text.*"%>
 
 <html>
 <head>
@@ -26,7 +28,13 @@
         </div>
     </div>
 </div>
+    <%
+    String datetime=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()); //获取系统时间
+    %>
+        <div style="margin-left: 40%">
         用户信息管理 <input type="button" id="ReFresh" value="刷新" class="btn" style="margin-right: 10%">
+        当前时间为：<% out.print(new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date())); %>
+        </div>
 <div>
     <div align="center">
         <table border="2" >

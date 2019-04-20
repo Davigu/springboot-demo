@@ -34,7 +34,7 @@ public String showPhoto()
             userID=Long.valueOf(request.getSession().getAttribute("ID").toString());
         }
 
-        List<Photo> photos=photoService.showAllPhoto(userID);
+        List<Photo> photos=photoService.showAllPhoto(Long.valueOf("12"));
         Map<String,List<Photo>> map=new HashMap<>();
         for(Photo photo:photos){
             Date date=photo.getUpTime();
