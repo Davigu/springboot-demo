@@ -1,11 +1,17 @@
 package com.zhitu.workshop.springbootdemo.service.impl;
 import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.dao.UserDao;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import com.zhitu.workshop.springbootdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.jws.soap.SOAPBinding;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
+
 
     @Autowired
     UserDao userDao;
@@ -29,7 +35,12 @@ public class UserServiceImpl implements UserService {
 
         return userDao.insertUser(user);
     }
-
+    @Override
+    public List <User> findAllUser(String adminName) throws Exception
+    {
+        List<User> userList = userDao.findAllUser(adminName);
+        return userList;
+    }
 
     @Override
     public void deleteUserById(Long id) {
