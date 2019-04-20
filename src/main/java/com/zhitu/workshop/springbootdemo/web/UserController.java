@@ -2,6 +2,7 @@ package com.zhitu.workshop.springbootdemo.web;
 
 import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.service.impl.UserServiceImpl;
+import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -93,6 +94,7 @@ import java.util.Random;
         String pwd = new BigInteger(1, resultData).toString(16);
         try
            {
+
                User user2 = userServiceImpl.selectUserByName(user.getUserName());
                if (!user2.getPassword().equals(pwd))
                {
@@ -101,6 +103,7 @@ import java.util.Random;
                else   //登录成功
                {
                       result.put("code",0);
+                      request.getSession().setAttribute("ID",user2.getUserId().toString());
                }
            }
            catch (Exception e)   //不存在这个帐号

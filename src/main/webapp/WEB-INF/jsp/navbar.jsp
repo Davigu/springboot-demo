@@ -4,7 +4,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
+
     <link href="css/bootstrap.css" rel="stylesheet">
+
     <meta charset="utf-8">
 
 </head>
@@ -128,6 +130,7 @@
     </div>
 </div>
 <hr>
-<footer class="panel-footer text-center fixed-bottom blockquote-footer">大伟出品，必属精品</footer>
+<footer class="panel-footer text-center fixed-bottom blockquote-footer">达伟出品，必属精品</footer>
+<script src="/js/jquery-3.3.1.min.js"></script>
 </body>
 </html>
