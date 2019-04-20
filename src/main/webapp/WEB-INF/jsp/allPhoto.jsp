@@ -43,9 +43,6 @@
             </div>
         </div>
         <div class="container col-md-9" style="border-left:medium #DCD4D4 solid;">
-            <div class="row float-left">
-                <a class="btn btn-danger" style="margin-left:38px;">全部删除</a>
-            </div>
             <div class="row float-right">
                 <button class="btn btn-warning" href="#myupload" data-toggle="modal">上传</button>
             </div>
@@ -63,11 +60,11 @@
                                     <input type="checkbox" style="position:absolute;top: 6px;left: 9.6px">
                                     <div class="dropdown editMenu" style="position:absolute;top: 10.5px;right: 10.5px;">
                                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></button>
-                                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto">
+                                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto" photoid="${photo.photoId}">
                                             <li><a class="renamePhoto" href="#">重命名</a></li>
-                                            <li><a class="delIntoRec" href="javascript:;"photoid="${photo.photoId}">删除照片</a></li>
+                                            <li><a class="delIntoRec" href="javascript:;">删除照片</a></li>
                                             <li role="separator" class="divider"></li>
-                                            <li><a class="delPhoto" href="javascript:;" photoid="${photo.photoId}">彻底删除</a></li>
+                                            <li><a class="delPhoto" href="javascript:;">彻底删除</a></li>
                                         </ul>
                                     </div>
                                     <a data-gallery="manual" href="${photo.photoAddress}" class="thumbnail">
@@ -86,7 +83,7 @@
 
 </div>
 <hr>
-<footer class="panel-footer text-center fixed-bottom blockquote-footer">梦雷出品，必属精品</footer>
+
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -99,12 +96,8 @@
         $(".editPhoto").hover(
             function () {
             $(this).find(".editMenu").css("display", "block");
-            $(this).find("input").css("display", "block");
         }, function () {
             $(this).find(".editMenu").css("display", "none");
-            if($(this).find("input").prop("checked")==false){
-                $(this).find("input").css("display", "none");
-            }
         });
     });
     //实现大图
@@ -127,7 +120,7 @@
     });
     //删除按钮
     $(".delPhoto").click(function () {
-        var id=$(".delPhoto").attr("photoid");
+        var id=$(".delPhoto").parent().parent().attr("photoid");
         var a=confirm("是否彻底删除这张照片？");
         var t=$(this).parent().parent().parent().parent();
         var size=$(this).parent().parent().parent().parent().parent().children("div").length;
@@ -155,7 +148,7 @@
         }
     });
     $(".delIntoRec").click(function () {
-        var photoid=$(this).attr("photoid");
+        var photoid=$(this).parent().parent().attr("photoid");
         var photoAdd=$(this).attr("photoAdd");
         var t=$(this).parent().parent().parent().parent();
         var size=$(this).parent().parent().parent().parent().parent().children("div").length;

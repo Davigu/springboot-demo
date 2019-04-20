@@ -6,7 +6,7 @@
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <meta charset="utf-8">
-    <title>导航模板</title>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
@@ -128,6 +128,6 @@
     </div>
 </div>
 <hr>
-<footer class="panel-footer text-center fixed-bottom blockquote-footer">达伟出品，必属精品</footer>
+<footer class="panel-footer text-center fixed-bottom blockquote-footer">大伟出品，必属精品</footer>
 </body>
 </html>

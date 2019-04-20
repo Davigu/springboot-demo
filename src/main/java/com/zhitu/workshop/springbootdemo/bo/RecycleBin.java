@@ -1,10 +1,15 @@
 package com.zhitu.workshop.springbootdemo.bo;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class RecycleBin {
     private Long fileId;
     private Long userId;
+    private String fileName;
     private Date deleteTime;
     private Date initialTime;
     private String address;
@@ -12,6 +17,13 @@ public class RecycleBin {
     private Long recentId;
     private Long size;
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
     public Long getSize() {
         return size;
     }
