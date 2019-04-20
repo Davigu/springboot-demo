@@ -111,7 +111,7 @@
                         if(result != "" && result.code == "0"){
                             alert("登录成功");
                            sessionStorage.setItem("name",loginCode);
-                            window.location.href="myAlbum";
+                            window.location.href="allPhoto";
                         }else if(result.code == "2"){
                             alert("登录账号不存在！请重试。");
                         }else if(result.code == "1"){

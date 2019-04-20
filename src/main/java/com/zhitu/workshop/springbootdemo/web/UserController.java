@@ -103,7 +103,7 @@ import java.util.Random;
                else   //登录成功
                {
                       result.put("code",0);
-                      request.getSession().setAttribute("ID",user2.getUserId().toString());
+                      request.getSession().setAttribute("ID",user2.getUserId());
                }
            }
            catch (Exception e)   //不存在这个帐号

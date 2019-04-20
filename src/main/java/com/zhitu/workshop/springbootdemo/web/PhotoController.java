@@ -28,13 +28,13 @@ public String showPhoto()
     @RequestMapping(value = "/allPhoto")
     public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
         Long userID;
-//        if(request.getSession().getAttribute("userID")==null){
-//            throw new Exception("session中用户id为空");
-//        }else{
-//            userID=(Long)request.getSession().getAttribute("userID");
-//        }
+        if(request.getSession().getAttribute("ID")==null){
+            throw new Exception("session中用户id为空");
+        }else{
+            userID=Long.valueOf(request.getSession().getAttribute("ID").toString());
+        }
 
-        List<Photo> photos=photoService.showAllPhoto(Long.valueOf("12"));
+        List<Photo> photos=photoService.showAllPhoto(userID);
         Map<String,List<Photo>> map=new HashMap<>();
         for(Photo photo:photos){
             Date date=photo.getUpTime();
