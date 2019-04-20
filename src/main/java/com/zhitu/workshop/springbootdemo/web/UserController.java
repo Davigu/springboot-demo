@@ -102,8 +102,15 @@ import java.util.Random;
                }
                else   //登录成功
                {
-                      result.put("code",0);
-                      request.getSession().setAttribute("ID",user2.getUserId());
+                   if(user2.getAuth().equals("1"))
+                   {
+                       result.put("code",3);
+                       return result;
+                   }
+                   else {
+                       result.put("code", 0);
+                       request.getSession().setAttribute("ID", user2.getUserId());
+                   }
                }
            }
            catch (Exception e)   //不存在这个帐号

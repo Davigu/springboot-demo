@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!-- TemplateBeginEditable name="doctitle" -->
         <title>星相册</title>
+        <link rel="icon" href="/images/star.ico" type="image/x-icon"/>
         <!-- TemplateEndEditable -->
         <!-- TemplateBeginEditable name="head" -->
         <!-- TemplateEndEditable -->
@@ -13,13 +14,11 @@
         <script src="/js/jquery-3.3.1.min.js"></script>
         <script src="/js/bootstrap.js"></script>
     </head>
-
     <body>
     <div  class="background">
         <div class=" fontwhite"> <p style="margin-left:10%">
             <input class="btn btn-warning" type="button" id="register" value="注册" onclick="Show1();" style="float:right; width:5%;height:5%;margin:5px;"/>
             <input  class="btn btn-info" type="button" id="login" value="登录" onclick="Show(); " style="float:right;width:5%;height:5%;margin:5px;" />
-            <input  class="btn btn-info" type="button" id="admin" value="管理员登录登录" onclick="Show(); " style="float:right;width:5%;height:5%;margin:5px;" />
         </p>
             <p style="margin-left:10%; font-size: 30px;">星相册    	  </p>
         </div>
@@ -42,33 +41,22 @@
     </div>
     <div align="center">
         <div style=" float:left;width:40%; margin-left:10%; margin-top:15px; margin-bottom:15px;">
-            <img  src="/images/first.jpg" class="picture"/><p align="left" style="margin-left:20%;">
-            <img  src="/images/1.jpg" class="head" /> </p>
+            <img  src="/images/first.jpg" class="picture"/>
         </div>
         <div style="float:right;width:40%;margin-right:10%;margin-top:15px; margin-bottom:15px;">
             <img src="/images/second.jpg" class="picture"/>
-            <p align="left" style="margin-left:20%;">
-                <img  src="/images/2.jpg" class="head" /> </p>
         </div>
         <div style="float:right;width:40%;margin-right:10%;margin-top:15px; margin-bottom:15px;">
             <img src="/images/third.jpeg" class="picture"/>
-            <p align="left" style="margin-left:20%;">
-                <img src="/images/3.jpg" class="head" /> </p>
         </div>
         <div style="float:right;width:40%;margin-left:10%;margin-top:15px; margin-bottom:15px;">
             <img src="/images/forth.jpg" class="picture"/>
-            <p align="left" style="margin-left:20%;">
-                <img src="/images/4.jpg" class="head" /> </p>
         </div>
         <div style="float:right;width:40%;margin-right:10%;margin-top:15px; margin-bottom:15px;">
             <img src="/images/fifth.jpg" class="picture"/>
-            <p align="left" style="margin-left:20%;">
-                <img src="/images/5.jpg" class="head" /> </p>
         </div>
         <div style="float:right;width:40%;margin-left:10%;margin-top:15px; margin-bottom:15px;">
             <img src="/images/sixth.jpg" class="picture"/>
-            <p align="left" style="margin-left:20%;">
-                <img  src="/images/6.jpg" class="head" /> </p>
 
         </div>
 
@@ -76,23 +64,11 @@
     <!-- 这里是登录界面 -->
     <div id="shade" class="c1 hide"></div>
             <div id="modal" class="c2 hide">
-        <p style="font-size: 20px; color: #000;margin-left:150px; margin-top: 50px">帐号密码登录</p>
+                <p style="font-size: 20px; color: #000;margin-left:150px; margin-top: 50px"><b>帐号密码登录</b></p>
         <p><input  type="text" id="uid" class="form-control" placeholder="用户名" style="width: 250px"/></p>
         <p><input type="password" id="pwd" class="form-control" placeholder="密码"style="width: 250px"/></p>
         <p>
             <input type="button" id="btn" value="确定" class="btn">
-            <input type="button" style="margin-left: 20%" value="取消" class="btn" onclick="Hide();">
-
-        </p>
-    </div>
-    <!-- 这里是管理员登录界面 -->
-    <div id="shade2" class="c1 hide"></div>
-    <div id="modal2" class="c2 hide">
-        <p style="font-size: 20px; color: #000;margin-left:150px; margin-top: 50px">帐号密码登录</p>
-        <p><input  type="text" id="adminId" class="form-control" placeholder="用户名" style="width: 250px"/></p>
-        <p><input type="password" id="adminPwd" class="form-control" placeholder="密码"style="width: 250px"/></p>
-        <p>
-            <input type="button" id="btn2" value="确定" class="btn">
             <input type="button" style="margin-left: 20%" value="取消" class="btn" onclick="Hide();">
 
         </p>
@@ -127,7 +103,12 @@
                             window.location.href="allPhoto";
                         }else if(result.code == "2"){
                             alert("登录账号不存在！请重试。");
-                        }else if(result.code == "1"){
+                        }
+                        else if(result.code == "3")
+                        {
+                            window.location.href="admin";
+                        }
+                        else if(result.code == "1"){
                             alert("登录密码错误！请重试。");
                         }
                     }

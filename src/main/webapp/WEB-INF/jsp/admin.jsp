@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <title> 管理员</title>
     <script src="/js/jquery-3.3.1.min.js"></script>
-
+    <script src="/js/bootstrap.js"></script>
 </head>
 <body>
 <div class="navbar navbar-expand-lg navbar-dark bg-warning">
@@ -31,15 +31,15 @@
     <%
     String datetime=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()); //获取系统时间
     %>
-        <div style="margin-left: 40%">
+        <div style="margin-left: 20%;font-size: 30px;">
         用户信息管理 <input type="button" id="ReFresh" value="刷新" class="btn" style="margin-right: 10%">
         当前时间为：<% out.print(new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date())); %>
         </div>
 <div>
     <div align="center">
-        <table border="2" >
+        <table border="2" class="table table-hover" >
             <tr>
-                <td> ID</td>
+                <td> ID</td>.
                 <td> 用户名</td>
                 <td> 邮箱</td>
                 <td> 性别</td>
