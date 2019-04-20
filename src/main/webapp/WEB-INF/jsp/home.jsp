@@ -18,7 +18,8 @@
     <div  class="background">
         <div class=" fontwhite"> <p style="margin-left:10%">
             <input class="btn btn-warning" type="button" id="register" value="注册" onclick="Show1();" style="float:right; width:5%;height:5%;margin:5px;"/>
-            <input  class="btn btn-info" type="button" id="login" value="登录" onclick="Show();" ck style="float:right;width:5%;height:5%;margin:5px;" />
+            <input  class="btn btn-info" type="button" id="login" value="登录" onclick="Show(); " style="float:right;width:5%;height:5%;margin:5px;" />
+            <input  class="btn btn-info" type="button" id="admin" value="管理员登录登录" onclick="Show(); " style="float:right;width:5%;height:5%;margin:5px;" />
         </p>
             <p style="margin-left:10%; font-size: 30px;">星相册    	  </p>
         </div>
@@ -80,6 +81,18 @@
         <p><input type="password" id="pwd" class="form-control" placeholder="密码"style="width: 250px"/></p>
         <p>
             <input type="button" id="btn" value="确定" class="btn">
+            <input type="button" style="margin-left: 20%" value="取消" class="btn" onclick="Hide();">
+
+        </p>
+    </div>
+    <!-- 这里是管理员登录界面 -->
+    <div id="shade2" class="c1 hide"></div>
+    <div id="modal2" class="c2 hide">
+        <p style="font-size: 20px; color: #000;margin-left:150px; margin-top: 50px">帐号密码登录</p>
+        <p><input  type="text" id="adminId" class="form-control" placeholder="用户名" style="width: 250px"/></p>
+        <p><input type="password" id="adminPwd" class="form-control" placeholder="密码"style="width: 250px"/></p>
+        <p>
+            <input type="button" id="btn2" value="确定" class="btn">
             <input type="button" style="margin-left: 20%" value="取消" class="btn" onclick="Hide();">
 
         </p>
@@ -309,6 +322,14 @@
         function Hide1(){
             document.getElementById('shade1').classList.add('hide');
             document.getElementById('modal1').classList.add('hide');
+        }
+        function Show2(){
+            document.getElementById('shade2').classList.remove('hide');
+            document.getElementById('modal2').classList.remove('hide');
+        }
+        function Hide2(){
+            document.getElementById('shade2').classList.add('hide');
+            document.getElementById('modal2').classList.add('hide');
         }
     </script>
 
