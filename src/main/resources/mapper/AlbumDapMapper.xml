@@ -21,8 +21,8 @@
     <insert id="insertAlbum" useGeneratedKeys="true"
             parameterType="com.zhitu.workshop.springbootdemo.bo.Album"
             keyProperty="albumId" keyColumn="album_id">
-        insert into album(album_name,use_user_id,album_description)
-        values (#{album.albumName},#{album.useUserId},#{album.albumDescription})
+        insert into album(album_name,album_description,use_user_id)
+        values (#{album.albumName},#{album.albumDescription},#{album.useUserId})
     </insert>
     <select id="getId" resultType="com.zhitu.workshop.springbootdemo.bo.Album">
         select user_id from user where use_user_id=#{userID}

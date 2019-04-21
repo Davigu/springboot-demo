@@ -79,16 +79,15 @@ public void deleteAlbum(@RequestParam(name = "albumId") Long albumId, HttpServle
         albumServiceImpl.insertAlbum(a);
         result.put("code",0);
         result.put("albumName",album.getAlbumName());
-        result.put("use_user_id",user.getUserId());
         result.put("albumDescription",album.getAlbumDescription());
+        result.put("use_user_id",user.getUserId());
+
         return result;
     }
 
     @RequestMapping(value="/getId")
     @ResponseBody
-    public Long getId(@RequestParam(name="userName") String a,HttpServletRequest request,HttpServletResponse response){
-        request.getSession().setAttribute("id",albumServiceImpl.getId(a));
-        return albumServiceImpl.getId(a);
+    public void getId(@RequestParam(name="userName") String a,HttpServletRequest request,HttpServletResponse response){
 
     }
 

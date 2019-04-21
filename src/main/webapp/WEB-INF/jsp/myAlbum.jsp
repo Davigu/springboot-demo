@@ -201,7 +201,9 @@
                 type:"POST",
                 url:"/addAlbum",
                 data:{
+
                     "albumName":albumname,
+
                     "albumDescription":albumdescribe,
                 },
                 <%--如果数据传输成功则增加一个相册 --%>
