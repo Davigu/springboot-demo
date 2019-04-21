@@ -4,6 +4,7 @@ import com.zhitu.workshop.springbootdemo.bo.Album;
 import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.dao.AlbumDao;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -30,4 +31,5 @@ public interface AlbumService {
     int updateAlbum(Album album) throws Exception;
 
     int insertAlbum(Album album) throws Exception;
+   Long getId(@RequestParam(name="userName") String a);
 }

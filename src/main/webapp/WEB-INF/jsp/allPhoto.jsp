@@ -22,20 +22,17 @@
 </head>
 <body>
 <div id="navbar"></div>
-
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
 <div class="container">
     <div class="row">
         <div class=" col-md-3 text-center">
 
             <a class="btn" href="#"><h2>我的照片</h2></a>
             <div class="list-group posi" >
-                <a href="myPhoto" class="list-group-item active"><span class="glyphicon glyphicon-picture"></span> 全部照片</a>
-                <a href="myAlbum" class="list-group-item"><span class="glyphicon glyphicon-book"></span> 我的相册</a>
-                <a href="myShare" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
-                <a href="myRecycleBin" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
+                <a href="/allPhoto" class="list-group-item active"><span class="glyphicon glyphicon-picture"></span> 全部照片</a>
+                <a href="/myAlbum" class="list-group-item"><span class="glyphicon glyphicon-book"></span> 我的相册</a>
+                <a href="/myShare" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
+                <a href="/myRecycleBin" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
             </div>
             <div class="progress" style="margin-top: 180px">
                 <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
@@ -55,7 +52,6 @@
                         </div>
                         <div class="panel-body">
                             <c:forEach items="${date.value}" var="photo" varStatus="status">
-
                                 <div class="col-xs-6 col-md-3 editPhoto" style="padding: 5px;">
                                     <input type="checkbox" style="position:absolute;top: 6px;left: 9.6px">
                                     <div class="dropdown editMenu" style="position:absolute;top: 10.5px;right: 10.5px;">
@@ -84,7 +80,6 @@
 </div>
 <hr>
 
-<script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/popper.min.js"></script>
