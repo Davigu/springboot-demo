@@ -42,4 +42,9 @@ public class AlbumServiceImpl implements AlbumService {
             return albumDao.updateAlbum(album);
 
     }
+
+    @Override
+    public Long getId(String a) {
+        return albumDao.getId(a);
+    }
 }

@@ -1,12 +1,15 @@
 package com.zhitu.workshop.springbootdemo.web;
 import com.zhitu.workshop.springbootdemo.bo.Album;
+import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.service.AlbumService;
 import com.zhitu.workshop.springbootdemo.service.impl.AlbumServiceImpl;
+import com.zhitu.workshop.springbootdemo.util.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +27,8 @@ public class AlbumController {
     @RequestMapping(value = "/myAlbum")
             public String showAlbum(HttpServletRequest request) throws Exception
     {
-        request.setAttribute("list",albumServiceImpl.showAllAlbum(12));
+        User user=LoginUser.getUser(request);
+        request.setAttribute("list",albumServiceImpl.showAllAlbum(user.getUserId()));
         return "myAlbum";
     }
 
@@ -33,7 +37,14 @@ public class AlbumController {
     public Map<String,Object> showAllAlbum(ModelMap model, HttpServletRequest request, HttpServletResponse response)throws Exception {
 
         Map<String, Object> map = new HashMap<String,Object>();
-        map.put("albums", albumService.showAllAlbum(14));
+
+        User user = LoginUser.getUser(request);
+
+        if (user == null) {
+            throw new Exception("用户未登录 ");
+        }
+
+        map.put("albums", albumService.showAllAlbum(user.getUserId()));
         return map;
     }
 
@@ -47,10 +58,10 @@ public class AlbumController {
     }
 @RequestMapping(value="/deleteAlbum")
     @ResponseBody
-public void deleteAlbum(Long id)
+public void deleteAlbum(@RequestParam(name = "albumId") Long albumId, HttpServletRequest request)
 {
     try {
-        albumServiceImpl.deleteAlbumById(id);
+        albumServiceImpl.deleteAlbumById(albumId);
     } catch (Exception e) {
         e.printStackTrace();
     }
@@ -65,6 +76,14 @@ public void deleteAlbum(Long id)
         result.put("albumId",album.getAlbumId());
         result.put("albumName",album.getAlbumName());
         return result;
+    }
+
+    @RequestMapping(value="/getId")
+    @ResponseBody
+    public Long getId(@RequestParam(name="userName") String a,HttpServletRequest request,HttpServletResponse response){
+        request.getSession().setAttribute("id",albumServiceImpl.getId(a));
+        return albumServiceImpl.getId(a);
+
     }
 
 }

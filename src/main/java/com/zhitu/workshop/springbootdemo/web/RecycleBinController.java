@@ -1,16 +1,13 @@
 package com.zhitu.workshop.springbootdemo.web;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.mysql.cj.xdevapi.JsonArray;
 import com.zhitu.workshop.springbootdemo.bo.RecycleBin;
 import com.zhitu.workshop.springbootdemo.service.RecycleBinService;
+import com.zhitu.workshop.springbootdemo.util.LoginUser;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,7 +33,7 @@ public class RecycleBinController {
         if(request.getSession().getAttribute("ID")==null){
             throw new Exception("用户未登录");
         }else{
-            userID=Long.valueOf(request.getSession().getAttribute("ID").toString());
+            userID=LoginUser.getUser(request).getUserId();
         }
         List<RecycleBin> recycleBins=recycleBinService.showFiles(userID);
 
@@ -46,8 +43,7 @@ public class RecycleBinController {
             int days = (int) ((re.getDeleteTime().getTime() - new Date().getTime()) / (1000*3600*24));
             map.put(re,days);
         }
-
-        if(recycleBins!=null){
+        if(map!=null){
             request.setAttribute("map",map);
         }else {
             throw new Exception("列表为空");
@@ -87,7 +83,7 @@ public class RecycleBinController {
     public Object delSelected(String ids, HttpServletRequest request)throws Exception{
         try{
             ids="["+ids+"]";
-            JSONArray arr = (JSONArray)JSONArray.parse(ids);
+            JSONArray arr = (JSONArray) JSONArray.parse(ids);
             for(int i=0;i<arr.size();i++){
                 JSONObject json=arr.getJSONObject(i);
                 Long fileId=Long.valueOf(json.getString("fileId"));
@@ -99,7 +95,23 @@ public class RecycleBinController {
             return e.getMessage();
         }
 
+    }
 
-
+    @RequestMapping(value = "recSelected")
+    @ResponseBody
+    public Object recSelected(String ids,HttpServletRequest request)throws Exception{
+        try{
+            ids="["+ids+"]";
+            JSONArray arr = (JSONArray) JSONArray.parse(ids);
+            for(int i=0;i<arr.size();i++){
+                JSONObject json=arr.getJSONObject(i);
+                Long fileId=Long.valueOf(json.getString("fileId"));
+                Long photoId=Long.valueOf(json.getString("recentId"));
+                recycleBinService.RecPhoto(fileId,photoId);
+            }
+            return true;
+        }catch (Exception e){
+            return e.getMessage();
+        }
     }
 }

@@ -21,10 +21,10 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class=" col-md-3 text-center"> <a class="btn" href="#">
+        <div class=" col-md-3 text-center"> <a class="btn" href="home">
             <h2>我的照片</h2>
         </a>
-            <div class="list-group posi" > <a href="allPhoto" class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 全部照片</a> <a href="#" class="list-group-item"><span class="glyphicon glyphicon-book"></span> 我的相册</a> <a href="#" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a> <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-trash"></span> 回收站</a></div>
+            <div class="list-group posi" > <a href="allPhoto" class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 全部照片</a> <a href="allAlbum" class="list-group-item"><span class="glyphicon glyphicon-book"></span> 我的相册</a> <a href="#" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a> <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-trash"></span> 回收站</a></div>
             <div class="progress" style="margin-top: 250px">
                 <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
 
@@ -33,7 +33,9 @@
         </div>
         <div class="col-md-9 container">
             <div class="row float-right">
-                <button id="delSelected" class="btn btn-warning ">删除所选</button>
+                <button id="recSelected" class="btn btn-warning ">恢复所选</button>
+                &nbsp;&nbsp;
+                <button id="delSelected" class="btn btn-danger ">删除所选</button>
             </div>
 
             <div class="row" style="clear: both">
@@ -156,6 +158,29 @@
             })
         }
 
+    });
+    $("#recSelected").click(function () {
+        var ids=[];
+        $("input[name='selected']:checked").each(function () {
+            ids.push($(this).val());
+        });
+        $.ajax({
+            type:"POST",
+            url:"recSelected",
+            data:"ids="+ids,
+            dataType:"json",
+            success:function (data) {
+                if(data==true){
+                    console.log("恢复成功");
+                    $("input[name='selected']:checked").each(function () {
+                        $(this).parent().parent().remove();
+                        $("#selectAll").prop("checked",false);
+                    });
+                }
+            },error:function (data) {
+                console.log(data);
+            }
+        })
     })
 </script>
 </body>

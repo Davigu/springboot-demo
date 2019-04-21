@@ -2,9 +2,11 @@ package com.zhitu.workshop.springbootdemo.web;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.zhitu.workshop.springbootdemo.bo.Photo;
 import com.zhitu.workshop.springbootdemo.bo.RecycleBin;
+import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.service.AlbumService;
 import com.zhitu.workshop.springbootdemo.service.PhotoService;
 import com.zhitu.workshop.springbootdemo.service.RecycleBinService;
+import com.zhitu.workshop.springbootdemo.util.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,7 @@ public class PhotoController {
     @Autowired
     RecycleBinService recycleBinService;
 
-    Long userID;
+    Long userId;
 
     //获取年月日，得到map
     public Map<String,List<Photo>> getYYYYMM(List<Photo> photos){
@@ -50,12 +52,12 @@ public class PhotoController {
     public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
 
         if(request.getSession().getAttribute("ID")==null){
-            throw new Exception("session中用户id为空");
+            throw new Exception("用户未登录");
         }else{
-            userID=Long.valueOf(request.getSession().getAttribute("ID").toString());
+            userId=LoginUser.getUser(request).getUserId();
         }
 
-        List<Photo> photos=photoService.showAllPhoto(userID,0);
+        List<Photo> photos=photoService.showAllPhoto(userId,0);
 
         Map<String,List<Photo>> map=getYYYYMM(photos);
         request.setAttribute("photos",map);
@@ -66,7 +68,7 @@ public class PhotoController {
     @ResponseBody
     public Map<String,List<Photo>> paging(int startRow)throws Exception{
 
-        List<Photo> photos=photoService.showAllPhoto(userID,startRow);
+        List<Photo> photos=photoService.showAllPhoto(userId,startRow);
         Map<String,List<Photo>> map=getYYYYMM(photos);
         return map;
     }
@@ -74,8 +76,8 @@ public class PhotoController {
     @RequestMapping(value = "deletePhoto")
     @ResponseBody
     public Object deletePhoto(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)throws Exception{
-        Long ID=Long.valueOf(id);
-        boolean isSuccess=photoService.deletePhotoById(ID);
+        Long Id=Long.valueOf(id);
+        boolean isSuccess=photoService.deletePhotoById(Id);
         if(isSuccess==true){
             return "true";
         }else {
@@ -94,7 +96,7 @@ public class PhotoController {
         Date date=cal.getTime();
 
         RecycleBin re=new RecycleBin();
-        re.setUserId(Long.valueOf(request.getSession().getAttribute("ID").toString()));
+        re.setUserId(LoginUser.getUser(request).getUserId());
         re.setObject("1");
         re.setRecentId(photoId);
         re.setInitialTime(dayNow);
