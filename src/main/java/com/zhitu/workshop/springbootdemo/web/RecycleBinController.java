@@ -30,11 +30,9 @@ public class RecycleBinController {
     throws Exception{
 
         Long userID;
-        if(request.getSession().getAttribute("ID")==null){
-            throw new Exception("用户未登录");
-        }else{
-            userID=LoginUser.getUser(request).getUserId();
-        }
+
+        userID=LoginUser.getUser(request).getUserId();
+
         List<RecycleBin> recycleBins=recycleBinService.showFiles(userID);
 
         Map<RecycleBin,Object> map=new HashMap<>();

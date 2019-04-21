@@ -22,7 +22,7 @@ public class PhotoController {
     @Autowired
     RecycleBinService recycleBinService;
 
-    Long userId;
+
 
     //获取年月日，得到map
     public Map<String,List<Photo>> getYYYYMM(List<Photo> photos){
@@ -51,12 +51,8 @@ public class PhotoController {
     @RequestMapping(value = "/allPhoto")
     public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
 
-        if(request.getSession().getAttribute("ID")==null){
-            throw new Exception("用户未登录");
-        }else{
-            userId=LoginUser.getUser(request).getUserId();
-        }
 
+        Long userId=LoginUser.getUser(request).getUserId();
         List<Photo> photos=photoService.showAllPhoto(userId,0);
 
         Map<String,List<Photo>> map=getYYYYMM(photos);
@@ -66,8 +62,9 @@ public class PhotoController {
 
     @RequestMapping(value = "paging")
     @ResponseBody
-    public Map<String,List<Photo>> paging(int startRow)throws Exception{
+    public Map<String,List<Photo>> paging(int startRow,HttpServletRequest request)throws Exception{
 
+        Long userId=LoginUser.getUser(request).getUserId();
         List<Photo> photos=photoService.showAllPhoto(userId,startRow);
         Map<String,List<Photo>> map=getYYYYMM(photos);
         return map;
