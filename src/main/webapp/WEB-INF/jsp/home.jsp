@@ -106,8 +106,15 @@
                     },
                     success:function(result){   //请求成功的回调方法
                         if(result != "" && result.code == "0"){
-
+                            $.ajax({
+                                type:"POST",
+                                url:"/getId",
+                                data:{
+                                    "userName":loginCode,
+                                },
+                            })
                            sessionStorage.setItem("name",loginCode);
+
                             window.location.href="allPhoto";
                         }else if(result.code == "2"){
                             alert("登录账号不存在！请重试。");

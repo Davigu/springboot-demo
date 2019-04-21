@@ -24,5 +24,7 @@
         insert into album(album_name,use_user_id,album_description)
         values (#{album.albumName},#{album.useUserId},#{album.albumDescription})
     </insert>
-
+    <select id="getId" resultType="com.zhitu.workshop.springbootdemo.bo.Album">
+        select user_id from user where user_name=#{userName}
+    </select>
 </mapper>

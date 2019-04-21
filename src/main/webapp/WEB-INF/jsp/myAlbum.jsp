@@ -120,7 +120,7 @@
             <h2>我的照片</h2>
         </a>
             <div class="list-group posi" >
-                <a href="/myPhoto"  class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 我的照片</a>
+                <a href="/allPhoto"  class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 我的照片</a>
                 <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-book"></span> 全部相册</a>
                 <a href="/myShare" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
                 <a href="/myRecycleBin" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
