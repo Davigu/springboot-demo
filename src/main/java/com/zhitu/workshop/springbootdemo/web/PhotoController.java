@@ -1,12 +1,12 @@
 package com.zhitu.workshop.springbootdemo.web;
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.zhitu.workshop.springbootdemo.bo.Album;
 import com.zhitu.workshop.springbootdemo.bo.Photo;
 import com.zhitu.workshop.springbootdemo.bo.RecycleBin;
 import com.zhitu.workshop.springbootdemo.bo.User;
-import com.zhitu.workshop.springbootdemo.service.AlbumService;
 import com.zhitu.workshop.springbootdemo.service.PhotoService;
 import com.zhitu.workshop.springbootdemo.service.RecycleBinService;
 import com.zhitu.workshop.springbootdemo.util.LoginUser;
+import com.zhitu.workshop.springbootdemo.util.OpenAlbum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +22,37 @@ public class PhotoController {
     @Autowired
     RecycleBinService recycleBinService;
 
-@RequestMapping(value="/myPhoto")
-public String showPhoto()
+@RequestMapping(value="/apartPhoto")
+public String showPartPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception
 {
-    return "myPhoto";
+    Long userID;
+     User user = LoginUser.getUser(request);
+    Album album= OpenAlbum.getAlbum(request);
+    if(user==null){
+        throw new Exception("用户未登录");
+    }
+    List<Photo> apartphotos=photoService.showApartPhoto(user.getUserId(),album.getAlbumId());
+    Map<String,List<Photo>> map=new HashMap<>();
+    for(Photo photo:apartphotos){
+        Date date=photo.getUpTime();
+        Calendar cal = Calendar.getInstance();
+        cal.clear();// 清除信息
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+        int month=cal.get(Calendar.MONTH)+1;
+        String YYYYMM=year+"年"+month+"月";//获得照片的年和月
+        if(map.containsKey(YYYYMM)){
+            map.get(YYYYMM).add(photo);
+        }else{
+            List<Photo> tmpList=new ArrayList<>();
+            tmpList.add(photo);
+            map.put(YYYYMM,tmpList);
+        }
+    }
+    request.setAttribute("apartphotos",map);
+    return "photoInAlbum";
 }
+
     @RequestMapping(value = "/allPhoto")
     public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
         Long userID;
@@ -34,7 +60,6 @@ public String showPhoto()
         if(user==null){
             throw new Exception("用户未登录");
         }
-
         List<Photo> photos=photoService.showAllPhoto(user.getUserId());
         Map<String,List<Photo>> map=new HashMap<>();
         for(Photo photo:photos){
@@ -57,7 +82,7 @@ public String showPhoto()
         return "allPhoto";
     }
 
-    @RequestMapping(value = "deletePhoto")
+    @RequestMapping(value = "/deletePhoto")
     @ResponseBody
     public Object deletePhoto(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)throws Exception{
         Long ID=Long.valueOf(id);

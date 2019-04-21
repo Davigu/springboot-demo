@@ -11,7 +11,7 @@ public interface PhotoService {
      * @return 返回照片地址
      */
     List<Photo> showAllPhoto(Long userID) throws Exception;
-
+    List<Photo> showApartPhoto(@Param("userID") long userID,@Param("albumId")Long albumID);
     /**
      * 根据照片ID查询照片
      * @param photoID

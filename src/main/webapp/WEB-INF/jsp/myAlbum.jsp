@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="navbar.jsp"%>
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -74,7 +73,7 @@
     </div>
     <!-- /.modal -->
 </div>
-<div class="modal fade" id="mybuild" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1">
+<!--<div class="modal fade" id="dlgNewAlbum" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -105,12 +104,13 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-warning" id="btn1" data-dismiss="modal"type="button">确定</button>
+                <button class="btn btn-warning" id="btnNewAlbum" data-dismiss="modal"type="button">确定</button>
                 <button class="btn btn-default " data-dismiss="modal">取消</button>
             </div>
         </div>
     </div>
 </div>
+-->
 
 <div id="navbar"></div>
 
@@ -175,9 +175,6 @@
     </div>
 </div>
 <hr>
-<footer class="text-center fixed-bottom blockquote-footer">
-    达伟出品
-</footer>
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -195,7 +192,7 @@
         $("#navbar").load("navbar.html");
         $("#testId").val("#albumName");
 
-        $("#btn1").click(function(){
+        $("#btnNewAlbum").click(function(){
             <%--获取值--%>
             var albumname=$("#albumName").val();
             var albumdescribe=$("#albumDescribe").val();
@@ -205,7 +202,6 @@
                 url:"/addAlbum",
                 data:{
                     "albumName":albumname,
-                    "useUserId":12,
                     "albumDescription":albumdescribe,
                 },
                 <%--如果数据传输成功则增加一个相册 --%>
@@ -231,6 +227,8 @@
                         +'   </a>'
                         +'  </div>'
                     )
+
+                    $('#dlgNewAlbum').modal('hide')
                 },
                 error:function ()
                 {

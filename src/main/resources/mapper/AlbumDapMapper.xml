@@ -25,6 +25,6 @@
         values (#{album.albumName},#{album.useUserId},#{album.albumDescription})
     </insert>
     <select id="getId" resultType="com.zhitu.workshop.springbootdemo.bo.Album">
-        select user_id from user where user_name=#{userName}
+        select user_id from user where use_user_id=#{userID}
     </select>
 </mapper>

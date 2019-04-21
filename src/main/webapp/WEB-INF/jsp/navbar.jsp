@@ -13,7 +13,7 @@
     <div class="container"><img src="images/starBrandBlack.png"><a class="navbar-brand" style="color: black" href="#">星相册</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"><a class="nav-link" style="color: black" href="#mybuild" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;创建</a></li>
+                <li class="nav-item active"><a class="nav-link" style="color: black" href="#dlgNewAlbum" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;创建</a></li>
                 <li class="nav-item active"><a class="nav-link" style="color: black" href="#myupload" data-toggle="modal"><span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;&nbsp;上传</a></li>
             </ul>
             <form class="form-inline my-2 my-lg-0 form-control-static float-right">
@@ -96,7 +96,7 @@
     </div>
     <!-- /.modal -->
 </div>
-<div class="modal fade" id="mybuild" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1">
+<div class="modal fade" id="dlgNewAlbum" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -126,7 +126,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-warning" type="button">确定</button>
+                <button class="btn btn-warning" id="btnNewAlbum" type="button">确定</button>
                 <button class="btn btn-default " data-dismiss="modal">取消</button>
             </div>
         </div>

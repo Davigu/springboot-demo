@@ -71,10 +71,16 @@ public void deleteAlbum(@RequestParam(name = "albumId") Long albumId, HttpServle
     public Map<String,Object >addAlbum(Album album,ModelMap model,HttpServletRequest request,HttpServletResponse response)
     {
         Map<String,Object> result=new HashMap<String,Object>();
-        albumServiceImpl.insertAlbum(album);
+        User user=LoginUser.getUser(request);
+        Album a=new Album();
+        a.setUserUseId(user.getUserId());
+        a.setAlbum_Name(album.getAlbumName());
+        a.setAlbumDescription(album.getAlbumDescription());
+        albumServiceImpl.insertAlbum(a);
         result.put("code",0);
-        result.put("albumId",album.getAlbumId());
         result.put("albumName",album.getAlbumName());
+        result.put("use_user_id",user.getUserId());
+        result.put("albumDescription",album.getAlbumDescription());
         return result;
     }
 

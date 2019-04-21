@@ -8,6 +8,11 @@
         inner join album a on p.album_id=a.album_id
         where a.use_user_id=#{userID} and p.state='0' order by p.up_time desc
     </select>
+    <select id="showApartPhoto" resultType="com.zhitu.workshop.springbootdemo.bo.Photo">
+        select * from photo p
+        inner join album a on p.album_id=a.album_id
+        where a.use_user_id=#{userID} and p.album_id=#{albumID} and p.state='0' order by p.up_time desc
+    </select>
     <select id="findPhotoByID" resultType="com.zhitu.workshop.springbootdemo.bo.Photo">
         select * from photo where photo_id=#{photoID}
     </select>
