@@ -115,7 +115,7 @@
                         /30</div>
                     <div>
                         <label for="albumName">相册描述：</label>
-                        <textarea name="textarea" rows="3" class="form-control"></textarea>
+                        <textarea name="textarea" id="albumDescribe" rows="3" class="form-control"></textarea>
                         <label>0</label>
                         /2000</div>
                     <div class="form-inline">

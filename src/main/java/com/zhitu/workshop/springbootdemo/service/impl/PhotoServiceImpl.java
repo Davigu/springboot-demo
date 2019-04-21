@@ -1,11 +1,9 @@
 package com.zhitu.workshop.springbootdemo.service.impl;
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import com.zhitu.workshop.springbootdemo.bo.Photo;
 import com.zhitu.workshop.springbootdemo.dao.PhotoDao;
 import com.zhitu.workshop.springbootdemo.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 @Service
 public class PhotoServiceImpl implements PhotoService {
@@ -55,10 +53,6 @@ public class PhotoServiceImpl implements PhotoService {
         }
     }
 
-    @Override
-    public List<Photo> showApartPhoto(long userID, Long albumID) {
-        return photoDao.showApartPhoto(userID,albumID);
-    }
 
     @Override
     public Photo insertPhoto(Photo photo){

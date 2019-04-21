@@ -80,7 +80,8 @@ public void deleteAlbum(@RequestParam(name = "albumId") Long albumId, HttpServle
         result.put("code",0);
         result.put("albumName",album.getAlbumName());
         result.put("albumDescription",album.getAlbumDescription());
-        result.put("use_user_id",user.getUserId());
+        result.put("useUserId",user.getUserId());
+        result.put("albumId",album.getAlbumId());
 
         return result;
     }

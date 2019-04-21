@@ -6,7 +6,6 @@ import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.service.PhotoService;
 import com.zhitu.workshop.springbootdemo.service.RecycleBinService;
 import com.zhitu.workshop.springbootdemo.util.LoginUser;
-import com.zhitu.workshop.springbootdemo.util.OpenAlbum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,36 +21,7 @@ public class PhotoController {
     @Autowired
     RecycleBinService recycleBinService;
 
-@RequestMapping(value="/apartPhoto")
-public String showPartPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception
-{
-    Long userID;
-     User user = LoginUser.getUser(request);
-    Album album= OpenAlbum.getAlbum(request);
-    if(user==null){
-        throw new Exception("用户未登录");
-    }
-    List<Photo> apartphotos=photoService.showApartPhoto(user.getUserId(),album.getAlbumId());
-    Map<String,List<Photo>> map=new HashMap<>();
-    for(Photo photo:apartphotos){
-        Date date=photo.getUpTime();
-        Calendar cal = Calendar.getInstance();
-        cal.clear();// 清除信息
-        cal.setTime(date);
-        int year = cal.get(Calendar.YEAR);
-        int month=cal.get(Calendar.MONTH)+1;
-        String YYYYMM=year+"年"+month+"月";//获得照片的年和月
-        if(map.containsKey(YYYYMM)){
-            map.get(YYYYMM).add(photo);
-        }else{
-            List<Photo> tmpList=new ArrayList<>();
-            tmpList.add(photo);
-            map.put(YYYYMM,tmpList);
-        }
-    }
-    request.setAttribute("apartphotos",map);
-    return "photoInAlbum";
-}
+
 
     @RequestMapping(value = "/allPhoto")
     public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
@@ -60,7 +30,7 @@ public String showPartPhoto(Model model, HttpServletResponse response, HttpServl
         if(user==null){
             throw new Exception("用户未登录");
         }
-        List<Photo> photos=photoService.showAllPhoto(user.getUserId());
+        List<Photo> photos=photoService.showAllPhoto(user.getUserId(),0);
         Map<String,List<Photo>> map=new HashMap<>();
         for(Photo photo:photos){
             Date date=photo.getUpTime();

@@ -15,7 +15,7 @@ public interface PhotoDao {
      * 显示所有照片
      * @return 返回照片地址
      */
-    List<Photo> showAllPhoto(@Param("userID") long userID);
+    List<Photo> showAllPhoto(@Param("userID") long userID,@Param(value="startRow") int startRow);
 
     /**
      * 查找相册中的照片
