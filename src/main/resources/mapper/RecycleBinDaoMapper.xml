@@ -17,4 +17,7 @@
     <delete id="delPhoto">
         delete from recycle_bin where file_id=#{fileID}
     </delete>
+    <select id="getAllFile" resultType="com.zhitu.workshop.springbootdemo.bo.RecycleBin">
+        select * from recycle_bin where delete_time &lt;#{now}
+    </select>
 </mapper>

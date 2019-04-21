@@ -37,7 +37,7 @@
                 <a href="myShare" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
                 <a href="myRecycleBin" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
             </div>
-            <div class="progress" style="margin-top: 180px">
+            <div class="progress" style="margin-top: 250px">
                 <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
                 </div>
             </div>
@@ -47,9 +47,9 @@
                 <button class="btn btn-warning" href="#myupload" data-toggle="modal">上传</button>
             </div>
 
-            <div class="row" style="clear: both">
+            <div id="month_view" class="row" style="clear: both">
                 <c:forEach items="${photos}" var="date" varStatus="status">
-                    <div class="panel col-md-12">
+                    <div id="${date.key}" class="panel col-md-12">
                         <div class="panel-heading">
                             <h4 class="panel-title">${date.key}</h4>
                         </div>
@@ -57,7 +57,7 @@
                             <c:forEach items="${date.value}" var="photo" varStatus="status">
 
                                 <div class="col-xs-6 col-md-3 editPhoto" style="padding: 5px;">
-                                    <input type="checkbox" style="position:absolute;top: 6px;left: 9.6px">
+
                                     <div class="dropdown editMenu" style="position:absolute;top: 10.5px;right: 10.5px;">
                                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></button>
                                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto" photoid="${photo.photoId}">
@@ -77,7 +77,9 @@
                     </div>
                 </c:forEach>
             </div>
-
+            <div class="row">
+                <img id="loading" class="center-block" src="images/loading.gif" style="display: none">
+            </div>
         </div>
     </div>
 
@@ -173,6 +175,53 @@
                 }
             }
         })
+    });
+    var curPage=2;
+    $(window).scroll(function () {
+        var startRow="startRow="+(curPage-1)*20;
+        if($(document).scrollTop()>=$(document).height()-document.body.clientHeight-40){
+            $("#loading").css("display","block");
+            $.ajax({
+                type:"POST",
+                url:"paging",
+                data:startRow,
+                success:function (result) {
+                    for (var key in result) {
+                        if($("#"+key).length==0){
+                            $("#month_view").append('<div id="'+key+'" class="panel col-md-12">\n' +
+                                '<div class="panel-heading">\n' +
+                                '<h4 class="panel-title">'+key+'</h4>\n' +
+                                '</div>\n' +
+                                '<div class="panel-body">\n' +
+                                '\n' +
+                                '</div>\n' +
+                                '</div>')
+                        }
+                        var html='';
+                            for(var index in result[key]){
+                                html=html+'<div class="col-xs-6 col-md-3 editPhoto" style="padding: 5px;">'+
+                                    '<div class="dropdown editMenu" style="position:absolute;top: 10.5px;right: 10.5px;">\n' +
+                                    '<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></button>\n' +
+                                    '<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto" photoid="'+result[key][index].photoId+'">\n' +
+                                    '<li><a class="renamePhoto" href="#">重命名</a></li>\n' +
+                                    '<li><a class="delIntoRec" href="javascript:;">删除照片</a></li>\n' +
+                                    '<li role="separator" class="divider"></li>\n' +
+                                    '<li><a class="delPhoto" href="javascript:;">彻底删除</a></li>\n' +
+                                    '</ul>\n' +
+                                    '</div>\n' +
+                                    '<a data-gallery="manual" href="'+result[key][index].photoAddress+'" class="thumbnail">\n' +
+                                    ' <img alt="'+result[key][index].photoName+'" src="'+result[key][index].photoAddress+'" style="height: 125px; width: 100%; display: block;" >\n' +
+                                    '</a>'+
+                                    '</div>'
+                            }
+                            $("#"+key+" .panel-body").append(html);
+                    }
+                    curPage++;
+
+                    $("#loading").css("display","none");
+                }
+            })
+        }
     })
 </script>
 </body>

@@ -25,7 +25,7 @@
             <h2>我的照片</h2>
         </a>
             <div class="list-group posi" > <a href="allPhoto" class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 全部照片</a> <a href="#" class="list-group-item"><span class="glyphicon glyphicon-book"></span> 我的相册</a> <a href="#" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a> <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-trash"></span> 回收站</a></div>
-            <div class="progress" style="margin-top: 180px">
+            <div class="progress" style="margin-top: 250px">
                 <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
 
                 </div>
@@ -33,14 +33,14 @@
         </div>
         <div class="col-md-9 container">
             <div class="row float-right">
-                <button class="btn btn-warning ">删除所选</button>
+                <button id="delSelected" class="btn btn-warning ">删除所选</button>
             </div>
 
             <div class="row" style="clear: both">
                 <table class="table table-hover table-striped">
                     <thead>
                     <tr class="table-dark">
-                        <th class="col-md-1 text-center"><input type="checkbox"></th>
+                        <th class="col-md-1 text-center"><input type="checkbox" id="selectAll" onclick="selectAll();"></th>
                         <th class="col-md-5">文&nbsp;&nbsp;件&nbsp;&nbsp;名</th>
                         <th class="col-md-1"></th>
                         <th class="col-md-1 text-center">大&nbsp;&nbsp;小</th>
@@ -51,7 +51,7 @@
                     <tbody>
                     <c:forEach items="${map}" var="file">
                         <tr>
-                            <td class="col-md-1 text-center"><input type="checkbox"></td>
+                            <td class="col-md-1 text-center"><input type="checkbox" name="selected" value='{ "fileId":"${file.key.fileId}" , "recentId":"${file.key.recentId}" }'></td>
                             <td class="col-md-4">
                                 <c:if test="${file.key.object==1}">
                                     <span style="color: #696969" class="glyphicon glyphicon-picture"></span>
@@ -107,7 +107,7 @@
         var fileid=$(this).parent().attr("fileid");
         var photoid=$(this).parent().attr("photoid")
         var t=$(this).parent().parent();
-        var data="fileID="+fileid+"&photoID="+photoid;
+        var data="fileId="+fileid+"&photoId="+photoid;
         $.ajax({
             type:"POST",
             url:"delPhotoComplete",
@@ -122,6 +122,40 @@
                 }
             }
         })
+    });
+    function selectAll() {
+        if($("#selectAll").is(":checked")){
+            $("[name='selected']").prop("checked",true);
+        }else{
+            $("[name='selected']").prop("checked",false);
+        }
+    };
+    $("#delSelected").click(function () {
+        var ids=[];
+        $("input[name='selected']:checked").each(function () {
+            ids.push($(this).val());
+        });
+        var t=confirm("确认删除？");
+        if(t==true){
+            $.ajax({
+                type:"POST",
+                url:"delSelected",
+                data:"ids="+ids,
+                dataType:"json",
+                success:function (data) {
+                    if(data==true){
+                        console.log("删除成功");
+                        $("input[name='selected']:checked").each(function () {
+                            $(this).parent().parent().remove();
+                            $("#selectAll").prop("checked",false);
+                        });
+                    }
+                },error:function (data) {
+                    console.log(data);
+                }
+            })
+        }
+
     })
 </script>
 </body>

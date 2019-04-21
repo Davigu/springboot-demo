@@ -12,18 +12,18 @@ public class PhotoServiceImpl implements PhotoService {
     @Autowired
     PhotoDao photoDao;
     @Override
-    public List<Photo> showAllPhoto(Long userID) throws Exception{
-        if(userID==null||userID.equals("")){
+    public List<Photo> showAllPhoto(Long userID,int startRow) throws Exception{
+        if(userID==null){
             throw new Exception("用户id为空");
         }else {
-            return photoDao.showAllPhoto(userID);
+            return photoDao.showAllPhoto(userID,startRow);
         }
 
     }
 
     @Override
     public Photo findPhotoByID(Long photoID) throws Exception{
-        if(photoID==null||photoID.equals("")){
+        if(photoID==null){
             throw new Exception("照片id为空");
         }else {
             return photoDao.findPhotoByID(photoID);
@@ -33,9 +33,9 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public List<Photo> showByAlbum(Long userID, Long albumID) throws Exception{
-        if(userID==null||userID.equals("")){
+        if(userID==null){
             throw new Exception("用户id空");
-        }else if(albumID==null||albumID.equals("")) {
+        }else if(albumID==null) {
             throw new Exception("相册id为空");
         }else{
             return photoDao.showByAlbum(userID,albumID);
@@ -44,7 +44,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public boolean deletePhotoById(Long photoID) throws Exception {
-        if(photoID==null||photoID.equals("")){
+        if(photoID==null){
             throw new Exception("照片id为空");
         }else {
             if(photoDao.deletePhotoById(photoID)>0){

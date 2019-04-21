@@ -5,6 +5,7 @@ import com.zhitu.workshop.springbootdemo.dao.RecycleBinDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -18,4 +19,6 @@ public interface RecycleBinService {
     boolean RecPhoto(Long fileID,Long photoID)throws Exception;
 
     boolean DelPhotoComp(Long fileID,Long photoID)throws Exception;
+
+    List<RecycleBin> getAllFile(Date date)throws Exception;
 }

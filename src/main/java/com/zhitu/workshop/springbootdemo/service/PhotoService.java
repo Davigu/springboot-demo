@@ -10,7 +10,7 @@ public interface PhotoService {
      * 显示所有照片
      * @return 返回照片地址
      */
-    List<Photo> showAllPhoto(Long userID) throws Exception;
+    List<Photo> showAllPhoto(Long userID,int startRow) throws Exception;
 
     /**
      * 根据照片ID查询照片

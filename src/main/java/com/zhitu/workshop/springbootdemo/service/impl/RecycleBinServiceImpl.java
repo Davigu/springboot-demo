@@ -8,6 +8,7 @@ import com.zhitu.workshop.springbootdemo.service.RecycleBinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -74,5 +75,15 @@ public class RecycleBinServiceImpl implements RecycleBinService {
             return false;
         }
 
+    }
+
+    @Override
+    public List<RecycleBin> getAllFile(Date date) throws Exception {
+        try{
+            return recycleBinDao.getAllFile(date);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

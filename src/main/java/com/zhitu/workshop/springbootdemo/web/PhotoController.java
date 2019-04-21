@@ -20,21 +20,10 @@ public class PhotoController {
     @Autowired
     RecycleBinService recycleBinService;
 
-@RequestMapping(value="/myPhoto")
-public String showPhoto()
-{
-    return "myPhoto";
-}
-    @RequestMapping(value = "/allPhoto")
-    public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
-        Long userID;
-        if(request.getSession().getAttribute("ID")==null){
-            throw new Exception("session中用户id为空");
-        }else{
-            userID=Long.valueOf(request.getSession().getAttribute("ID").toString());
-        }
+    Long userID;
 
-        List<Photo> photos=photoService.showAllPhoto(Long.valueOf("12"));
+    //获取年月日，得到map
+    public Map<String,List<Photo>> getYYYYMM(List<Photo> photos){
         Map<String,List<Photo>> map=new HashMap<>();
         for(Photo photo:photos){
             Date date=photo.getUpTime();
@@ -52,8 +41,34 @@ public String showPhoto()
                 map.put(YYYYMM,tmpList);
             }
         }
+        return map;
+    }
+
+
+
+    @RequestMapping(value = "/allPhoto")
+    public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
+
+        if(request.getSession().getAttribute("ID")==null){
+            throw new Exception("session中用户id为空");
+        }else{
+            userID=Long.valueOf(request.getSession().getAttribute("ID").toString());
+        }
+
+        List<Photo> photos=photoService.showAllPhoto(userID,0);
+
+        Map<String,List<Photo>> map=getYYYYMM(photos);
         request.setAttribute("photos",map);
         return "allPhoto";
+    }
+
+    @RequestMapping(value = "paging")
+    @ResponseBody
+    public Map<String,List<Photo>> paging(int startRow)throws Exception{
+
+        List<Photo> photos=photoService.showAllPhoto(userID,startRow);
+        Map<String,List<Photo>> map=getYYYYMM(photos);
+        return map;
     }
 
     @RequestMapping(value = "deletePhoto")
@@ -79,7 +94,7 @@ public String showPhoto()
         Date date=cal.getTime();
 
         RecycleBin re=new RecycleBin();
-        re.setUserId(Long.valueOf("12"));
+        re.setUserId(Long.valueOf(request.getSession().getAttribute("ID").toString()));
         re.setObject("1");
         re.setRecentId(photoId);
         re.setInitialTime(dayNow);

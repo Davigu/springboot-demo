@@ -4,6 +4,7 @@ import com.zhitu.workshop.springbootdemo.bo.RecycleBin;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -29,5 +30,6 @@ public interface RecycleBinDao {
      */
     int delPhoto(@Param("fileID")Long fileID);
 
+    List<RecycleBin> getAllFile(@Param("now") Date now);
 
 }

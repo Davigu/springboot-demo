@@ -133,7 +133,7 @@
     </div>
 </div>
 <hr>
-<footer class="panel-footer text-center fixed-bottom blockquote-footer">达伟出品，必属精品</footer>
+<%--<footer class="panel-footer text-center fixed-bottom blockquote-footer">达伟出品，必属精品</footer>--%>
 <script src="/js/jquery-3.3.1.min.js"></script>
 </body>
 </html>
