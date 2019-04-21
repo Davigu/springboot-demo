@@ -231,6 +231,7 @@
                     )
 
                     $('#dlgNewAlbum').modal('hide')
+                    window.location.reload();
                 },
                 error:function ()
                 {
