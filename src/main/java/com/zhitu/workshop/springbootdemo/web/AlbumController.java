@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,10 +48,10 @@ public class AlbumController {
     }
 @RequestMapping(value="/deleteAlbum")
     @ResponseBody
-public void deleteAlbum(Long id)
+public void deleteAlbum(@RequestParam(name = "albumId") Long albumId, HttpServletRequest request)
 {
     try {
-        albumServiceImpl.deleteAlbumById(id);
+        albumServiceImpl.deleteAlbumById(albumId);
     } catch (Exception e) {
         e.printStackTrace();
     }

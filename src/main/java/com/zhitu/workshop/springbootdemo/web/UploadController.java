@@ -1,5 +1,4 @@
 package com.zhitu.workshop.springbootdemo.web;
-
 import com.zhitu.workshop.springbootdemo.bo.Photo;
 import com.zhitu.workshop.springbootdemo.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import java.io.*;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * 文件上传
@@ -52,8 +50,7 @@ public class UploadController {
         long newFileName=System.currentTimeMillis()+random;
 
         String basepath= this.getClass().getResource("/").getPath();
-        File saveFile=new File(basepath+File.separator+"static"+File.separator+"picture"+File.separator+newFileName+fileStyle);
-
+        File saveFile=new File(basepath+File.separator+"static"+File.separator+newFileName+fileStyle);
         Photo p=new Photo();
         p.setPhotoName(fileOnlyName);
         p.setPhotoAddress("/picture/"+newFileName+fileStyle);

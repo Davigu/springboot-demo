@@ -19,7 +19,7 @@ public interface AlbumDao {
      * @param
      * @return
      */
-    int deleteAlbumById(@Param("AlbumId")Long AlbumId);
+    int deleteAlbumById(@Param("albumId")Long AlbumId);
 
     /**
      * 更新相册信息

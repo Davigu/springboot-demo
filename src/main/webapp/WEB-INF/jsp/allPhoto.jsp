@@ -57,7 +57,6 @@
                         </div>
                         <div class="panel-body">
                             <c:forEach items="${date.value}" var="photo" varStatus="status">
-
                                 <div class="col-xs-6 col-md-3 editPhoto" style="padding: 5px;">
                                     <input type="checkbox" style="position:absolute;top: 6px;left: 9.6px">
                                     <div class="dropdown editMenu" style="position:absolute;top: 10.5px;right: 10.5px;">
@@ -85,7 +84,7 @@
 
 </div>
 <hr>
-<footer class="panel-footer text-center fixed-bottom blockquote-footer">梦雷出品，必属精品</footer>
+
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -21,8 +21,8 @@
     <insert id="insertAlbum" useGeneratedKeys="true"
             parameterType="com.zhitu.workshop.springbootdemo.bo.Album"
             keyProperty="albumId" keyColumn="album_id">
-        insert into album(album_name,album_description)
-        values (#{album.albumName},#{album.albumDescription})
+        insert into album(album_name,use_user_id,album_description)
+        values (#{album.albumName},#{album.useUserId},#{album.albumDescription})
     </insert>
 
 </mapper>
