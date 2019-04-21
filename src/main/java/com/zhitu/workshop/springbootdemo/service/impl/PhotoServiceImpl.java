@@ -56,11 +56,6 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public List<Photo> showApartPhoto(long userID, Long albumID) {
-        return photoDao.showApartPhoto(userID,albumID);
-    }
-
-    @Override
     public Photo insertPhoto(Photo photo){
         int count =photoDao.insertPhoto(photo);
         return photo;

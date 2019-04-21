@@ -1,12 +1,12 @@
 package com.zhitu.workshop.springbootdemo.web;
-import com.zhitu.workshop.springbootdemo.bo.Album;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.zhitu.workshop.springbootdemo.bo.Photo;
 import com.zhitu.workshop.springbootdemo.bo.RecycleBin;
 import com.zhitu.workshop.springbootdemo.bo.User;
+import com.zhitu.workshop.springbootdemo.service.AlbumService;
 import com.zhitu.workshop.springbootdemo.service.PhotoService;
 import com.zhitu.workshop.springbootdemo.service.RecycleBinService;
 import com.zhitu.workshop.springbootdemo.util.LoginUser;
-import com.zhitu.workshop.springbootdemo.util.OpenAlbum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,46 +21,9 @@ public class PhotoController {
     PhotoService photoService;
     @Autowired
     RecycleBinService recycleBinService;
-
-@RequestMapping(value="/apartPhoto")
-public String showPartPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception
-{
-    Long userID;
-     User user = LoginUser.getUser(request);
-    Album album= OpenAlbum.getAlbum(request);
-    if(user==null){
-        throw new Exception("用户未登录");
-    }
-    List<Photo> apartphotos=photoService.showApartPhoto(user.getUserId(),album.getAlbumId());
-    Map<String,List<Photo>> map=new HashMap<>();
-    for(Photo photo:apartphotos){
-        Date date=photo.getUpTime();
-        Calendar cal = Calendar.getInstance();
-        cal.clear();// 清除信息
-        cal.setTime(date);
-        int year = cal.get(Calendar.YEAR);
-        int month=cal.get(Calendar.MONTH)+1;
-        String YYYYMM=year+"年"+month+"月";//获得照片的年和月
-        if(map.containsKey(YYYYMM)){
-            map.get(YYYYMM).add(photo);
-        }else{
-            List<Photo> tmpList=new ArrayList<>();
-            tmpList.add(photo);
-            map.put(YYYYMM,tmpList);
-        }
-    }
-    request.setAttribute("apartphotos",map);
-    return "photoInAlbum";
-}
-
-    @RequestMapping(value = "/allPhoto")
-    public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
-        Long userID;
-        User user = LoginUser.getUser(request);
-        if(user==null){
-            throw new Exception("用户未登录");
-        }
-        List<Photo> photos=photoService.showAllPhoto(user.getUserId());
+    Long userId;
+    //获取年月日，得到map
+    public Map<String,List<Photo>> getYYYYMM(List<Photo> photos){
         Map<String,List<Photo>> map=new HashMap<>();
         for(Photo photo:photos){
             Date date=photo.getUpTime();
@@ -78,15 +41,39 @@ public String showPartPhoto(Model model, HttpServletResponse response, HttpServl
                 map.put(YYYYMM,tmpList);
             }
         }
+        return map;
+    }
+
+
+
+    @RequestMapping(value = "/allPhoto")
+    public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
+
+
+        userId=LoginUser.getUser(request).getUserId();
+
+
+        List<Photo> photos=photoService.showAllPhoto(userId,0);
+
+        Map<String,List<Photo>> map=getYYYYMM(photos);
         request.setAttribute("photos",map);
         return "allPhoto";
     }
 
-    @RequestMapping(value = "/deletePhoto")
+    @RequestMapping(value = "paging")
+    @ResponseBody
+    public Map<String,List<Photo>> paging(int startRow)throws Exception{
+
+        List<Photo> photos=photoService.showAllPhoto(userId,startRow);
+        Map<String,List<Photo>> map=getYYYYMM(photos);
+        return map;
+    }
+
+    @RequestMapping(value = "deletePhoto")
     @ResponseBody
     public Object deletePhoto(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)throws Exception{
-        Long ID=Long.valueOf(id);
-        boolean isSuccess=photoService.deletePhotoById(ID);
+        Long Id=Long.valueOf(id);
+        boolean isSuccess=photoService.deletePhotoById(Id);
         if(isSuccess==true){
             return "true";
         }else {
@@ -105,7 +92,7 @@ public String showPartPhoto(Model model, HttpServletResponse response, HttpServl
         Date date=cal.getTime();
 
         RecycleBin re=new RecycleBin();
-        re.setUserId(Long.valueOf("12"));
+        re.setUserId(LoginUser.getUser(request).getUserId());
         re.setObject("1");
         re.setRecentId(photoId);
         re.setInitialTime(dayNow);

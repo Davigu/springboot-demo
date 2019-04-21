@@ -23,7 +23,7 @@
 <body>
 <div id="navbar"></div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<div class="container">
+<div class="container" id="container">
     <div class="row">
         <div class=" col-md-3 text-center">
 
@@ -54,7 +54,7 @@
                             <c:forEach items="${date.value}" var="photo" varStatus="status">
                                 <div class="col-xs-6 col-md-3 editPhoto" style="padding: 5px;">
 
-                                    <div class="dropdown editMenu" style="position:absolute;top: 10.5px;right: 10.5px;">
+                                    <div class="dropdown editMenu" style="position:absolute;top: 10.5px;right: 10.5px;display: none">
                                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></button>
                                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto" photoid="${photo.photoId}">
                                             <li><a class="renamePhoto" href="#">重命名</a></li>
@@ -88,35 +88,38 @@
 <script src="js/photoviewer.js"></script>
 <script>
     $(function () {
-        $(".editMenu").css("display", "none");
-        $(".editPhoto").find("input").css("display","none");
-        $(".editPhoto").hover(
-            function () {
+
+        $("#container").on("mouseenter",".editPhoto",function () {
             $(this).find(".editMenu").css("display", "block");
-        }, function () {
+        });
+
+        $("#container").on("mouseleave",".editPhoto", function () {
             $(this).find(".editMenu").css("display", "none");
         });
     });
     //实现大图
-    $('[data-gallery=manual]').click(function (e) {
-        e.preventDefault();
-        var items = [],
-            // get index of element clicked
-            options = {
-                index: $(this).index(".thumbnail")
-            };
-        // looping to create images array
-        $('[data-gallery=manual]').each(function () {
-            let src = $(this).attr('href');
-            items.push({
-                src: src
+
+        $("#container").on("click","[data-gallery=manual]",function (e) {
+            e.preventDefault();
+            var items = [],
+                // get index of element clicked
+                options = {
+                    index: $(this).index(".thumbnail")
+                };
+            // looping to create images array
+            $('[data-gallery=manual]').each(function () {
+                let src = $(this).attr('href');
+                items.push({
+                    src: src
+                });
             });
+            console.log(options);
+            new PhotoViewer(items, options);
         });
-        console.log(options);
-        new PhotoViewer(items, options);
-    });
+
+
     //删除按钮
-    $(".delPhoto").click(function () {
+    $("#container").on("click", ".delPhoto", function () {
         var id=$(".delPhoto").parent().parent().attr("photoid");
         var a=confirm("是否彻底删除这张照片？");
         var t=$(this).parent().parent().parent().parent();
@@ -174,13 +177,18 @@
     var curPage=2;
     $(window).scroll(function () {
         var startRow="startRow="+(curPage-1)*20;
-        if($(document).scrollTop()>=$(document).height()-document.body.clientHeight-40){
+        console.info($(document).scrollTop());
+        console.info($(document).height());
+        console.info(document.body.clientHeight);
+        if(Math.ceil($(document).scrollTop())>=$(document).height()-document.body.clientHeight){
             $("#loading").css("display","block");
             $.ajax({
                 type:"POST",
                 url:"paging",
                 data:startRow,
                 success:function (result) {
+                    if(result==null) return;
+                    var count=0;
                     for (var key in result) {
                         if($("#"+key).length==0){
                             $("#month_view").append('<div id="'+key+'" class="panel col-md-12">\n' +
@@ -193,27 +201,29 @@
                                 '</div>')
                         }
                         var html='';
-                            for(var index in result[key]){
-                                html=html+'<div class="col-xs-6 col-md-3 editPhoto" style="padding: 5px;">'+
-                                    '<div class="dropdown editMenu" style="position:absolute;top: 10.5px;right: 10.5px;">\n' +
-                                    '<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></button>\n' +
-                                    '<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto" photoid="'+result[key][index].photoId+'">\n' +
-                                    '<li><a class="renamePhoto" href="#">重命名</a></li>\n' +
-                                    '<li><a class="delIntoRec" href="javascript:;">删除照片</a></li>\n' +
-                                    '<li role="separator" class="divider"></li>\n' +
-                                    '<li><a class="delPhoto" href="javascript:;">彻底删除</a></li>\n' +
-                                    '</ul>\n' +
-                                    '</div>\n' +
-                                    '<a data-gallery="manual" href="'+result[key][index].photoAddress+'" class="thumbnail">\n' +
-                                    ' <img alt="'+result[key][index].photoName+'" src="'+result[key][index].photoAddress+'" style="height: 125px; width: 100%; display: block;" >\n' +
-                                    '</a>'+
-                                    '</div>'
-                            }
-                            $("#"+key+" .panel-body").append(html);
+                        for(var index in result[key]){
+                            html=html+'<div class="col-xs-6 col-md-3 editPhoto" style="padding: 5px;">'+
+                                '<div class="dropdown editMenu" style="position:absolute;top: 10.5px;right: 10.5px;display:none">\n' +
+                                '<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></button>\n' +
+                                '<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto" photoid="'+result[key][index].photoId+'">\n' +
+                                '<li><a class="renamePhoto" href="#">重命名</a></li>\n' +
+                                '<li><a class="delIntoRec" href="javascript:;">删除照片</a></li>\n' +
+                                '<li role="separator" class="divider"></li>\n' +
+                                '<li><a class="delPhoto" href="javascript:;">彻底删除</a></li>\n' +
+                                '</ul>\n' +
+                                '</div>\n' +
+                                '<a data-gallery="manual" href="'+result[key][index].photoAddress+'" class="thumbnail">\n' +
+                                ' <img alt="'+result[key][index].photoName+'" src="'+result[key][index].photoAddress+'" style="height: 125px; width: 100%; display: block;" >\n' +
+                                '</a>'+
+                                '</div>'
+                        }
+                        $("#"+key+" .panel-body").append(html);
+                        count++;
                     }
-                    curPage++;
-
+                    if (count>0) curPage++;
+                    console.log(curPage);
                     $("#loading").css("display","none");
+
                 }
             })
         }
