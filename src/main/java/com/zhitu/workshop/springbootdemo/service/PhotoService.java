@@ -36,4 +36,11 @@ public interface PhotoService {
     boolean deletePhotoById(Long photoID) throws Exception;
 
     Photo insertPhoto(Photo photo);
+
+    /**
+     * 将照片移入回收站
+     * @param photoID 传入照片
+     * @return
+     */
+    int DelIntoRec(Long photoID)throws Exception;
 }

@@ -28,5 +28,5 @@ public interface UserService {
      * @param id 用户编号
      */
    void deleteUserById(Long id);
-
+   List<User> findAllUser(String adminName)throws Exception;
 }

@@ -33,7 +33,6 @@ public interface UserDao {
      * @param id
      */
     void deleteUserById(@Param("id") Long id);
-
-
+    List<User> findAllUser(@Param("adminName") String adminName);
 
 }

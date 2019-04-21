@@ -1,3 +1,14 @@
+<%@page pageEncoding="UTF-8"%>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <meta charset="utf-8">
+
+</head>
+<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
     <div class="container"><img src="images/starBrandBlack.png"><a class="navbar-brand" style="color: black" href="#">星相册</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -10,7 +21,12 @@
                 <button class="btn btn-primary my-2 my-sm-0" type="button"><span class="glyphicon glyphicon-search"></span></button>
             </form>
         </div>
-        <div class="dropdown"><a class="dropdown-toggle btn " id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img class="img-circle" alt="140x140" src="images/32X32.gif"></a><lable id="bdiv">
+        <div class="dropdown"><a class="dropdown-toggle btn " id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img class="img-circle" alt="140x140" src="images/32X32.gif"></a>
+            <label id="aaa"></label>
+            <script>
+                var str = sessionStorage.getItem("name");
+                document.getElementById('aaa').innerHTML = str;
+            </script>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu1">
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -117,10 +133,7 @@
     </div>
 </div>
 <hr>
-<script>
-    $(function()
-    {
-        var str=sessionStorage.getItem("name");
-        $("#bdiv").html(str);
-    });
-</script>
+<footer class="panel-footer text-center fixed-bottom blockquote-footer">达伟出品，必属精品</footer>
+<script src="/js/jquery-3.3.1.min.js"></script>
+</body>
+</html>

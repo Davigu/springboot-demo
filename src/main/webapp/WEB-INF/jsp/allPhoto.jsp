@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="navbar.jsp" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -42,9 +43,6 @@
             </div>
         </div>
         <div class="container col-md-9" style="border-left:medium #DCD4D4 solid;">
-            <div class="row float-left">
-                <a class="btn btn-danger" style="margin-left:38px;">全部删除</a>
-            </div>
             <div class="row float-right">
                 <button class="btn btn-warning" href="#myupload" data-toggle="modal">上传</button>
             </div>
@@ -61,11 +59,11 @@
                                     <input type="checkbox" style="position:absolute;top: 6px;left: 9.6px">
                                     <div class="dropdown editMenu" style="position:absolute;top: 10.5px;right: 10.5px;">
                                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"></button>
-                                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto">
+                                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto" photoid="${photo.photoId}">
                                             <li><a class="renamePhoto" href="#">重命名</a></li>
-                                            <li><a href="#">移入回收站</a></li>
+                                            <li><a class="delIntoRec" href="javascript:;">删除照片</a></li>
                                             <li role="separator" class="divider"></li>
-                                            <li><a class="delPhoto" href="javascript:;" photoid="${photo.photoId}">彻底删除</a></li>
+                                            <li><a class="delPhoto" href="javascript:;">彻底删除</a></li>
                                         </ul>
                                     </div>
                                     <a data-gallery="manual" href="${photo.photoAddress}" class="thumbnail">
@@ -92,18 +90,13 @@
 <script src="js/photoviewer.js"></script>
 <script>
     $(function () {
-        $("#navbar").load("navbar.html");
         $(".editMenu").css("display", "none");
         $(".editPhoto").find("input").css("display","none");
         $(".editPhoto").hover(
             function () {
             $(this).find(".editMenu").css("display", "block");
-            $(this).find("input").css("display", "block");
         }, function () {
             $(this).find(".editMenu").css("display", "none");
-            if($(this).find("input").prop("checked")==false){
-                $(this).find("input").css("display", "none");
-            }
         });
     });
     //实现大图
@@ -126,7 +119,7 @@
     });
     //删除按钮
     $(".delPhoto").click(function () {
-        var id=$(".delPhoto").attr("photoid");
+        var id=$(".delPhoto").parent().parent().attr("photoid");
         var a=confirm("是否彻底删除这张照片？");
         var t=$(this).parent().parent().parent().parent();
         var size=$(this).parent().parent().parent().parent().parent().children("div").length;
@@ -152,6 +145,33 @@
                 }
             })
         }
+    });
+    $(".delIntoRec").click(function () {
+        var photoid=$(this).parent().parent().attr("photoid");
+        var photoAdd=$(this).attr("photoAdd");
+        var t=$(this).parent().parent().parent().parent();
+        var size=$(this).parent().parent().parent().parent().parent().children("div").length;
+        var panel=$(this).parent().parent().parent().parent().parent().parent();
+        $.ajax({
+            type:"POST",
+            url:"delIntoRec",
+            data:{
+                "photoid":photoid,
+            },
+            dataType: "json",
+            success:function(data){
+                if(data==true){
+                    console.log("移入回收站成功");
+                    t.remove();
+                    //console.log(size);
+                    if(size-1==0){
+                        panel.remove();
+                    }
+                }else{
+                    console.log("移入回收站失败");
+                }
+            }
+        })
     })
 </script>
 </body>
