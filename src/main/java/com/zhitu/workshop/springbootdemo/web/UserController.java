@@ -2,6 +2,7 @@ package com.zhitu.workshop.springbootdemo.web;
 
 import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.service.impl.UserServiceImpl;
+import com.zhitu.workshop.springbootdemo.util.LoginUser;
 import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -122,7 +123,8 @@ import java.awt.Color;
                    }
                    else {
                        result.put("code", 0);
-                       request.getSession().setAttribute("ID", user2.getUserId());
+                       //request.getSession().setAttribute("ID", user2.getUserId());
+                       LoginUser.setUser(request, user2);
                        return result;
                    }
                }
@@ -232,11 +234,6 @@ import java.awt.Color;
         return result;
     }
 
-    /*@ResponseBody
-    public String photoDetail(@PathVariable Long photoId,
-                              HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Photo photo = photoService.getPhoto(photoId);
-        return photo.getPhotoName();
-    }*/
+
 
 }

@@ -2,9 +2,11 @@ package com.zhitu.workshop.springbootdemo.web;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.zhitu.workshop.springbootdemo.bo.Photo;
 import com.zhitu.workshop.springbootdemo.bo.RecycleBin;
+import com.zhitu.workshop.springbootdemo.bo.User;
 import com.zhitu.workshop.springbootdemo.service.AlbumService;
 import com.zhitu.workshop.springbootdemo.service.PhotoService;
 import com.zhitu.workshop.springbootdemo.service.RecycleBinService;
+import com.zhitu.workshop.springbootdemo.util.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,13 +30,12 @@ public String showPhoto()
     @RequestMapping(value = "/allPhoto")
     public String showMyPhoto(Model model, HttpServletResponse response, HttpServletRequest request)throws Exception{
         Long userID;
-        if(request.getSession().getAttribute("ID")==null){
-            throw new Exception("session中用户id为空");
-        }else{
-            userID=Long.valueOf(request.getSession().getAttribute("ID").toString());
+        User user = LoginUser.getUser(request);
+        if(user==null){
+            throw new Exception("用户未登录");
         }
 
-        List<Photo> photos=photoService.showAllPhoto(Long.valueOf("12"));
+        List<Photo> photos=photoService.showAllPhoto(user.getUserId());
         Map<String,List<Photo>> map=new HashMap<>();
         for(Photo photo:photos){
             Date date=photo.getUpTime();

@@ -53,10 +53,7 @@
                 </div>
                 <div class="row">
 
-
                              <!--上传照片-->
-
-
 
                 </div>
             </div>
@@ -123,7 +120,7 @@
             <h2>我的照片</h2>
         </a>
             <div class="list-group posi" >
-                <a href="/myPhoto"  class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 我的照片</a>
+                <a href="/allPhoto"  class="list-group-item"><span class="glyphicon glyphicon-picture"></span> 我的照片</a>
                 <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-book"></span> 全部相册</a>
                 <a href="/myShare" class="list-group-item"><span class="glyphicon glyphicon-new-window"></span> 我的分享</a>
                 <a href="/myRecycleBin" class="list-group-item"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
@@ -153,26 +150,23 @@
                 </a>
             </div>
             <div id="list">
-
-
                 <c:forEach items="${list}" var="item"  >
                     <div id="editphone" class="col-xs-6 col-md-3">
-            <div id="editmenu" class="dropdown" style="position:absolute;top: 5px;right: 20px;">
-                 <button class="btn btn-default dropdown-toggle btn-sm" type="button" data-toggle="dropdown" ></button>
-                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto">
-                     <li><a href="#">重命名</a></li>
-                     <li><a href="#">分享</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li ><a id ="delete" href="#" >删除</a></li>
-                     </ul>
-                 </div>
-             <a  href="#" class="thumbnail">
-                 <img class="img-rounded" src="images/100X125.gif" style="width: 100%;height: 130px" alt="">
-                 <div class="float-right" style="position:relative;bottom: 20px;right: 5px;color:rgba(252,255,250,0)">点赞数</div>
-                  <div class="btn" id="obj" album_id="${item.albumId}">${item.albumName}</div>
-
-                   </a>
-              </div>
+                            <div id="editmenu" class="dropdown" style="position:absolute;top: 5px;right: 20px;">
+                            <button class="btn btn-default dropdown-toggle btn-sm" type="button" data-toggle="dropdown" ></button>
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="editphoto">
+                            <li><a href="#">重命名</a></li>
+                            <li><a href="#">分享</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li ><a id ="delete" href="#" >删除</a></li>
+                         </ul>
+                            </div>
+                        <a  href="#" class="thumbnail">
+                                <img class="img-rounded" src="images/100X125.gif" style="width: 100%;height: 130px" alt="">
+                         <div class="float-right" style="position:relative;bottom: 20px;right: 5px;color:rgba(252,255,250,0)">点赞数</div>
+                         <div class="btn" id="obj" album_id="${item.albumId}">${item.albumName}</div>
+                        </a>
+                      </div>
 
                 </c:forEach>
             </div>
@@ -210,6 +204,7 @@
                 url:"/addAlbum",
                 data:{
                     "albumName":albumname,
+                    "useUserId":12,
                     "albumDescription":albumdescribe,
                 },
                 <%--如果数据传输成功则增加一个相册 --%>
@@ -217,7 +212,6 @@
                     if (result.code !=0) {
                         return;
                     }
-
                     $("#list").append(
                         '<div id="editphone" class="col-xs-6 col-md-3">'
                         +'<div id="editmenu" class="dropdown" style="position:absolute;top: 5px;right: 20px;">'
@@ -245,8 +239,8 @@
         });
 
         $("body").on( "click","#delete",function() {
-
-            var albumId=$(this).parents("#editphone").find("#obj").attr("album_id");
+            var that=$(this);
+            var albumId=that.parents("#editphone").find("#obj").attr("album_id");
             $.ajax({
                 type:"POST",
                 url:"/deleteAlbum",
@@ -254,19 +248,17 @@
                 success:
                     function()
                     {
-                        $(this).parent().parent().parent().parent().hide();
+                        that.parents("#editphone").hide();
                         alert("Delete Success!")
                     },
                 error:
-                    function(){
+                    function()
+                    {
                         alert("Delete Failed!")
                     }
             })
-
         });
-
     });
-
     <!--读取上传照片及上传照片-->
     function setImagePreview() {
         var docObj = document.getElementById("doc");
@@ -287,8 +279,6 @@
             //必须设置初始大小
             localImagId.style.width = "100px";
             localImagId.style.height = "100px";
-
-
             //图片异常的捕捉，防止用户修改后缀来伪造图片
             try {
                 localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
