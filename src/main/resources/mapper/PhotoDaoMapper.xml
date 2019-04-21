@@ -6,7 +6,7 @@
     <select id="showAllPhoto" resultType="com.zhitu.workshop.springbootdemo.bo.Photo">
         select * from photo p
         inner join album a on p.album_id=a.album_id
-        where a.use_user_id=#{userID} and p.state='0' order by p.up_time desc
+        where a.use_user_id=#{userID} and p.state='0' order by p.up_time desc limit #{startRow},20
     </select>
     <select id="showApartPhoto" resultType="com.zhitu.workshop.springbootdemo.bo.Photo">
         select * from photo p
