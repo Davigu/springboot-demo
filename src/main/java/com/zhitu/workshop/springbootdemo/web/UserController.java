@@ -118,6 +118,7 @@ import java.awt.Color;
                    if(user2.getAuth()!=null&&user2.getAuth().equals("1"))          //登录为管理员
                    {
                        result.put("code",3);
+                       request.getSession().setAttribute("ID", user2.getUserId());
                        return result;
                    }
                    else {
