@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/uploadfile.css">
     <meta charset="utf-8">
 
 </head>
 <body>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="/js/jqueryfileupload/jquery.uploadfile.min.js"></script>
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
     <div class="container"><img src="images/starBrandBlack.png"><a class="navbar-brand" style="color: black" href="#">星相册</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -77,12 +80,9 @@
                     </form>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 col-xs-4 text-center " style="padding: 5px">
-                        <a href="#" style="position:absolute;right: 5px;top: 5px"><span class="glyphicon glyphicon-remove"></span></a>
-                        <img src="../../../resources/static/images/100X125.gif" style="height: 100px;width: 100%;margin-top: 13%" alt="">
-                        <label>aaa</label>
-                    </div>
-                    <div class="col-md-3 col-xs-4 text-center"><a href="#"><img src="../../../resources/static/images/add.png" alt=""></a></div>
+
+                    <div id="fileuploader" >Upload</div>
+
                 </div>
             </div>
             <div class="panel-footer">
@@ -134,6 +134,17 @@
 </div>
 <hr>
 <footer class="panel-footer text-center fixed-bottom blockquote-footer">达伟出品，必属精品</footer>
-<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+<script>
+    $(document).ready(function()
+    {
+        $("#fileuploader").uploadFile({
+            url:"doUpload",
+            fileName:"upfile"
+        });
+    });
+</script>
+
 </body>
 </html>
