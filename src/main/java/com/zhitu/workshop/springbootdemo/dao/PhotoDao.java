@@ -12,7 +12,7 @@ import java.util.List;
 public interface PhotoDao {
 
     /**
-     * 显示所有照片
+     * 按页码显示所有照片
      * @return 返回照片地址
      */
     List<Photo> showAllPhoto(@Param("userID") long userID,@Param(value = "startRow")int startRow);
@@ -45,4 +45,6 @@ public interface PhotoDao {
     int delIntoRec(@Param("photoID") long photoID);
 
     int recoverPhoto(@Param("photoID")long photoID);
+
+    List<Photo> getAblePhoto(@Param("userID") long userID);
 }

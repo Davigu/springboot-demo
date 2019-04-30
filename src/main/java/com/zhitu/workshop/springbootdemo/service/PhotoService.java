@@ -44,4 +44,12 @@ public interface PhotoService {
      * @return
      */
     int DelIntoRec(Long photoID)throws Exception;
+
+    /**
+     * 计算可用空间
+     * @param userId
+     * @return 返回值为百分率
+     * @throws Exception
+     */
+    double calSpace(Long userId)throws Exception;
 }

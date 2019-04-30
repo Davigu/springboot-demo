@@ -72,4 +72,14 @@ public class PhotoServiceImpl implements PhotoService {
         //return 0;
     }
 
+    @Override
+    public double calSpace(Long userId) throws Exception {
+        double count=0;
+        List<Photo> photos=photoDao.getAblePhoto(userId);
+        for(Photo p:photos){
+            count+=p.getSize()/(1024*1024);
+        }
+        return count/10240;
+    }
+
 }

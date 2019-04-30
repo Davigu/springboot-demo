@@ -29,9 +29,7 @@ public class RecycleBinController {
     public String myRecyclebin(HttpServletRequest request, HttpServletResponse response)
     throws Exception{
 
-        Long userID;
-
-        userID=LoginUser.getUser(request).getUserId();
+        Long userID=LoginUser.getUser(request).getUserId();
 
         List<RecycleBin> recycleBins=recycleBinService.showFiles(userID);
 
