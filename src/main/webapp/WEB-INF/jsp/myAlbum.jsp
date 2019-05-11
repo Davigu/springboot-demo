@@ -25,7 +25,7 @@
                         &nbsp;&nbsp;&nbsp;
                         <div class="form-group">
                             <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="images/32X32.gif" style="height: 20px" alt="32*32" class="img-rounded">&nbsp;<font style="font-weight: bold">萌宠猫咪</font></button>
+                                <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="/images/32X32.gif" style="height: 20px" alt="32*32" class="img-rounded">&nbsp;<font style="font-weight: bold">萌宠猫咪</font></button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                     <li><a href="#">Action</a></li>
                                     <li><a href="#">Another action</a></li>
