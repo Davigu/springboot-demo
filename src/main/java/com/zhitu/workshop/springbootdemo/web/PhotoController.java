@@ -106,8 +106,8 @@ public class PhotoController {
 
     @RequestMapping(value = "width")
     @ResponseBody
-    public Object width(Long userId,HttpServletRequest request)throws Exception{
+    public Object width(HttpServletRequest request)throws Exception{
         Long userId=LoginUser.getUser(request).getUserId();
-
+        return 0;
     }
 }
