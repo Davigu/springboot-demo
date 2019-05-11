@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ include file="navbar.jsp" %>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -21,7 +21,7 @@
     <link href="css/photoviewer.css" rel="stylesheet">
 </head>
 <body>
-<div id="navbar"></div>
+<%@ include file="navbar.jsp" %>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <div class="container" id="container">
     <div class="row">

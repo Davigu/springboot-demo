@@ -6,7 +6,6 @@
 
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/jquery.fileupload.css">
-    <link rel="stylesheet" href="/css/uploadfile.css">
 
 </head>
 <body>

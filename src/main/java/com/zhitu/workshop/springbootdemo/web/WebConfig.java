@@ -24,6 +24,6 @@ public class WebConfig implements WebMvcConfigurer {
         //SpringMVC下，拦截器的注册需要排除对静态资源的拦截(*.css,*.js)
         //SpringBoot已经做好了静态资源的映射，因此我们无需任何操作
         registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-                .excludePathPatterns("/home","/","/service/**","/authCode","/doInsert","/doLogin","/js/**","/css/**","/picture/**","/images/**","/fonts/**");
+                .excludePathPatterns("/home","/","/service/**","/authCode","/doInsert","/upload","doUpload","/doSendMail","/doLogin","/js/**","/css/**","/picture/**","/images/**","/fonts/**");
     }
 }
