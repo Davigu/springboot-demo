@@ -8,7 +8,7 @@ public class User {
     private String email;
     private String phone;
     private String gender;
-    private  String auth;
+    private String auth;
     private String sign;
     private String ablespace;
 

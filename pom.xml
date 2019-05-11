@@ -53,6 +53,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
+
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
@@ -108,12 +109,12 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<!-- <scope>provided</scope>-->
 		</dependency>
-
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.57</version>
 		</dependency>
+
 
 
 	</dependencies>
