@@ -1,16 +1,11 @@
 <%@page pageEncoding="UTF-8"%>
-<html>
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/uploadfile.css">
-    <meta charset="utf-8">
 
-</head>
-<body>
-<script src="js/jquery-3.3.1.min.js"></script>
+    <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/uploadfile.css">
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jqueryfileupload/jquery.form.min.js"></script>
 <script src="/js/jqueryfileupload/jquery.uploadfile.min.js"></script>
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
     <div class="container"><img src="images/starBrandBlack.png"><a class="navbar-brand" style="color: black" href="#">星相册</a>
@@ -40,7 +35,7 @@
         </div>
     </div>
 </nav>
-<div class="modal fade"  id="myupload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade"  id="myupload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content"   style="height: 570px">
             <div class="modal-header">
@@ -85,7 +80,8 @@
                         <img src="/images/100X125.gif" style="height: 100px;width: 100%;margin-top: 13%" alt="">
                         <label>aaa</label>
                     </div>
-                    <div class="col-md-3 col-xs-4 text-center"><a href="#"><img src="/images/add.png" alt=""></a></div>
+                    <div class="col-md-3 col-xs-4 text-center"><a href="#" ><img src="/images/add.png" alt=""></a></div>
+                    <div id="fileuploader">Upload</div>
                 </div>
             </div>
             <div class="panel-footer">
@@ -148,6 +144,3 @@
         });
     });
 </script>
-
-</body>
-</html>
